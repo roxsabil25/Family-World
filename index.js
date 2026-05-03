@@ -62,6 +62,18 @@ app.use((req, res) => {
     res.status(404).send("Oops! Ei page-ti khuje paowa jayni.");
 });
 
+
+// Health Check Route
+app.get('/healthz', (req, res) => {
+    res.status(200).json({
+        status: 'OK',
+        uptime: process.uptime(),
+        timestamp: new Date().toISOString(),
+        message: 'Family World server is running smoothly'
+    });
+});
+
+
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
 });
