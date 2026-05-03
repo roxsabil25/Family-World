@@ -1,6 +1,7 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
-require('dotenv').config();
+
 const PORT = process.env.PORT || 3000;
 
 // 1. EJS Setup
@@ -48,6 +49,19 @@ const awareKeys = [
 ];
 
 // Route
+
+
+// Health Check Route (ETAKE UPORE NIYE ASHUN)
+app.get('/healthz', (req, res) => {
+    res.status(200).json({
+        status: 'OK',
+        uptime: process.uptime(),
+        timestamp: new Date().toISOString(),
+        message: 'Family World server is running smoothly'
+    });
+});
+
+
 app.get('/', (req, res) => {
     res.render('home', { awareKeys });
 });
@@ -64,15 +78,6 @@ app.use((req, res) => {
 });
 
 
-// Health Check Route
-app.get('/healthz', (req, res) => {
-    res.status(200).json({
-        status: 'OK',
-        uptime: process.uptime(),
-        timestamp: new Date().toISOString(),
-        message: 'Family World server is running smoothly'
-    });
-});
 
 
 
