@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>Advance Responsive Header</title>
+
+    <style>
+        /* Video slider-er scrollbar hide korar jonno */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+
+        /* Video hover korle jeno smooth bhabe zoom hoy */
+        .video-card:hover video {
+            transform: scale(1.05);
+        }
+
+
+        /* CSS দিয়ে আমরা smooth এবং continuous এনিমেশন তৈরি করছি */
+        @keyframes slide {
+            from { transform: translateX(0); }
+            to { transform: translateX(-100%); } /* মোট স্লাইডার কন্টেন্টের সমান বামে যাবে */
+        }
+
+        .animate-slide {
+            animation: slide 30s linear infinite; /* 30 সেকেন্ড পর পর লুপ হবে */
+        }
+    </style>
+</head>
+<body class="bg-gray-200">
+
+    <nav class="bg-[#0f172a] text-white px-4 py-3 flex items-center justify-between sticky top-0 z-50 shadow-lg">
+        
+<div class="flex items-center group cursor-pointer">
+    <div class="flex flex-col items-end md:items-start transition-all duration-300 group-hover:translate-x-1">
+        <h1 class="text-2xl font-extrabold tracking-tight leading-none italic">
+            <span class="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Family</span>
+            <span class="text-white">World</span>
+        </h1>
+        <p class="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-medium group-hover:text-cyan-400 transition-colors">
+            familyworld.com
+        </p>
+    </div>
+
+    <div class="h-8 w-[2px] bg-gradient-to-b from-transparent via-gray-600 to-transparent mx-4 hidden sm:block"></div>
+
+    <div class="relative">
+        <div class="absolute -inset-1 bg-cyan-500 rounded-full blur opacity-25 group-hover:opacity-50 transition duration-300"></div>
+        <img src="/img/logo.png" 
+             alt="Logo" 
+             class="relative h-12 w-12 rounded-full border-2 border-white/10 object-cover shadow-2xl transition-transform duration-500 group-hover:rotate-[360deg]">
+    </div>
+</div>
+
+        <div class="hidden lg:flex items-center space-x-8 font-medium">
+            <a href="#" class="hover:text-cyan-400 transition duration-300">Shows <i class="fa-solid fa-chevron-down text-xs ml-1"></i></a>
+            <a href="#" class="hover:text-cyan-400 transition duration-300">Events</a>
+            <a href="#" class="hover:text-cyan-400 transition duration-300">Resources</a>
+            <a href="#" class="hover:text-cyan-400 transition duration-300">Articles</a>
+            <a href="#" class="hover:text-cyan-400 transition duration-300">Store</a>
+        </div>
+
+        <div class="flex items-center space-x-5">
+            <div class="hidden xl:flex space-x-4 text-gray-400">
+                <i class="fa-brands fa-instagram hover:text-white cursor-pointer transition"></i>
+                <i class="fa-brands fa-facebook hover:text-white cursor-pointer transition"></i>
+                <i class="fa-brands fa-youtube hover:text-white cursor-pointer transition"></i>
+                <i class="fa-brands fa-x-twitter hover:text-white cursor-pointer transition"></i>
+            </div>
+
+            <button class="bg-[#d4a017] hover:bg-[#b88a14] text-white px-6 py-2 rounded-full font-bold hidden md:block transition transform hover:scale-105 active:scale-95 shadow-md">
+                Donate
+            </button>
+
+            <div class="flex items-center space-x-4 text-lg">
+                <div class="relative cursor-pointer group">
+                    
+                <i class="fa-solid fa-magnifying-glass cursor-pointer hover:text-cyan-400 transition"></i>
+                
+                <button id="menu-btn" class="lg:hidden text-2xl focus:outline-none hover:text-cyan-400 transition">
+                    <i class="fa-solid fa-bars-staggered"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div id="mobile-menu" class="fixed inset-0 bg-black bg-opacity-50 z-[60] hidden transition-opacity duration-300 opacity-0">
+        <div id="sidebar" class="fixed top-0 right-0 h-full w-[280px] bg-[#0f172a] shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out p-6">
+            
+            <div class="flex justify-end mb-8">
+                <button id="close-btn" class="text-3xl text-gray-400 hover:text-white transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="flex flex-col space-y-6 text-lg font-semibold">
+                <a href="#" class="hover:text-cyan-400 flex items-center justify-between border-b border-gray-800 pb-2">Shows <i class="fa-solid fa-chevron-right text-sm"></i></a>
+                <a href="#" class="hover:text-cyan-400 border-b border-gray-800 pb-2">Events</a>
+                <a href="#" class="hover:text-cyan-400 border-b border-gray-800 pb-2">Resources</a>
+                <a href="#" class="hover:text-cyan-400 border-b border-gray-800 pb-2">Articles</a>
+                <a href="#" class="hover:text-cyan-400 border-b border-gray-800 pb-2">Store</a>
+            </div>
+
+            <div class="mt-10">
+                <button class="w-full bg-[#d4a017] text-white py-3 rounded-lg font-bold">Donate Now</button>
+            </div>
+
+            <div class="flex justify-center space-x-6 mt-10 text-xl text-gray-400">
+                <i class="fa-brands fa-instagram"></i>
+                <i class="fa-brands fa-facebook"></i>
+                <i class="fa-brands fa-youtube"></i>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const closeBtn = document.getElementById('close-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const sidebar = document.getElementById('sidebar');
+
+        function toggleMenu() {
+            if (mobileMenu.classList.contains('hidden')) {
+                // Open Menu
+                mobileMenu.classList.remove('hidden');
+                setTimeout(() => {
+                    mobileMenu.classList.add('opacity-100');
+                    sidebar.classList.remove('translate-x-full');
+                }, 10);
+            } else {
+                // Close Menu
+                mobileMenu.classList.remove('opacity-100');
+                sidebar.classList.add('translate-x-full');
+                setTimeout(() => {
+                    mobileMenu.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        menuBtn.addEventListener('click', toggleMenu);
+        closeBtn.addEventListener('click', toggleMenu);
+        
+        // Overlay te click korle menu bondho hobe
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target === mobileMenu) toggleMenu();
+        });
+    </script>
+
+
+
+
+<section class="container mx-auto px-4 py-16">
+        
+        <div class="flex flex-col md:flex-row md:space-x-8">
+            
+            <div id="hostCard" class="bg-white rounded-2xl shadow-xl overflow-hidden mb-8 md:mb-0 relative cursor-pointer flex-1 group">
+                <img src="/img/images.jpeg" alt="Meet our Host" class="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105">
+                
+                <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                <div class="absolute bottom-10 left-10 text-white z-10 transition-transform duration-300 group-hover:-translate-y-2">
+                    <h2 class="text-4xl font-bold mb-4">Meet our Host</h2>
+                    <p class="text-lg opacity-90 max-w-md">Learn more about Roy and his passion for helping people achieve a healthy lifestyle</p>
+                    <button class="mt-6 bg-[#d4a017] hover:bg-yellow-600 text-white font-bold py-3 px-8 rounded-full transition transform hover:scale-105">
+                        Learn More
+                    </button>
+                </div>
+            </div>
+
+            <div class="md:w-1/3 bg-[#0a203f] rounded-2xl shadow-xl p-8 flex flex-col justify-between text-white">
+                <div>
+                    <div class="flex items-center space-x-3 mb-6">
+                        <img src="/img/logo.png" alt="Logo" class="h-10 w-10">
+                        <span class="text-sm font-light">Lifestyle with Roy ice</span>
+                    </div>
+
+                    <div class="relative rounded-lg overflow-hidden mb-6 cursor-pointer">
+                        <img src="https://via.placeholder.com/600x400/eeeeee/333333?text=Created To Survive" alt="Episode Thumbnail" class="w-full h-auto">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="bg-red-600 rounded-full h-16 w-16 flex items-center justify-center text-white text-3xl shadow-lg">
+                                ▶
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="text-sm text-gray-300 uppercase tracking-wide mb-1">Latest Episode</p>
+                    <h3 class="text-2xl font-bold mb-6">Created to Survive with Bobby and Courtney Newt</h3>
+                </div>
+
+                <button class="bg-[#1e3a8a] hover:bg-blue-800 text-white font-semibold py-3 px-6 rounded-lg w-full transition transform hover:scale-105">
+                    Watch Episode
+                </button>
+            </div>
+
+        </div>
+
+    </section>
+
+    <script>
+        // Example: Add a special effect on card click
+        const hostCard = document.getElementById('hostCard');
+        hostCard.addEventListener('click', () => {
+            alert('More information about Roy will be shown!');
+            // You could redirect, open a modal, or load more content here.
+        });
+
+    </script>
+
+
+<div class="bg-gray-900 text-white font-sans">
+<section class="flex flex-col items-center justify-center pt-20 px-4 text-center">
+        
+        <div class="bg-[#1a0b1e] border border-pink-500/30 text-pink-400 px-4 py-1.5 rounded-full text-sm mb-6 flex items-center space-x-2 aFamily Worldate-pulse">
+            <span>✨ New: Nano Banana 2 is available on Family World</span>
+        </div>
+
+        <h1 class="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
+            The ultimate AI video app
+        </h1>
+        <p class="text-gray-400 text-lg md:text-xl mb-10">
+            All best models and tools in one place
+        </p>
+
+        <button class="bg-[#ff009d] hover:bg-[#e6008e] text-white px-8 py-4 rounded-xl font-bold text-lg flex items-center space-x-2 transition transform hover:scale-105 mb-12 shadow-[0_0_20px_rgba(255,0,157,0.4)]">
+            <i class="fa-solid fa-sparkles"></i>
+            <span>Try now</span>
+        </button>
+
+        <p class="text-gray-500 text-sm mb-6">Join 4M+ creators on Family World</p>
+        
+        <div class="flex space-x-6 text-2xl text-gray-400 mb-20">
+            <i class="fa-brands fa-discord hover:text-white cursor-pointer transition"></i>
+            <i class="fa-brands fa-google hover:text-white cursor-pointer transition"></i>
+            <i class="fa-solid fa-brain hover:text-white cursor-pointer transition"></i>
+            <i class="fa-brands fa-github hover:text-white cursor-pointer transition"></i>
+        </div>
+    </section>
+
+    <section class="pb-20  ">
+        <div class="flex overflow-x-auto no-scrollbar space-x-8 px-6 md:justify-center mb-10 text-gray-400 font-medium">
+            <button class="hover:text-white flex items-center space-x-2 whitespace-nowrap"><i class="fa-regular fa-image"></i> <span>Edit image</span></button>
+            <button class="hover:text-white flex items-center space-x-2 whitespace-nowrap"><i class="fa-regular fa-eye"></i> <span>Describe</span></button>
+            <button class="hover:text-white flex items-center space-x-2 whitespace-nowrap"><i class="fa-solid fa-wand-magic-sparkles"></i> <span>Text to image</span></button>
+            <button class="text-white border-b-2 border-pink-500 pb-2 flex items-center space-x-2 whitespace-nowrap"><i class="fa-solid fa-video"></i> <span>Text to video</span></button>
+            <button class="hover:text-white flex items-center space-x-2 whitespace-nowrap"><i class="fa-solid fa-clapperboard"></i> <span>Image to video</span></button>
+            <button class="hover:text-white flex items-center space-x-2 whitespace-nowrap"><i class="fa-solid fa-waveform-lines"></i> <span>Upscale</span></button>
+        </div>
+
+        <section>
+
+    <div class="columns-4 sm:columns-2 lg:columns-10 gap-4 space-y-4 p-5">
+    
+    <div class="break-inside-avoid rounded-xl overflow-hidden shadow-lg bg-black cursor-pointer group relative" 
+         onclick="openModal('/videos/9.mp4')">
+        <video class="w-[100px] h-auto" autoplay loop muted playsinline>
+            <source src="/videos/9.mp4" type="video/mp4">
+        </video>
+        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-all"></div>
+    </div>
+
+    <div class="break-inside-avoid rounded-xl overflow-hidden shadow-lg bg-black cursor-pointer group relative" 
+         onclick="openModal('/videos/10.mp4')">
+        <video class="w-[100px] h-auto" autoplay loop muted playsinline>
+            <source src="/videos/10.mp4" type="video/mp4">
+        </video>
+    </div>
+
+
+        <div class="break-inside-avoid rounded-xl overflow-hidden shadow-lg bg-black cursor-pointer group relative" 
+         onclick="openModal('/videos/11.mp4')">
+        <video class="w-[100px] h-auto" autoplay loop muted playsinline>
+            <source src="/videos/11.mp4" type="video/mp4">
+        </video>
+    </div>
+
+
+        <div class="break-inside-avoid rounded-xl overflow-hidden shadow-lg bg-black cursor-pointer group relative" 
+         onclick="openModal('/videos/12.mp4')">
+        <video class="w-[100px] h-auto" autoplay loop muted playsinline>
+            <source src="/videos/12.mp4" type="video/mp4">
+        </video>
+    </div>
+
+
+
+            <div class="break-inside-avoid rounded-xl overflow-hidden shadow-lg bg-black cursor-pointer group relative" 
+         onclick="openModal('/videos/13.mp4')">
+        <video class="w-[100px] h-auto" autoplay loop muted playsinline>
+            <source src="/videos/12.mp4" type="video/mp4">
+        </video>
+    </div>
+
+
+            <div class="break-inside-avoid rounded-xl overflow-hidden shadow-lg bg-black cursor-pointer group relative" 
+         onclick="openModal('/videos/12.mp4')">
+        <video class="w-[100px] h-auto" autoplay loop muted playsinline>
+            <source src="/videos/13.mp4" type="video/mp4">
+        </video>
+    </div>
+
+
+            <div class="break-inside-avoid rounded-xl overflow-hidden shadow-lg bg-black cursor-pointer group relative" 
+         onclick="openModal('/videos/14.mp4')">
+        <video class="w-[100px] h-auto" autoplay loop muted playsinline>
+            <source src="/videos/14.mp4" type="video/mp4">
+        </video>
+    </div>
+
+
+            <div class="break-inside-avoid rounded-xl overflow-hidden shadow-lg bg-black cursor-pointer group relative" 
+         onclick="openModal('/videos/15.mp4')">
+        <video class="w-[100px] h-auto" autoplay loop muted playsinline>
+            <source src="/videos/15.mp4" type="video/mp4">
+        </video>
+    </div>
+
+
+            <div class="break-inside-avoid rounded-xl overflow-hidden shadow-lg bg-black cursor-pointer group relative" 
+         onclick="openModal('/videos/16.mp4')">
+        <video class="w-[100px] h-auto" autoplay loop muted playsinline>
+            <source src="/videos/16.mp4" type="video/mp4">
+        </video>
+    </div>
+
+
+            <div class="break-inside-avoid rounded-xl overflow-hidden shadow-lg bg-black cursor-pointer group relative" 
+         onclick="openModal('/videos/17.mp4')">
+        <video class="w-[100px] h-auto" autoplay loop muted playsinline>
+            <source src="/videos/17.mp4" type="video/mp4">
+        </video>
+    </div>
+
+
+
+</div>
+
+<div id="videoModal" class="fixed inset-0 z-[100] hidden bg-black/90 flex items-center justify-center p-4 backdrop-blur-sm transition-opacity duration-300">
+    
+    <button onclick="closeModal()" class="absolute top-5 right-5 text-white text-4xl hover:text-gray-400 z-[110]">
+        &times;
+    </button>
+
+    <div class="relative w-full flex items-center justify-center">
+        <video id="modalVideo" class="max-h-[75vh] w-auto rounded-lg shadow-2xl" controls autoplay>
+            <source src="" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <div class="absolute inset-0 -z-10" onclick="closeModal()"></div>
+</div>
+
+
+<script>
+    const modal = document.getElementById('videoModal');
+const modalVideo = document.getElementById('modalVideo');
+
+function openModal(videoSrc) {
+    // Modal show kora
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    
+    // Video source set kora ebong play kora
+    modalVideo.src = videoSrc;
+    modalVideo.muted = false; // Boro obosthay sound thakbe
+    modalVideo.play();
+    
+    // Background scroll bondho kora
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+    // Modal hide kora
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    
+    // Video pause kora ebong source clean kora (jeno sound theme jay)
+    modalVideo.pause();
+    modalVideo.src = "";
+    
+    // Background scroll abr chalu kora
+    document.body.style.overflow = 'auto';
+}
+
+// Keyboard er 'Esc' button chaple jeno bondho hoy
+document.addEventListener('keydown', (e) => {
+    if (e.key === "Escape") closeModal();
+});
+</script>
+</section>
+
+
+    </section>
+
+
+
+
+
+</div>
+
+
+<section class="bg-gray-100 font-sans p-5">
+    <div class="container mx-auto p-10 bg-white rounded-3xl shadow-xl">
+        <div class="text-center mb-10">
+            <img src="/img/logo.png" alt="AWARE Logo" class="mx-auto h-20 w-20 mb-4">
+            <h1 class="text-4xl font-extrabold text-gray-800">AWARE Keys</h1>
+            <p class="text-gray-600 mt-2 max-w-lg mx-auto">At Lifestyle.org, all of our content encompasses five key areas necessary to live your best life possible.</p>
+            <button class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-6 rounded-full mt-5">Learn More</button>
+        </div>
+
+ <style>
+    /* স্মুথ অ্যানিমেশনের জন্য কাস্টম কি-ফ্রেম */
+    @keyframes slide {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+    }
+    .animate-slide {
+        display: flex;
+        width: max-content;
+        animation: slide 40s linear infinite;
+    }
+    .animate-slide:hover {
+        animation-play-state: paused; /* হোভার করলে স্লাইডার থামবে */
+    }
+    .video-card-gradient {
+        background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 40%, transparent 100%);
+    }
+</style>
+
+<div class="overflow-hidden relative py-10 bg-white">
+    <div class="absolute inset-y-0 left-0 w-20 z-10 bg-gradient-to-r from-white to-transparent pointer-events-none"></div>
+    <div class="absolute inset-y-0 right-0 w-20 z-10 bg-gradient-to-l from-white to-transparent pointer-events-none"></div>
+
+    <div id="slider" class="animate-slide space-x-6 px-4">
+        
+        <% awareKeys.forEach(key => { %>
+            <div class="group relative rounded-2xl overflow-hidden shadow-xl transition-all duration-500 hover:scale-105 hover:shadow-2xl flex-shrink-0
+                <%= key.type === 'vertical' ? 'w-64 h-[400px]' : 'w-[400px] h-64' %>">
+                
+                <video class="w-full h-full object-cover" autoplay loop muted playsinline>
+                    <source src="<%= key.image %>" type="video/mp4">
+                </video>
+
+                <div class="absolute inset-0 video-card-gradient opacity-80 group-hover:opacity-90 transition-opacity duration-300"></div>
+                
+                <div class="absolute bottom-0 left-0 p-6 w-full transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                    <span class="text-xs font-semibold tracking-widest text-blue-400 uppercase mb-2 block opacity-0 group-hover:opacity-100 transition-opacity delay-100">
+                        Showcase
+                    </span>
+                    <h2 class="text-xl font-bold text-white leading-tight mb-1">
+                        <%= key.title %>
+                    </h2>
+                    <div class="w-10 h-1 bg-blue-500 rounded-full scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></div>
+                </div>
+
+                <div class="absolute inset-0 border border-white/10 rounded-2xl pointer-events-none"></div>
+            </div>
+        <% }) %>
+
+    </div>
+</div>
+
+
+
+    </div>
+</section>
+
+<div class="bg-[#0a0a0a] text-white min-h-screen p-8 font-sans">
+  
+  <!-- Category Section -->
+  <div class="mb-12">
+    <div class="flex items-center justify-between mb-4 px-2">
+      <h2 class="text-xl font-semibold hover:underline cursor-pointer flex items-center">
+        Architecture & design 
+        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+      </h2>
+      <div class="flex space-x-2">
+        <button class="p-1 hover:bg-gray-800 rounded transition"><svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg></button>
+        <button class="p-1 hover:bg-gray-800 rounded transition"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></button>
+      </div>
+    </div>
+
+    <!-- Scrollable Horizontal Grid -->
+    <div class="flex space-x-4 overflow-x-auto scrollbar-hide pb-4 snap-x">
+      
+      <!-- Card Item -->
+      <div class="min-w-[240px] group cursor-pointer snap-start">
+        <div class="relative aspect-[4/3] rounded-xl overflow-hidden bg-gray-900 border border-transparent group-hover:border-blue-500 transition-all duration-300 shadow-lg">
+          <img src="https://picsum.photos/400/300?random=1" alt="House" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <!-- Badge -->
+          <span class="absolute top-2 left-2 bg-black/60 backdrop-blur-md text-[10px] px-2 py-1 rounded font-bold uppercase tracking-wider text-blue-400 border border-blue-500/30">Beta</span>
+        </div>
+        <p class="mt-3 text-sm text-gray-400 group-hover:text-white transition-colors">Drone flyover</p>
+      </div>
+
+
+           <div class="min-w-[240px] group cursor-pointer snap-start">
+        <div class="relative aspect-[4/3] rounded-xl overflow-hidden bg-gray-900 border border-transparent group-hover:border-blue-500 transition-all duration-300 shadow-lg">
+          <img src="https://picsum.photos/400/300?random=1" alt="House" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <!-- Badge -->
+          <span class="absolute top-2 left-2 bg-black/60 backdrop-blur-md text-[10px] px-2 py-1 rounded font-bold uppercase tracking-wider text-blue-400 border border-blue-500/30">Beta</span>
+        </div>
+        <p class="mt-3 text-sm text-gray-400 group-hover:text-white transition-colors">Drone flyover</p>
+      </div>
+
+
+
+           <div class="min-w-[240px] group cursor-pointer snap-start">
+        <div class="relative aspect-[4/3] rounded-xl overflow-hidden bg-gray-900 border border-transparent group-hover:border-blue-500 transition-all duration-300 shadow-lg">
+          <img src="https://picsum.photos/400/300?random=1" alt="House" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <!-- Badge -->
+          <span class="absolute top-2 left-2 bg-black/60 backdrop-blur-md text-[10px] px-2 py-1 rounded font-bold uppercase tracking-wider text-blue-400 border border-blue-500/30">Beta</span>
+        </div>
+        <p class="mt-3 text-sm text-gray-400 group-hover:text-white transition-colors">Drone flyover</p>
+      </div>
+
+      <!-- Add more cards here... -->
+      <div class="min-w-[240px] group cursor-pointer snap-start">
+        <div class="relative aspect-[4/3] rounded-xl overflow-hidden bg-gray-900">
+          <img src="https://picsum.photos/400/300?random=2" class="w-full h-full object-cover">
+          <span class="absolute top-2 left-2 bg-pink-600 text-[10px] px-2 py-1 rounded font-bold uppercase">Free</span>
+        </div>
+        <p class="mt-3 text-sm text-gray-400">3D to real</p>
+      </div>
+
+      <!-- NIM Choice Badge Example -->
+      <div class="min-w-[240px] group cursor-pointer snap-start">
+        <div class="relative aspect-[4/3] rounded-xl overflow-hidden bg-gray-900">
+          <img src="https://picsum.photos/400/300?random=3" class="w-full h-full object-cover">
+          <span class="absolute top-2 left-2 bg-blue-600 text-[10px] px-2 py-1 rounded flex items-center font-bold italic">
+            <i class="fas fa-star mr-1"></i> Nim choice
+          </span>
+        </div>
+        <p class="mt-3 text-sm text-gray-400">Lived-in interior</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Scrollbar hide করার জন্য */
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+</style>
+
+
+
+
+<section class="min-h-screen bg-gradient-to-br from-indigo-700 via-blue-600 to-purple-700 flex items-center justify-center p-6">
+  <div class="max-w-6xl w-full flex flex-col md:flex-row items-center justify-between gap-12">
+    
+    <!-- Left Side: Logo/Brand -->
+    <div class="text-white flex items-center gap-4">
+      <div class="w-16 h-16 border-4 border-white rounded-xl flex items-center justify-center">
+        <span class="text-4xl font-bold italic">C</span>
+      </div>
+      <h1 class="text-6xl font-bold tracking-tighter italic">CHIP<sup class="text-sm font-normal">®</sup></h1>
+    </div>
+
+    <!-- Right Side: Payment Methods Grid (Referencing WhatsApp Image 2026-05-02 at 7.20.14 PM.jpeg) -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 auto-rows-max">
+      
+      <!-- Individual Card Style -->
+      <div class="bg-white/90 backdrop-blur-sm p-4 rounded-2xl shadow-xl flex items-center justify-center h-24 w-40 transform hover:-translate-y-1 transition-all">
+        <img src="/img/fpx.png" alt="FPX" class="max-h-full">
+      </div>
+
+      <div class="bg-white/90 backdrop-blur-sm p-4 rounded-2xl shadow-xl flex items-center justify-center h-24 w-40 transform hover:-translate-y-1 transition-all">
+        <img src="/img/visa.jpeg" alt="Visa Mastercard" class="max-h-full">
+      </div>
+
+      <!-- Offset/Staggered Effect for QR Pay style -->
+      <div class="bg-white/90 backdrop-blur-sm p-4 rounded-2xl shadow-xl flex items-center justify-center h-28 w-44 md:ml-[-20px] transform hover:-translate-y-1 transition-all">
+        <img src="qrpay-logo.png" alt="QRPay" class="max-h-full">
+      </div>
+
+      <div class="bg-white/90 backdrop-blur-sm p-4 rounded-2xl shadow-xl flex items-center justify-center h-24 w-40 transform hover:-translate-y-1 transition-all">
+        <img src="boost-logo.png" alt="Boost" class="max-h-full">
+      </div>
+
+      <div class="bg-white/90 backdrop-blur-sm p-4 rounded-2xl shadow-xl flex items-center justify-center h-24 w-40 transform hover:-translate-y-1 transition-all">
+        <img src="shopeepay-logo.png" alt="ShopeePay" class="max-h-full">
+      </div>
+
+      <!-- Small Cards -->
+      <div class="bg-white/90 backdrop-blur-sm p-2 rounded-xl shadow-lg flex items-center justify-center h-20 w-24 transform hover:-translate-y-1 transition-all">
+        <img src="duitnow-logo.png" alt="DuitNow" class="max-h-full">
+      </div>
+
+      <div class="bg-white/90 backdrop-blur-sm p-4 rounded-2xl shadow-xl flex items-center justify-center h-24 w-48 col-span-2 md:col-span-1 transform hover:-translate-y-1 transition-all">
+        <img src="alipay-logo.png" alt="Alipay" class="max-h-full">
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+<section class="bg-white p-10 md:p-16 rounded-[40px] shadow-2xl w-full max-w-6xl mx-auto border border-gray-50">
+        <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Connect With Us</h2>
+
+        <!-- Responsive Grid for 15 Icons (matching WhatsApp Image 2026-05-02 at 7.20.14 PM.jpeg) -->
+        <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-y-10 gap-x-4 place-items-center">
+
+            <!-- 1. Facebook -->
+            <a href="#" class="group">
+                <div class="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center bg-[#1877F2] text-white shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-[#1877F2]/50">
+                    <i class="fa-brands fa-facebook-f text-3xl md:text-4xl"></i>
+                </div>
+            </a>
+
+            <!-- 2. X (Twitter) -->
+            <a href="#" class="group">
+                <div class="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center bg-black text-white shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-black/50">
+                    <i class="fa-brands fa-x-twitter text-3xl md:text-4xl"></i>
+                </div>
+            </a>
+
+            <!-- 3. Instagram -->
+            <a href="#" class="group">
+                <div class="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] text-white shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-[#ee2a7b]/50">
+                    <i class="fa-brands fa-instagram text-3xl md:text-4xl"></i>
+                </div>
+            </a>
+
+            <!-- 4. TikTok -->
+            <a href="#" class="group">
+                <div class="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center bg-black text-white shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-black/50">
+                    <i class="fa-brands fa-tiktok text-3xl md:text-4xl"></i>
+                </div>
+            </a>
+
+            <!-- 5. Discord -->
+            <a href="#" class="group">
+                <div class="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center bg-[#5865F2] text-white shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-[#5865F2]/50">
+                    <i class="fa-brands fa-discord text-3xl md:text-4xl"></i>
+                </div>
+            </a>
+
+            <!-- 6. Snapchat -->
+            <a href="#" class="group">
+                <div class="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center bg-[#FFFC00] text-black shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-[#FFFC00]/50">
+                    <i class="fa-brands fa-snapchat text-3xl md:text-4xl"></i>
+                </div>
+            </a>
+
+            <!-- 7. YouTube -->
+            <a href="#" class="group">
+                <div class="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center bg-[#FF0000] text-white shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-[#FF0000]/50">
+                    <i class="fa-brands fa-youtube text-3xl md:text-4xl"></i>
+                </div>
+            </a>
+
+            <!-- 8. WhatsApp -->
+            <a href="#" class="group">
+                <div class="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center bg-[#25D366] text-white shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-[#25D366]/50">
+                    <i class="fa-brands fa-whatsapp text-3xl md:text-4xl"></i>
+                </div>
+            </a>
+
+            <!-- 9. Behance -->
+            <a href="#" class="group">
+                <div class="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center bg-[#1769FF] text-white shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-[#1769FF]/50">
+                    <i class="fa-brands fa-behance text-3xl md:text-4xl"></i>
+                </div>
+            </a>
+
+            <!-- 10. Threads -->
+            <a href="#" class="group">
+                <div class="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center bg-black text-white shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-black/50">
+                    <i class="fa-solid fa-at text-3xl md:text-4xl"></i>
+                </div>
+            </a>
+
+            <!-- 11. LinkedIn -->
+            <a href="#" class="group">
+                <div class="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center bg-[#0077B5] text-white shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-[#0077B5]/50">
+                    <i class="fa-brands fa-linkedin-in text-3xl md:text-4xl"></i>
+                </div>
+            </a>
+
+            <!-- 12. Dribbble -->
+            <a href="#" class="group">
+                <div class="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center bg-[#EA4C89] text-white shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-[#EA4C89]/50">
+                    <i class="fa-brands fa-dribbble text-3xl md:text-4xl"></i>
+                </div>
+            </a>
+
+            <!-- 13. Pinterest -->
+            <a href="#" class="group">
+                <div class="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center bg-[#BD081C] text-white shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-[#BD081C]/50">
+                    <i class="fa-brands fa-pinterest-p text-3xl md:text-4xl"></i>
+                </div>
+            </a>
+
+            <!-- 14. Twitch -->
+            <a href="#" class="group">
+                <div class="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center bg-[#9146FF] text-white shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-[#9146FF]/50">
+                    <i class="fa-brands fa-twitch text-3xl md:text-4xl"></i>
+                </div>
+            </a>
+
+            <!-- 15. Telegram -->
+            <a href="#" class="group">
+                <div class="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center bg-[#229ED9] text-white shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-[#229ED9]/50">
+                    <i class="fa-brands fa-telegram text-3xl md:text-4xl"></i>
+                </div>
+            </a>
+
+        </div>
+    </section>
+
+
+
+
+<!-- Footer Section -->
+<footer class="bg-[#0f1d33] text-white pt-16 pb-6 px-6 md:px-12 lg:px-20 relative overflow-hidden">
+  
+  <!-- Main Grid Container -->
+  <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 relative z-10">
+    
+    <!-- 1. Logo & Contact Info -->
+    <div class="space-y-6">
+      <div class="flex items-center group cursor-pointer">
+    <div class="flex flex-col items-end md:items-start transition-all duration-300 group-hover:translate-x-1">
+        <h1 class="text-2xl font-extrabold tracking-tight leading-none italic">
+            <span class="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Family</span>
+            <span class="text-white">World</span>
+        </h1>
+        <p class="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-medium group-hover:text-cyan-400 transition-colors">
+            familyworld.com
+        </p>
+    </div>
+
+    <div class="h-8 w-[2px] bg-gradient-to-b from-transparent via-gray-600 to-transparent mx-4 hidden sm:block"></div>
+
+    <div class="relative">
+        <div class="absolute -inset-1 bg-cyan-500 rounded-full blur opacity-25 group-hover:opacity-50 transition duration-300"></div>
+        <img src="/img/logo.png" 
+             alt="Logo" 
+             class="relative h-12 w-12 rounded-full border-2 border-white/10 object-cover shadow-2xl transition-transform duration-500 group-hover:rotate-[360deg]">
+    </div>
+</div>
+      
+      <div class="text-[13px] leading-relaxed space-y-2 text-gray-300">
+        <p><strong class="text-white">ADDRESS:</strong> PO Box 1000<br>Thousand Oaks, CA 91359-1000</p>
+        <p><strong class="text-white">PHONE:</strong> (805) 955-7700</p>
+        <p><strong class="text-white">TOLL FREE:</strong> (888) 940-0062</p>
+        <p><strong class="text-white">EMAIL:</strong> info@lifestyle.org</p>
+        <p><strong class="text-white">Site:</strong> www.lifestyle.org</p>
+      </div>
+    </div>
+
+    <!-- 2. Shows Column -->
+    <div>
+      <h3 class="text-xl font-bold mb-4">Shows</h3>
+      <ul class="space-y-2 text-gray-300 text-sm">
+        <li><a href="#" class="hover:text-white transition">Lifestyle</a></li>
+        <li><a href="#" class="hover:text-white transition">The Funny Thing About Sadness</a></li>
+        <li><a href="#" class="hover:text-white transition">Lifestyle.org Podcast</a></li>
+        <li><a href="#" class="hover:text-white transition">Friends vs Time</a></li>
+      </ul>
+    </div>
+
+    <!-- 3. Articles & Resources -->
+    <div class="space-y-4">
+      <h3 class="text-xl font-bold">Articles</h3>
+      <ul class="space-y-3 text-lg font-bold">
+        <li><a href="#" class="hover:text-blue-400 transition">Resources</a></li>
+        <li><a href="#" class="hover:text-blue-400 transition">Store</a></li>
+        <li><a href="#" class="hover:text-blue-400 transition">Events</a></li>
+      </ul>
+    </div>
+
+    <!-- 4. About Us -->
+    <div class="space-y-4">
+      <h3 class="text-xl font-bold">About Us</h3>
+      <ul class="space-y-3 text-lg font-bold">
+        <li><a href="#" class="hover:text-blue-400 transition">FAQ</a></li>
+        <li><a href="#" class="hover:text-blue-400 transition">Contact Us</a></li>
+        <li><a href="#" class="hover:text-blue-400 transition">Donate</a></li>
+      </ul>
+    </div>
+
+    <!-- 5. Media & Socials -->
+    <div class="space-y-6">
+      <div>
+        <h3 class="text-xl font-bold mb-4">Media Kit</h3>
+        <h3 class="text-xl font-bold mb-4">Follow Us</h3>
+        <!-- Social Icons -->
+        <div class="flex items-center gap-4 text-xl">
+          <a href="#" class="hover:scale-110 transition"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="hover:scale-110 transition"><i class="fab fa-tiktok"></i></a>
+          <a href="#" class="hover:scale-110 transition"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="hover:scale-110 transition"><i class="fab fa-youtube"></i></a>
+          <a href="#" class="hover:scale-110 transition"><i class="fab fa-x-twitter"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Background Pattern (Referencing the bottom part of Capture.PNG) -->
+  <div class="absolute bottom-0 left-0 w-full h-48 opacity-20 pointer-events-none bg-repeat-x bg-bottom" 
+       style="background-image: url('path-to-your-pattern-icon.png'); background-size: contain;">
+  </div>
+
+  <!-- Bottom Copyright -->
+  <div class="mt-16 pt-4 border-t border-gray-700/50 flex justify-end relative z-10">
+    <p class="text-[10px] text-gray-500 uppercase tracking-widest">Site Design by PPx</p>
+  </div>
+</footer>
+</body>
+</html>
