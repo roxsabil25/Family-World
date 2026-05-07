@@ -29,6 +29,17 @@
             animation: slide 30s linear infinite; /* 30 সেকেন্ড পর পর লুপ হবে */
         }
     </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    aspectRatio: {
+                        'video': '16 / 9',
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 <body class="bg-gray-200">
 
@@ -151,6 +162,176 @@
 
 
 
+<section class="bg-gray-100 p-4 md:p-8">
+
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-6">
+
+        <!-- প্রধান ভিডিও প্লেয়ার সেকশন -->
+        <div class="w-full md:w-3/4 flex-grow">
+            <!-- ভিডিও কন্টেইনার (এটি 16:9 রেশিও বজায় রাখবে) -->
+            <div class="relative w-full aspect-video bg-black rounded-lg overflow-hidden shadow-xl">
+                <!-- ভিডিও ট্যাগ:
+                     - 'Capture.jpg' কে পোস্টার ইমেজ হিসেবে ব্যবহার করা হয়েছে।
+                     - অটো-প্লের জন্য 'muted' এবং 'playsinline' অপরিহার্য। -->
+                <video 
+                    id="mainVideo" 
+                    class="absolute inset-0 w-full h-full object-cover" 
+                    controls 
+                    autoplay 
+                    muted 
+                    playsinline
+                    poster="/img/Capture.PNG"> <!-- Capture.jpg এখানে পোস্টার -->
+                    <source id="videoSource" src="/videos/13.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            
+            <!-- ভিডিওর নিচে টেক্সট এরিয়া -->
+            <div class="mt-4 p-4 bg-white rounded-lg shadow">
+                <h1 id="currentVideoTitle" class="text-2xl font-bold text-gray-800">10 Slashing video - Playing Now</h1>
+                <p class="text-sm text-gray-600 mt-1">This is a dynamic playlist. Enjoy!</p>
+            </div>
+        </div>
+
+
+<div class="w-full md:w-1/4 bg-white p-4 rounded-lg shadow-lg">
+    <h2 class="text-xl font-semibold mb-4 text-gray-800">Video Playlist</h2>
+    
+    <!-- 
+        Mobile: 'grid grid-cols-3' ব্যবহার করা হয়েছে যাতে এক লাইনে ৩টি ভিডিও থাকে।
+        Desktop: 'md:flex md:flex-col' ব্যবহার করা হয়েছে যাতে ভিডিওগুলো উপরে-নিচে থাকে।
+        Scrolling: 'overflow-y-auto' এবং 'max-h' দিয়ে ডেস্কটপে স্ক্রলিং নিশ্চিত করা হয়েছে।
+    -->
+    <div class="grid grid-cols-3 md:flex md:flex-col gap-3 overflow-y-auto overflow-x-hidden max-h-[400px] md:max-h-[calc(100vh-150px)] custom-scrollbar">
+        
+        <!-- প্লেলিস্ট আইটেম ১ -->
+        <button onclick="changeVideo('/videos/14.mp4', '10 Slashing video')" class="group flex flex-col md:flex-row items-center gap-2 md:gap-3 w-full p-1 md:p-2 rounded-lg hover:bg-blue-50 transition-all duration-300 transform hover:scale-95 md:hover:scale-100 md:hover:translate-x-1">
+            <div class="relative overflow-hidden rounded-md flex-shrink-0 w-full md:w-20 aspect-video md:h-14">
+                <img src="/img/thamble01.avif" alt="Video 1" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+            </div>
+            <span class="text-[10px] md:text-sm font-medium text-gray-700 line-clamp-2 md:line-clamp-1">10 Slashing video</span>
+        </button>
+
+        <!-- প্লেলিস্ট আইটেম ২ -->
+        <button onclick="changeVideo('/videos/16.mp4', 'Epic Space Journey')" class="group flex flex-col md:flex-row items-center gap-2 md:gap-3 w-full p-1 md:p-2 rounded-lg hover:bg-blue-50 transition-all duration-300 transform hover:scale-95 md:hover:scale-100 md:hover:translate-x-1">
+            <div class="relative overflow-hidden rounded-md flex-shrink-0 w-full md:w-20 aspect-video md:h-14">
+                <img src="/img/thamble02.jpeg" alt="Video 2" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+            </div>
+            <span class="text-[10px] md:text-sm font-medium text-gray-700 line-clamp-2 md:line-clamp-1">Epic Space Journey</span>
+        </button>
+
+        <!-- প্লেলিস্ট আইটেম ৩ -->
+        <button onclick="changeVideo('/videos/17.mp4', 'Galactic Mysteries')" class="group flex flex-col md:flex-row items-center gap-2 md:gap-3 w-full p-1 md:p-2 rounded-lg hover:bg-blue-50 transition-all duration-300 transform hover:scale-95 md:hover:scale-100 md:hover:translate-x-1">
+            <div class="relative overflow-hidden rounded-md flex-shrink-0 w-full md:w-20 aspect-video md:h-14">
+                <img src="/img/thamble03.jpeg" alt="Video 3" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+            </div>
+            <span class="text-[10px] md:text-sm font-medium text-gray-700 line-clamp-2 md:line-clamp-1">Galactic Mysteries</span>
+        </button>
+
+
+<button onclick="changeVideo('/videos/14.mp4', '10 Slashing video')" class="group flex flex-col md:flex-row items-center gap-2 md:gap-3 w-full p-1 md:p-2 rounded-lg hover:bg-blue-50 transition-all duration-300 transform hover:scale-95 md:hover:scale-100 md:hover:translate-x-1">
+            <div class="relative overflow-hidden rounded-md flex-shrink-0 w-full md:w-20 aspect-video md:h-14">
+                <img src="/img/thamble04.jpeg" alt="Video 1" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+            </div>
+            <span class="text-[10px] md:text-sm font-medium text-gray-700 line-clamp-2 md:line-clamp-1">10 Slashing video</span>
+        </button>
+
+        <!-- প্লেলিস্ট আইটেম ২ -->
+        <button onclick="changeVideo('/videos/16.mp4', 'Epic Space Journey')" class="group flex flex-col md:flex-row items-center gap-2 md:gap-3 w-full p-1 md:p-2 rounded-lg hover:bg-blue-50 transition-all duration-300 transform hover:scale-95 md:hover:scale-100 md:hover:translate-x-1">
+            <div class="relative overflow-hidden rounded-md flex-shrink-0 w-full md:w-20 aspect-video md:h-14">
+                <img src="/img/thamble05.jpeg" alt="Video 2" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+            </div>
+            <span class="text-[10px] md:text-sm font-medium text-gray-700 line-clamp-2 md:line-clamp-1">Epic Space Journey</span>
+        </button>
+
+        <!-- প্লেলিস্ট আইটেম ৩ -->
+        <button onclick="changeVideo('/videos/17.mp4', 'Galactic Mysteries')" class="group flex flex-col md:flex-row items-center gap-2 md:gap-3 w-full p-1 md:p-2 rounded-lg hover:bg-blue-50 transition-all duration-300 transform hover:scale-95 md:hover:scale-100 md:hover:translate-x-1">
+            <div class="relative overflow-hidden rounded-md flex-shrink-0 w-full md:w-20 aspect-video md:h-14">
+                <img src="/img/thamble06.jpeg" alt="Video 3" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+            </div>
+            <span class="text-[10px] md:text-sm font-medium text-gray-700 line-clamp-2 md:line-clamp-1">Galactic Mysteries</span>
+        </button>
+
+
+        <!-- এভাবে আরও বাটন যোগ করুন (নিচে মোবাইল গ্রিড অটোমেটিক রো তৈরি করবে) -->
+
+    </div>
+</div>
+
+<style>
+    /* ডেস্কটপ স্ক্রলবারকে আরও সুন্দর করার জন্য ছোট একটি CSS */
+    @media (min-width: 768px) {
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 5px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #3b82f6; 
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #2563eb;
+        }
+    }
+</style>
+
+
+
+        <!-- প্লেলিস্ট সেকশন (8-10টি ভিডিও) -->
+
+
+    </div>
+
+    <!-- JavaScript - অটো-প্লে এবং ভিডিও পরিবর্তনের জন্য -->
+    <script>
+        const video = document.getElementById('mainVideo');
+        const videoSource = document.getElementById('videoSource');
+        const currentTitle = document.getElementById('currentVideoTitle');
+
+        // আপনার ভিডিও এবং তাদের শিরোনামের একটি অ্যারে তৈরি করুন
+        const playlist = [
+            { src: '/videos/15.mp4', title: '10 Slashing video' },
+            { src: '/videos/16.mp4', title: 'Epic Space Journey' },
+            { src: '/videos/17.mp4', title: 'Galactic Mysteries Explored' },
+            // ... আরও ভিডিও যোগ করুন
+        ];
+
+        let currentVideoIndex = 0; // প্রথম ভিডিও থেকে শুরু হবে
+
+        // যখন একটি ভিডিও শেষ হবে, এই ফাংশনটি চলবে
+        video.addEventListener('ended', function() {
+            // পরবর্তী ভিডিওর ইনডেক্স ঠিক করুন
+            currentVideoIndex = (currentVideoIndex + 1) % playlist.length; // শেষ হলে আবার প্রথমে ফিরে যাবে
+
+            // নতুন ভিডিওর সোর্স এবং টাইটেল আপডেট করুন
+            changeVideo(playlist[currentVideoIndex].src, playlist[currentVideoIndex].title);
+        });
+
+        // ম্যানুয়ালি ভিডিও পরিবর্তন করার ফাংশন (প্লেলিস্ট থেকে ক্লিক করলে)
+        function changeVideo(src, title) {
+            // ভিডিও সোর্স পরিবর্তন করুন
+            videoSource.src = src;
+            
+            // টাইটেল আপডেট করুন
+            currentTitle.textContent = title + " - Playing Now";
+            
+            // নতুন ভিডিও লোড এবং প্লে করুন
+            video.load(); // গুরুত্বপূর্ণ! সোর্স পরিবর্তন করার পর এটি প্রয়োজন
+            video.play().catch(error => {
+                // কিছু ব্রাউজার অটো-প্লের অনুমতি দেয় না যদি না সেটি muted থাকে।
+                console.error("Auto-play failed:", error);
+            });
+        }
+    </script>
+</section>
+
+
+
 
 <section class="container mx-auto px-4 py-16">
         
@@ -213,12 +394,12 @@
 <div class="bg-gray-900 text-white font-sans">
 <section class="flex flex-col items-center justify-center pt-20 px-4 text-center">
         
-        <div class="bg-[#1a0b1e] border border-pink-500/30 text-pink-400 px-4 py-1.5 rounded-full text-sm mb-6 flex items-center space-x-2 aFamily Worldate-pulse">
+        <!-- <div class="bg-[#1a0b1e] border border-pink-500/30 text-pink-400 px-4 py-1.5 rounded-full text-sm mb-6 flex items-center space-x-2 aFamily Worldate-pulse">
             <span>✨ New: Nano Banana 2 is available on Family World</span>
-        </div>
+        </div> -->
 
-        <h1 class="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
-            The ultimate AI video app
+        <h1 class="text-2xl md:text-3xl font-bold mb-6 tracking-tight">
+            The Family User Used Unlimited Video & AI Video App
         </h1>
         <p class="text-gray-400 text-lg md:text-xl mb-10">
             All best models and tools in one place
@@ -406,7 +587,7 @@ document.addEventListener('keydown', (e) => {
     <div class="container mx-auto p-10 bg-white rounded-3xl shadow-xl">
         <div class="text-center mb-10">
             <img src="/img/logo.png" alt="AWARE Logo" class="mx-auto h-20 w-20 mb-4">
-            <h1 class="text-4xl font-extrabold text-gray-800">AWARE Keys</h1>
+            <h1 class="text-4xl font-extrabold text-gray-800"> Family Video Keys</h1>
             <p class="text-gray-600 mt-2 max-w-lg mx-auto">At Lifestyle.org, all of our content encompasses five key areas necessary to live your best life possible.</p>
             <button class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-6 rounded-full mt-5">Learn More</button>
         </div>
@@ -468,89 +649,845 @@ document.addEventListener('keydown', (e) => {
     </div>
 </section>
 
-<div class="bg-[#0a0a0a] text-white min-h-screen p-8 font-sans">
-  
-  <!-- Category Section -->
-  <div class="mb-12">
-    <div class="flex items-center justify-between mb-4 px-2">
-      <h2 class="text-xl font-semibold hover:underline cursor-pointer flex items-center">
-        Architecture & design 
-        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-      </h2>
-      <div class="flex space-x-2">
-        <button class="p-1 hover:bg-gray-800 rounded transition"><svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg></button>
-        <button class="p-1 hover:bg-gray-800 rounded transition"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></button>
-      </div>
-    </div>
 
-    <!-- Scrollable Horizontal Grid -->
-    <div class="flex space-x-4 overflow-x-auto scrollbar-hide pb-4 snap-x">
+<section class="bg-yellow-400 min-h-screen flex items-center justify-center p-4 md:p-10 overflow-hidden">
+  <div class="container mx-auto flex flex-col lg:flex-row items-center gap-10 lg:gap-20">
+    
+    <div class="relative w-full lg:w-1/2 flex justify-center items-center h-[400px] sm:h-[500px] lg:h-[550px] order-2 lg:order-1">
       
-      <!-- Card Item -->
-      <div class="min-w-[240px] group cursor-pointer snap-start">
-        <div class="relative aspect-[4/3] rounded-xl overflow-hidden bg-gray-900 border border-transparent group-hover:border-blue-500 transition-all duration-300 shadow-lg">
-          <img src="https://picsum.photos/400/300?random=1" alt="House" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-          <!-- Badge -->
-          <span class="absolute top-2 left-2 bg-black/60 backdrop-blur-md text-[10px] px-2 py-1 rounded font-bold uppercase tracking-wider text-blue-400 border border-blue-500/30">Beta</span>
-        </div>
-        <p class="mt-3 text-sm text-gray-400 group-hover:text-white transition-colors">Drone flyover</p>
+      <div onclick="showCard(this)" class="card-item absolute w-36 h-52 sm:w-48 sm:h-64 lg:w-60 lg:h-80 bg-white rounded-2xl shadow-xl border-2 md:border-4 border-white overflow-hidden cursor-pointer transition-all duration-500 ease-in-out transform -rotate-[20deg] -translate-x-16 sm:-translate-x-24 lg:-translate-x-32 hover:scale-105">
+        <img src="/img/thamble02.jpeg" class="object-cover w-full h-full pointer-events-none" alt="Gallery 1">
       </div>
 
-
-           <div class="min-w-[240px] group cursor-pointer snap-start">
-        <div class="relative aspect-[4/3] rounded-xl overflow-hidden bg-gray-900 border border-transparent group-hover:border-blue-500 transition-all duration-300 shadow-lg">
-          <img src="https://picsum.photos/400/300?random=1" alt="House" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-          <!-- Badge -->
-          <span class="absolute top-2 left-2 bg-black/60 backdrop-blur-md text-[10px] px-2 py-1 rounded font-bold uppercase tracking-wider text-blue-400 border border-blue-500/30">Beta</span>
-        </div>
-        <p class="mt-3 text-sm text-gray-400 group-hover:text-white transition-colors">Drone flyover</p>
+      <div onclick="showCard(this)" class="card-item absolute w-36 h-52 sm:w-48 sm:h-64 lg:w-60 lg:h-80 bg-white rounded-2xl shadow-xl border-2 md:border-4 border-white overflow-hidden cursor-pointer transition-all duration-500 ease-in-out transform -rotate-[10deg] -translate-x-8 sm:-translate-x-12 lg:-translate-x-16 hover:scale-105">
+        <img src="/img/thamble03.jpeg" class="object-cover w-full h-full pointer-events-none" alt="Gallery 2">
       </div>
 
-
-
-           <div class="min-w-[240px] group cursor-pointer snap-start">
-        <div class="relative aspect-[4/3] rounded-xl overflow-hidden bg-gray-900 border border-transparent group-hover:border-blue-500 transition-all duration-300 shadow-lg">
-          <img src="https://picsum.photos/400/300?random=1" alt="House" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-          <!-- Badge -->
-          <span class="absolute top-2 left-2 bg-black/60 backdrop-blur-md text-[10px] px-2 py-1 rounded font-bold uppercase tracking-wider text-blue-400 border border-blue-500/30">Beta</span>
-        </div>
-        <p class="mt-3 text-sm text-gray-400 group-hover:text-white transition-colors">Drone flyover</p>
+      <div onclick="showCard(this)" class="card-item active-card absolute w-36 h-52 sm:w-48 sm:h-64 lg:w-60 lg:h-80 bg-white rounded-2xl shadow-2xl border-2 md:border-4 border-white overflow-hidden cursor-pointer transition-all duration-500 ease-in-out transform z-30 scale-105 sm:scale-110">
+        <img src="/img/thamble04.jpeg" class="object-cover w-full h-full pointer-events-none" alt="Gallery 3">
       </div>
 
-      <!-- Add more cards here... -->
-      <div class="min-w-[240px] group cursor-pointer snap-start">
-        <div class="relative aspect-[4/3] rounded-xl overflow-hidden bg-gray-900">
-          <img src="https://picsum.photos/400/300?random=2" class="w-full h-full object-cover">
-          <span class="absolute top-2 left-2 bg-pink-600 text-[10px] px-2 py-1 rounded font-bold uppercase">Free</span>
-        </div>
-        <p class="mt-3 text-sm text-gray-400">3D to real</p>
+      <div onclick="showCard(this)" class="card-item absolute w-36 h-52 sm:w-48 sm:h-64 lg:w-60 lg:h-80 bg-white rounded-2xl shadow-xl border-2 md:border-4 border-white overflow-hidden cursor-pointer transition-all duration-500 ease-in-out transform rotate-[10deg] translate-x-8 sm:translate-x-12 lg:translate-x-16 hover:scale-105">
+        <img src="/img/thamble02.jpeg" class="object-cover w-full h-full pointer-events-none" alt="Gallery 4">
       </div>
 
-      <!-- NIM Choice Badge Example -->
-      <div class="min-w-[240px] group cursor-pointer snap-start">
-        <div class="relative aspect-[4/3] rounded-xl overflow-hidden bg-gray-900">
-          <img src="https://picsum.photos/400/300?random=3" class="w-full h-full object-cover">
-          <span class="absolute top-2 left-2 bg-blue-600 text-[10px] px-2 py-1 rounded flex items-center font-bold italic">
-            <i class="fas fa-star mr-1"></i> Nim choice
-          </span>
-        </div>
-        <p class="mt-3 text-sm text-gray-400">Lived-in interior</p>
+      <div onclick="showCard(this)" class="card-item absolute w-36 h-52 sm:w-48 sm:h-64 lg:w-60 lg:h-80 bg-white rounded-2xl shadow-xl border-2 md:border-4 border-white overflow-hidden cursor-pointer transition-all duration-500 ease-in-out transform rotate-[20deg] translate-x-16 sm:translate-x-24 lg:translate-x-32 hover:scale-105">
+        <img src="/img/thamble03.jpeg" class="object-cover w-full h-full pointer-events-none" alt="Gallery 5">
       </div>
 
     </div>
+
+    <div class="w-full lg:w-1/2 space-y-4 md:space-y-6 text-center lg:text-left order-1 lg:order-2 px-4">
+      <h1 class="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold text-gray-900 leading-tight">
+        Explore a world of inspirations
+      </h1>
+      <p class="text-base sm:text-lg md:text-xl text-gray-800 max-w-xl mx-auto lg:mx-0">
+        Discover a personalized feed of endless diversity and possibilities.
+      </p>
+      <div class="flex flex-wrap justify-center lg:justify-start gap-4 pt-4">
+        <button class="bg-black hover:bg-gray-800 text-white px-5 py-2.5 md:px-8 md:py-3.5 rounded-xl flex items-center gap-2 transition-all shadow-lg active:scale-95">
+          App Store
+        </button>
+        <button class="bg-black hover:bg-gray-800 text-white px-5 py-2.5 md:px-8 md:py-3.5 rounded-xl flex items-center gap-2 transition-all shadow-lg active:scale-95">
+          Google Play
+        </button>
+      </div>
+    </div>
+
   </div>
-</div>
+</section>
 
 <style>
-  /* Scrollbar hide করার জন্য */
-  .scrollbar-hide::-webkit-scrollbar { display: none; }
-  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+  /* ক্লিক করলে যে কার্ডটি সামনে আসবে */
+  .active-card {
+    z-index: 50 !important;
+    transform: rotate(0deg) scale(1.1) translateY(-10px) !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+  }
+  
+  /* মোবাইলের জন্য হালকা অ্যাডজাস্টমেন্ট */
+  @media (max-width: 640px) {
+    .active-card {
+      transform: rotate(0deg) scale(1.15) translateY(-5px) !important;
+    }
+  }
+</style>
+
+<script>
+  function showCard(element) {
+    const allCards = document.querySelectorAll('.card-item');
+    allCards.forEach(card => {
+      card.classList.remove('active-card');
+      // সব কার্ডকে আগের জায়গায় ফিরিয়ে নেওয়া
+      card.style.zIndex = ""; 
+    });
+
+    element.classList.add('active-card');
+  }
+</script>
+
+
+
+
+<div class="main">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<section class="bg-gray-50 py-12 px-4 md:px-10">
+  <div class="container mx-auto">
+    
+    <div class="flex items-center justify-between mb-8">
+      <div class="flex items-center gap-4">
+        <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900">Family Recent Video Episodes</h2>
+        <button class="bg-yellow-500 text-white px-4 py-1 rounded-full text-sm font-semibold hover:bg-yellow-600 transition">See All</button>
+      </div>
+      <div class="hidden md:flex gap-2">
+        <button class="prev-btn p-2 border border-gray-300 rounded-full hover:bg-white hover:shadow-md transition">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+        </button>
+        <button class="next-btn p-2 border border-gray-300 rounded-full hover:bg-white hover:shadow-md transition">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper" id="card-container">
+        </div>
+      <div class="swiper-pagination !static mt-6"></div>
+    </div>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+  const container = document.getElementById('card-container');
+
+  // এখানে আপনার ভিডিও এবং ছবির নামগুলো বসিয়ে দিন
+  const episodes = [
+    { 
+      id: 1, 
+      title: "Episode 01: Getting Started", 
+      image: "/img/thamble02.jpeg", 
+      video: "/videos/9.mp4", 
+      duration: "10:15" 
+    },
+    { 
+      id: 2, 
+      title: "Episode 02: Advanced Design", 
+      image: "/img/thamble03.jpeg", 
+      video: "/videos/10.mp4", 
+      duration: "15:30" 
+    },
+    { 
+      id: 3, 
+      title: "Episode 03: Performance Tips", 
+      image: "/img/thamble04.jpeg", 
+      video: "/videos/11.mp4", 
+      duration: "12:00" 
+    },
+
+    { 
+      id: 3, 
+      title: "Episode 03: Performance Tips", 
+      image: "/img/thamble05.jpeg", 
+      video: "/videos/12.mp4", 
+      duration: "12:00" 
+    },
+
+    { 
+      id: 3, 
+      title: "Episode 03: Performance Tips", 
+      image: "/img/thamble06.jpeg", 
+      video: "/videos/13.mp4", 
+      duration: "12:00" 
+    },
+
+    { 
+      id: 3, 
+      title: "Episode 03: Performance Tips", 
+      image: "/img/thamble02.jpeg", 
+      video: "/videos/14.mp4", 
+      duration: "12:00" 
+    },
+
+    { 
+      id: 3, 
+      title: "Episode 03: Performance Tips", 
+      image: "/img/thamble05.jpeg", 
+      video: "/videos/15.mp4", 
+      duration: "12:00" 
+    },
+
+    { 
+      id: 3, 
+      title: "Episode 03: Performance Tips", 
+      image: "/img/thamble06.jpeg", 
+      video: "/videos/16.mp4", 
+      duration: "12:00" 
+    },
+    // এভাবে আপনি ১৫টি বা তার বেশি ডাটা যোগ করতে পারেন...
+  ];
+
+  // কার্ডগুলো জেনারেট করার ফাংশন
+  episodes.forEach(ep => {
+    container.innerHTML += `
+      <div class="swiper-slide">
+        <div class="bg-[#e0f2f7] p-4 rounded-2xl h-full flex flex-col group shadow-sm hover:shadow-md transition-all">
+          <div class="relative overflow-hidden rounded-xl aspect-video bg-black">
+            <img src="${ep.image}" class="w-full h-full object-cover transition group-hover:opacity-80">
+            
+            <button onclick="playVideo('${ep.video}', this)" class="absolute inset-0 flex items-center justify-center">
+              <div class="bg-white/90 p-3 rounded-full shadow-lg hover:scale-110 transition active:scale-95">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </div>
+            </button>
+          </div>
+          <div class="mt-4">
+            <h3 class="font-bold text-gray-800 text-lg leading-tight line-clamp-2 mb-2">${ep.title}</h3>
+            <span class="text-blue-500 text-sm font-semibold">${ep.duration}</span>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+
+  // Swiper স্লাইডার সেটিংস (আগের মতোই থাকবে)
+  new Swiper(".mySwiper", {
+    slidesPerView: 1.2,
+    spaceBetween: 20,
+    navigation: { nextEl: ".next-btn", prevEl: ".prev-btn" },
+    breakpoints: {
+      640: { slidesPerView: 2.2 },
+      1024: { slidesPerView: 3.2 },
+      1280: { slidesPerView: 4 }
+    }
+  });
+});
+
+// ভিডিও প্লে করার ফাংশন
+function playVideo(videoPath, btn) {
+  const videoWrapper = btn.parentElement;
+  videoWrapper.innerHTML = `
+    <video class="w-full h-full object-cover rounded-xl" controls autoplay>
+      <source src="${videoPath}" type="video/mp4">
+      আপনার ব্রাউজার ভিডিও সাপোর্ট করছে না।
+    </video>
+  `;
+}
+</script>
+
+</div>
+
+
+
+
+<section class="bg-[#0a0a0a] py-10 px-4 md:px-10 h-full  text-white">
+  <div class="container mx-auto">
+    
+    <div class="flex items-center gap-6 overflow-x-auto pb-6 no-scrollbar text-sm font-medium text-gray-400">
+      <span class="text-white border-b-2 border-white pb-1 cursor-pointer">Islam</span>
+      <span class="hover:text-white cursor-pointer whitespace-nowrap">Family</span>
+      <span class="hover:text-white cursor-pointer whitespace-nowrap">Shorts</span>
+      <span class="hover:text-white cursor-pointer whitespace-nowrap">Music</span>
+      <span class="hover:text-white cursor-pointer whitespace-nowrap">Pets & Animals</span>
+      <span class="hover:text-white cursor-pointer whitespace-nowrap">Autos & Vehicles</span>
+      </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6">
+      
+      <div class="group cursor-pointer">
+        <div class="relative aspect-video overflow-hidden rounded-xl">
+          <img src="/img/thamble02.jpeg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Video Thumbnail">
+          
+          <div class="absolute top-2 left-2 bg-blue-600/80 text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider">
+            BETA
+          </div>
+
+          <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+             <div class="bg-white/20 p-3 rounded-full backdrop-blur-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+             </div>
+          </div>
+        </div>
+        
+        <h3 class="mt-3 text-sm md:text-base font-semibold text-gray-200 group-hover:text-white transition">
+          Islam
+        </h3>
+      </div>
+
+
+<div class="group cursor-pointer">
+        <div class="relative aspect-video overflow-hidden rounded-xl">
+          <img src="/img/thamble02.jpeg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Video Thumbnail">
+          
+          <div class="absolute top-2 left-2 bg-blue-600/80 text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider">
+            BETA
+          </div>
+
+          <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+             <div class="bg-white/20 p-3 rounded-full backdrop-blur-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+             </div>
+          </div>
+        </div>
+        
+        <h3 class="mt-3 text-sm md:text-base font-semibold text-gray-200 group-hover:text-white transition">
+          Islam
+        </h3>
+      </div>
+
+
+      <div class="group cursor-pointer">
+        <div class="relative aspect-video overflow-hidden rounded-xl">
+          <img src="/img/thamble02.jpeg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Video Thumbnail">
+          
+          <div class="absolute top-2 left-2 bg-blue-600/80 text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider">
+            BETA
+          </div>
+
+          <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+             <div class="bg-white/20 p-3 rounded-full backdrop-blur-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+             </div>
+          </div>
+        </div>
+        
+        <h3 class="mt-3 text-sm md:text-base font-semibold text-gray-200 group-hover:text-white transition">
+          Islam
+        </h3>
+      </div>
+
+
+      <div class="group cursor-pointer">
+        <div class="relative aspect-video overflow-hidden rounded-xl">
+          <img src="/img/thamble02.jpeg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Video Thumbnail">
+          
+          <div class="absolute top-2 left-2 bg-blue-600/80 text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider">
+            BETA
+          </div>
+
+          <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+             <div class="bg-white/20 p-3 rounded-full backdrop-blur-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+             </div>
+          </div>
+        </div>
+        
+        <h3 class="mt-3 text-sm md:text-base font-semibold text-gray-200 group-hover:text-white transition">
+          Islam
+        </h3>
+      </div>
+
+
+      <div class="group cursor-pointer">
+        <div class="relative aspect-video overflow-hidden rounded-xl">
+          <img src="/img/thamble02.jpeg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Video Thumbnail">
+          
+          <div class="absolute top-2 left-2 bg-blue-600/80 text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider">
+            BETA
+          </div>
+
+          <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+             <div class="bg-white/20 p-3 rounded-full backdrop-blur-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+             </div>
+          </div>
+        </div>
+        
+        <h3 class="mt-3 text-sm md:text-base font-semibold text-gray-200 group-hover:text-white transition">
+          Islam
+        </h3>
+      </div>
+
+
+      <div class="group cursor-pointer">
+        <div class="relative aspect-video overflow-hidden rounded-xl">
+          <img src="/img/thamble02.jpeg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Video Thumbnail">
+          
+          <div class="absolute top-2 left-2 bg-blue-600/80 text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider">
+            BETA
+          </div>
+
+          <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+             <div class="bg-white/20 p-3 rounded-full backdrop-blur-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+             </div>
+          </div>
+        </div>
+        
+        <h3 class="mt-3 text-sm md:text-base font-semibold text-gray-200 group-hover:text-white transition">
+          Islam
+        </h3>
+      </div>
+
+      <div class="group cursor-pointer">
+        <div class="relative aspect-video overflow-hidden rounded-xl">
+          <img src="/img/thamble02.jpeg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Video Thumbnail">
+          
+          <div class="absolute top-2 left-2 bg-blue-600/80 text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider">
+            BETA
+          </div>
+
+          <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+             <div class="bg-white/20 p-3 rounded-full backdrop-blur-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+             </div>
+          </div>
+        </div>
+        
+        <h3 class="mt-3 text-sm md:text-base font-semibold text-gray-200 group-hover:text-white transition">
+          Islam
+        </h3>
+      </div>
+
+      <div class="group cursor-pointer">
+        <div class="relative aspect-video overflow-hidden rounded-xl">
+          <img src="/img/thamble02.jpeg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Video Thumbnail">
+          
+          <div class="absolute top-2 left-2 bg-blue-600/80 text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider">
+            BETA
+          </div>
+
+          <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+             <div class="bg-white/20 p-3 rounded-full backdrop-blur-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+             </div>
+          </div>
+        </div>
+        
+        <h3 class="mt-3 text-sm md:text-base font-semibold text-gray-200 group-hover:text-white transition">
+          Islam
+        </h3>
+      </div>
+
+      <div class="group cursor-pointer">
+        <div class="relative aspect-video overflow-hidden rounded-xl">
+          <img src="/img/thamble02.jpeg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Video Thumbnail">
+          
+          <div class="absolute top-2 left-2 bg-blue-600/80 text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider">
+            BETA
+          </div>
+
+          <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+             <div class="bg-white/20 p-3 rounded-full backdrop-blur-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+             </div>
+          </div>
+        </div>
+        
+        <h3 class="mt-3 text-sm md:text-base font-semibold text-gray-200 group-hover:text-white transition">
+          Islam
+        </h3>
+      </div>
+
+      <div class="group cursor-pointer">
+        <div class="relative aspect-video overflow-hidden rounded-xl">
+          <img src="/img/thamble02.jpeg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Video Thumbnail">
+          
+          <div class="absolute top-2 left-2 bg-blue-600/80 text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider">
+            BETA
+          </div>
+
+          <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+             <div class="bg-white/20 p-3 rounded-full backdrop-blur-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+             </div>
+          </div>
+        </div>
+        
+        <h3 class="mt-3 text-sm md:text-base font-semibold text-gray-200 group-hover:text-white transition">
+          Islam
+        </h3>
+      </div>
+
+      <div class="group cursor-pointer">
+        <div class="relative aspect-video overflow-hidden rounded-xl">
+          <img src="/img/thamble02.jpeg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Video Thumbnail">
+          
+          <div class="absolute top-2 left-2 bg-blue-600/80 text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider">
+            BETA
+          </div>
+
+          <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+             <div class="bg-white/20 p-3 rounded-full backdrop-blur-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+             </div>
+          </div>
+        </div>
+        
+        <h3 class="mt-3 text-sm md:text-base font-semibold text-gray-200 group-hover:text-white transition">
+          Islam
+        </h3>
+      </div>
+
+      <div class="group cursor-pointer">
+        <div class="relative aspect-video overflow-hidden rounded-xl">
+          <img src="/img/thamble02.jpeg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Video Thumbnail">
+          
+          <div class="absolute top-2 left-2 bg-blue-600/80 text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider">
+            BETA
+          </div>
+
+          <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+             <div class="bg-white/20 p-3 rounded-full backdrop-blur-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+             </div>
+          </div>
+        </div>
+        
+        <h3 class="mt-3 text-sm md:text-base font-semibold text-gray-200 group-hover:text-white transition">
+          Islam
+        </h3>
+      </div>
+
+
+      <div class="group cursor-pointer">
+        <div class="relative aspect-video overflow-hidden rounded-xl">
+          <img src="/img/thamble02.jpeg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Video Thumbnail">
+          
+          <div class="absolute top-2 left-2 bg-blue-600/80 text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider">
+            BETA
+          </div>
+
+          <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+             <div class="bg-white/20 p-3 rounded-full backdrop-blur-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+             </div>
+          </div>
+        </div>
+        
+        <h3 class="mt-3 text-sm md:text-base font-semibold text-gray-200 group-hover:text-white transition">
+          Islam
+        </h3>
+      </div>
+
+
+      
+
+
+            <div class="group cursor-pointer">
+        <div class="relative aspect-video overflow-hidden rounded-xl">
+          <img src="/img/thamble02.jpeg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Video Thumbnail">
+          
+          <div class="absolute top-2 left-2 bg-blue-600/80 text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider">
+            BETA
+          </div>
+
+          <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+             <div class="bg-white/20 p-3 rounded-full backdrop-blur-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+             </div>
+          </div>
+        </div>
+        
+        <h3 class="mt-3 text-sm md:text-base font-semibold text-gray-200 group-hover:text-white transition">
+          Islam
+        </h3>
+      </div>
+
+
+
+
+            <div class="group cursor-pointer">
+        <div class="relative aspect-video overflow-hidden rounded-xl">
+          <img src="/img/thamble02.jpeg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Video Thumbnail">
+          
+          <div class="absolute top-2 left-2 bg-blue-600/80 text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider">
+            BETA
+          </div>
+
+          <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+             <div class="bg-white/20 p-3 rounded-full backdrop-blur-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+             </div>
+          </div>
+        </div>
+        
+        <h3 class="mt-3 text-sm md:text-base font-semibold text-gray-200 group-hover:text-white transition">
+          Islam
+        </h3>
+      </div>
+      </div>
+  </div>
+</section>
+
+<style>
+  /* উপরের ট্যাগগুলোর স্ক্রলবার হাইড করার জন্য */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 </style>
 
 
 
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-<section class="min-h-screen bg-gradient-to-br from-indigo-700 via-blue-600 to-purple-700 flex items-center justify-center p-6">
+<section class="relative bg-[#050b18] min-h-screen flex items-center justify-center py-20 px-4 overflow-hidden">
+  
+  <canvas id="bg-canvas" class="absolute inset-0 z-0 opacity-40"></canvas>
+
+  <div class="container mx-auto relative z-10">
+    <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
+      
+      <div class="w-full lg:w-3/5 space-y-8 text-center lg:text-left order-2 lg:order-1">
+        <div class="inline-flex items-center gap-2 bg-gradient-to-r from-red-600 to-red-500 text-white px-5 py-2 rounded-lg shadow-lg">
+          <span class="relative flex h-3 w-3">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
+          </span>
+          <p class="text-xs md:text-sm font-bold uppercase tracking-widest">Featured Resource</p>
+        </div>
+        
+        <h1 class="text-5xl sm:text-6xl md:text-7xl font-extrabold text-white leading-[1.1] tracking-tight">
+          The Grief Sessions <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500">Leaders Kit</span>
+        </h1>
+        
+        <div class="flex items-center justify-center lg:justify-start gap-4">
+            <p class="text-4xl font-light text-white">$89.95</p>
+            <div class="h-8 w-[2px] bg-gray-600"></div>
+            <p class="text-gray-400 text-sm uppercase tracking-tighter">Limited Time<br>Offer</p>
+        </div>
+        
+        <p class="text-lg md:text-xl text-gray-400 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-medium">
+          An interactive, six-session presentation designed to help people find peace and face loss. A comprehensive kit for leaders.
+        </p>
+        
+        <div class="flex flex-wrap justify-center lg:justify-start gap-5">
+          <button class="group relative px-10 py-4 bg-yellow-500 rounded-full overflow-hidden transition-all duration-300 hover:pr-14 active:scale-95 shadow-[0_0_20px_rgba(234,179,8,0.3)]">
+            <span class="relative z-10 text-black font-black text-lg">Learn More</span>
+            <span class="absolute right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 text-black">→</span>
+          </button>
+          
+          <button class="px-10 py-4 border-2 border-white/20 text-white font-bold rounded-full hover:bg-white/10 transition-all">
+            View Sample
+          </button>
+        </div>
+      </div>
+
+      <div class="w-full lg:w-2/5 flex justify-center items-center order-1 lg:order-2">
+        <div class="relative group">
+          <div class="absolute -inset-10 bg-yellow-500/20 rounded-full blur-[80px] group-hover:bg-yellow-500/30 transition-all duration-700"></div>
+          
+          <div class="relative bg-white/5 backdrop-blur-xl p-6 rounded-[40px] border border-white/10 shadow-2xl transition-transform duration-500 group-hover:rotate-2 group-hover:scale-105">
+            <img src="/img/grief-removebg-preview.png" class="max-h-[350px] sm:max-h-[450px] object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]" alt="Kit">
+            
+            <div class="absolute -bottom-4 -right-4 bg-black/80 backdrop-blur-md p-4 rounded-2xl border border-white/10 hidden md:block">
+               <p class="text-[10px] text-gray-400 uppercase font-bold">Included</p>
+               <!-- <p class="text-white text-xs font-black">All Videos on USB</p> -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+    // Three.js Scene Setup with Unique Variable Names
+    const luxHeroScene = new THREE.Scene();
+    const luxHeroCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const luxHeroRenderer = new THREE.WebGLRenderer({ 
+        canvas: document.getElementById('bg-canvas'), 
+        alpha: true, 
+        antialias: true 
+    });
+    
+    luxHeroRenderer.setSize(window.innerWidth, window.innerHeight);
+    luxHeroRenderer.setPixelRatio(window.devicePixelRatio);
+
+    // Grid System Configuration
+    const wavePointCount = 50;
+    const wavePointSpacing = 15;
+    const waveGeometry = new THREE.BufferGeometry();
+    const waveVertexPositions = new Float32Array(wavePointCount * wavePointCount * 3);
+
+    // Building the Particle Grid
+    for (let row = 0; row < wavePointCount; row++) {
+        for (let col = 0; col < wavePointCount; col++) {
+            const vertexIndex = (row * wavePointCount + col) * 3;
+            waveVertexPositions[vertexIndex] = (row - wavePointCount / 2) * wavePointSpacing;     // x
+            waveVertexPositions[vertexIndex + 1] = 0;                                           // y
+            waveVertexPositions[vertexIndex + 2] = (col - wavePointCount / 2) * wavePointSpacing; // z
+        }
+    }
+
+    waveGeometry.setAttribute('position', new THREE.BufferAttribute(waveVertexPositions, 3));
+    
+    // Luxury Particle Styling
+    const waveMaterial = new THREE.PointsMaterial({ 
+        color: 0x4a5568, 
+        size: 2, 
+        transparent: true, 
+        opacity: 0.5 
+    });
+    
+    const waveMeshPoints = new THREE.Points(waveGeometry, waveMaterial);
+    luxHeroScene.add(waveMeshPoints);
+
+    luxHeroCamera.position.set(0, 200, 400);
+    luxHeroCamera.lookAt(0, 0, 0);
+
+    // Animation Timing & Frame Logic
+    let luxClock = new THREE.Clock();
+
+    function animateLuxWave() {
+        requestAnimationFrame(animateLuxWave);
+        let elapsedTime = luxClock.getElapsedTime();
+        
+        const positionBuffer = waveGeometry.attributes.position;
+        for (let r = 0; r < wavePointCount; r++) {
+            for (let c = 0; c < wavePointCount; c++) {
+                const currentIdx = (r * wavePointCount + c) * 3;
+                
+                // Fetching X and Z to calculate the dynamic Y (Wave Height)
+                const currentX = positionBuffer.array[currentIdx];
+                const currentZ = positionBuffer.array[currentIdx + 2];
+                
+                // Advanced Sin/Cos Wave Math
+                positionBuffer.array[currentIdx + 1] = 
+                    Math.sin(elapsedTime + currentX * 0.05) * 20 + 
+                    Math.cos(elapsedTime + currentZ * 0.05) * 20;
+            }
+        }
+        
+        positionBuffer.needsUpdate = true;
+        luxHeroRenderer.render(luxHeroScene, luxHeroCamera);
+    }
+
+    // Initialize Animation
+    animateLuxWave();
+
+    // Handling Window Resizing Dynamically
+    window.addEventListener('resize', () => {
+        luxHeroCamera.aspect = window.innerWidth / window.innerHeight;
+        luxHeroCamera.updateProjectionMatrix();
+        luxHeroRenderer.setSize(window.innerWidth, window.innerHeight);
+    });
+</script>
+
+
+
+
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<section class="relative bg-[#001529] min-h-screen flex flex-col items-center justify-center py-16 px-4 overflow-hidden">
+  
+  <canvas id="bg-canvas" class="absolute inset-0 z-0"></canvas>
+
+  <div class="container mx-auto relative z-10">
+    <div class="flex justify-between items-center mb-10 px-4">
+      <h2 class="text-4xl md:text-5xl font-bold text-white tracking-tight">Latest Articles</h2>
+      <button class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-6 rounded-full transition-transform active:scale-95">
+        See All
+      </button>
+    </div>
+
+    <div class="swiper articleSwiper p-4">
+      <div class="swiper-wrapper" id="article-wrapper">
+        </div>
+      
+      <div class="flex justify-center gap-4 mt-10">
+        <button class="prev-btn bg-white/10 hover:bg-white/20 text-white p-4 rounded-full backdrop-blur-md transition">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+        </button>
+        <button class="next-btn bg-white/10 hover:bg-white/20 text-white p-4 rounded-full backdrop-blur-md transition">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+    // 1. Three.js - Simple Floating Particles Background
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg-canvas'), alpha: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+
+const geometry = new THREE.BufferGeometry();
+const vertices = [];
+for (let i = 0; i < 500; i++) {
+    vertices.push(THREE.MathUtils.randFloatSpread(2000), THREE.MathUtils.randFloatSpread(2000), THREE.MathUtils.randFloatSpread(2000));
+}
+geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+const particles = new THREE.Points(geometry, new THREE.PointsMaterial({ color: 0x50d8f7, size: 2 }));
+scene.add(particles);
+camera.position.z = 1000;
+
+function animateBg() {
+    requestAnimationFrame(animateBg);
+    particles.rotation.y += 0.001;
+    renderer.render(scene, camera);
+}
+animateBg();
+
+// 2. Article Data & Injection
+const articles = [
+    { title: "The Truth About Cholesterol", img: "/img/thamble02.jpeg", desc: "There's so much confusion surrounding dietary cholesterol..." },
+    { title: "Why Does Your Back Hurt?", img: "/img/thamble03.jpeg", desc: "Millions of people suffer from chronic back pain. In fact, it's leading..." },
+    { title: "Are Artificial Sweeteners Healthier?", img: "/img/thamble04.jpeg", desc: "When people 'quit sugar' they often switch to an artificial, calorie-free..." },
+    { title: "Healthy Heart Tips", img: "/img/thamble05.jpeg", desc: "Discover the best exercises to keep your heart pumping strong..." },
+    { title: "Healthy Heart Tips", img: "/img/thamble06.jpeg", desc: "Discover the best exercises to keep your heart pumping strong..." },
+    { title: "Healthy Heart Tips", img: "/img/thamble02.jpeg", desc: "Discover the best exercises to keep your heart pumping strong..." },
+    { title: "Healthy Heart Tips", img: "/img/thamble03.jpeg", desc: "Discover the best exercises to keep your heart pumping strong..." },
+];
+
+const wrapper = document.getElementById('article-wrapper');
+articles.forEach(art => {
+    wrapper.innerHTML += `
+    <div class="swiper-slide">
+        <div class="bg-[#cde9f0] rounded-[30px] p-6 h-full flex flex-col shadow-2xl transform transition-all duration-500 hover:-translate-y-2">
+            <img src="${art.img}" class="w-full h-48 md:h-60 object-cover rounded-2xl mb-6 shadow-lg">
+            <h3 class="text-2xl font-black text-[#1a2b3c] mb-4">${art.title}</h3>
+            <p class="text-gray-700 leading-relaxed mb-6 flex-grow">${art.desc}</p>
+            <button class="bg-[#006699] text-white font-bold py-3 px-8 rounded-full w-fit hover:bg-[#004466] transition-colors">
+                Learn More
+            </button>
+        </div>
+    </div>`;
+});
+
+// 3. Swiper Initialization
+const swiper = new Swiper(".articleSwiper", {
+    slidesPerView: 1,
+    spaceBetween: 30,
+    loop: true,
+    navigation: { nextEl: ".next-btn", prevEl: ".prev-btn" },
+    breakpoints: {
+        640: { slidesPerView: 1.5 },
+        1024: { slidesPerView: 2.5 },
+        1280: { slidesPerView: 3 }
+    }
+});
+</script>
+
+
+
+
+
+
+
+
+
+<section class="h-full bg-gradient-to-br from-indigo-700 via-blue-600 to-purple-700 flex items-center justify-center py-10 px-4 md:px-10">
   <div class="max-w-6xl w-full flex flex-col md:flex-row items-center justify-between gap-12">
     
     <!-- Left Side: Logo/Brand -->
@@ -722,99 +1659,119 @@ document.addEventListener('keydown', (e) => {
 
 
 <!-- Footer Section -->
-<footer class="bg-[#0f1d33] text-white pt-16 pb-6 px-6 md:px-12 lg:px-20 relative overflow-hidden">
-  
-  <!-- Main Grid Container -->
-  <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 relative z-10">
+<footer class="bg-[#001529] text-gray-300 py-12 px-6 md:px-16 font-sans border-t border-gray-800">
+  <div class="max-w-7xl mx-auto">
     
-    <!-- 1. Logo & Contact Info -->
-    <div class="space-y-6">
-      <div class="flex items-center group cursor-pointer">
-    <div class="flex flex-col items-end md:items-start transition-all duration-300 group-hover:translate-x-1">
-        <h1 class="text-2xl font-extrabold tracking-tight leading-none italic">
-            <span class="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Family</span>
-            <span class="text-white">World</span>
-        </h1>
-        <p class="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-medium group-hover:text-cyan-400 transition-colors">
-            familyworld.com
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-10 border-b border-gray-700 pb-12">
+      
+      <div class="sm:col-span-2 lg:col-span-2">
+        <div class="flex items-center gap-3 mb-6">
+          <h2 class="text-white text-xl font-bold uppercase tracking-tight">Family World International</h2>
+          <div class="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center text-black font-bold">
+            <img src="/img/logo.png" 
+             alt="Logo" 
+             class="relative h-12 w-12 rounded-full border-2 border-white/10 object-cover shadow-2xl transition-transform duration-500 group-hover:rotate-[360deg]">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 gap-8 text-xs leading-relaxed">
+          <div>
+            <h3 class="text-emerald-400 font-bold mb-2 flex items-center gap-2">
+              <i class="fas fa-map-marker-alt"></i> United Arab Emirates
+            </h3>
+            <p>Office: APT- C10, Safetake Building, Ajman Industrial Area- 2, UAE</p>
+            <p class="mt-1">PH: +971 56 179 1590</p>
+          </div>
+
+          <div>
+            <h3 class="text-emerald-400 font-bold mb-2 flex items-center gap-2">
+              <i class="fas fa-map-marker-alt"></i> Singapore
+            </h3>
+            <p>10 Anson Road 5-17 International Plaza, Singapore, 079903</p>
+            <p class="mt-1">PH: (+65) 67940014</p>
+          </div>
+
+          <div>
+            <h3 class="text-emerald-400 font-bold mb-2 flex items-center gap-2">
+              <i class="fas fa-map-marker-alt"></i> Bangladesh
+            </h3>
+            <p>House: 84 (3rd Floor), Road: 16/23, Block: A, Banani, Dhaka-1212</p>
+            <p class="mt-1">PH: +880 1332-107467</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        <h3 class="text-white font-bold uppercase text-sm border-l-4 border-emerald-500 pl-3">Shows</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#" class="hover:text-emerald-400 transition-all">Familyworld</a></li>
+          <li><a href="#" class="hover:text-emerald-400 transition-all">AI- Family AI</a></li>
+          <li><a href="#" class="hover:text-emerald-400 transition-all">Podcast</a></li>
+        </ul>
+      </div>
+
+      <div class="space-y-4">
+        <h3 class="text-white font-bold uppercase text-sm border-l-4 border-emerald-500 pl-3">Articles</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#" class="hover:text-emerald-400 transition-all">Blogs</a></li>
+          <li><a href="#" class="hover:text-emerald-400 transition-all">Resources</a></li>
+          <li><a href="#" class="hover:text-emerald-400 transition-all">Investment</a></li>
+        </ul>
+      </div>
+
+      <div class="space-y-4">
+        <h3 class="text-white font-bold uppercase text-sm border-l-4 border-emerald-500 pl-3">About Us</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#" class="hover:text-emerald-400 transition-all">FAQ</a></li>
+          <li><a href="#" class="hover:text-emerald-400 transition-all">Contact Us</a></li>
+          <li class="text-xs text-gray-500 pt-2 italic text-emerald-500/80">Hosting- Hostinger</li>
+        </ul>
+      </div>
+
+      <div class="space-y-4">
+        <h3 class="text-white font-bold uppercase text-sm border-l-4 border-emerald-500 pl-3">AI Tech</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#" class="hover:text-emerald-400 transition-all">Text to image</a></li>
+          <li><a href="#" class="hover:text-emerald-400 transition-all">Image to video</a></li>
+          <li><a href="#" class="hover:text-emerald-400 transition-all">Lip sync</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-10 flex flex-col md:flex-row justify-between items-center gap-6">
+      <p class="text-xs text-gray-500">© 2026 Family World International Service.</p>
+      
+
+
+
+                  <div class="flex items-center gap-3 DEVELOPED BY ROX SABIL">
+    <div class="group relative flex items-center gap-2 bg-white/5 px-4 py-2 rounded-full border border-white/10 hover:border-emerald-500/50 transition-all duration-300">
+        <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+        </span>
+        
+        <p class="text-[10px] md:text-xs tracking-widest text-gray-400 group-hover:text-emerald-400 transition-colors">
+            DEVELOPED BY 
+            <a href="https://rox-portfolio-8iff.onrender.com/" target="_blank" class="text-emerald-500 font-black hover:text-white transition-colors">
+                ROX SABIL
+            </a>
         </p>
     </div>
 
-    <div class="h-8 w-[2px] bg-gradient-to-b from-transparent via-gray-600 to-transparent mx-4 hidden sm:block"></div>
+    <a href="https://wa.me/8801749935208" target="_blank" class="p-3 bg-emerald-500/10 hover:bg-emerald-500 text-emerald-500 hover:text-white rounded-full transition-all">
+        <i class="fab fa-whatsapp text-[18px]"></i>
+    </a>
+<a href="https://rox-portfolio-8iff.onrender.com/" target="_blank" class="p-3 bg-emerald-500/10 hover:bg-emerald-500 text-emerald-500 hover:text-white rounded-full transition-all">
+    <i class="fa-solid fa-arrow-up-right-from-square text-[17px]"></i>
+</a>
 
-    <div class="relative">
-        <div class="absolute -inset-1 bg-cyan-500 rounded-full blur opacity-25 group-hover:opacity-50 transition duration-300"></div>
-        <img src="/img/logo.png" 
-             alt="Logo" 
-             class="relative h-12 w-12 rounded-full border-2 border-white/10 object-cover shadow-2xl transition-transform duration-500 group-hover:rotate-[360deg]">
-    </div>
+
 </div>
-      
-      <div class="text-[13px] leading-relaxed space-y-2 text-gray-300">
-        <p><strong class="text-white">ADDRESS:</strong> PO Box 1000<br>Thousand Oaks, CA 91359-1000</p>
-        <p><strong class="text-white">PHONE:</strong> (805) 955-7700</p>
-        <p><strong class="text-white">TOLL FREE:</strong> (888) 940-0062</p>
-        <p><strong class="text-white">EMAIL:</strong> info@lifestyle.org</p>
-        <p><strong class="text-white">Site:</strong> www.lifestyle.org</p>
-      </div>
+
+
+
     </div>
-
-    <!-- 2. Shows Column -->
-    <div>
-      <h3 class="text-xl font-bold mb-4">Shows</h3>
-      <ul class="space-y-2 text-gray-300 text-sm">
-        <li><a href="#" class="hover:text-white transition">Lifestyle</a></li>
-        <li><a href="#" class="hover:text-white transition">The Funny Thing About Sadness</a></li>
-        <li><a href="#" class="hover:text-white transition">Lifestyle.org Podcast</a></li>
-        <li><a href="#" class="hover:text-white transition">Friends vs Time</a></li>
-      </ul>
-    </div>
-
-    <!-- 3. Articles & Resources -->
-    <div class="space-y-4">
-      <h3 class="text-xl font-bold">Articles</h3>
-      <ul class="space-y-3 text-lg font-bold">
-        <li><a href="#" class="hover:text-blue-400 transition">Resources</a></li>
-        <li><a href="#" class="hover:text-blue-400 transition">Store</a></li>
-        <li><a href="#" class="hover:text-blue-400 transition">Events</a></li>
-      </ul>
-    </div>
-
-    <!-- 4. About Us -->
-    <div class="space-y-4">
-      <h3 class="text-xl font-bold">About Us</h3>
-      <ul class="space-y-3 text-lg font-bold">
-        <li><a href="#" class="hover:text-blue-400 transition">FAQ</a></li>
-        <li><a href="#" class="hover:text-blue-400 transition">Contact Us</a></li>
-        <li><a href="#" class="hover:text-blue-400 transition">Donate</a></li>
-      </ul>
-    </div>
-
-    <!-- 5. Media & Socials -->
-    <div class="space-y-6">
-      <div>
-        <h3 class="text-xl font-bold mb-4">Media Kit</h3>
-        <h3 class="text-xl font-bold mb-4">Follow Us</h3>
-        <!-- Social Icons -->
-        <div class="flex items-center gap-4 text-xl">
-          <a href="#" class="hover:scale-110 transition"><i class="fab fa-instagram"></i></a>
-          <a href="#" class="hover:scale-110 transition"><i class="fab fa-tiktok"></i></a>
-          <a href="#" class="hover:scale-110 transition"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" class="hover:scale-110 transition"><i class="fab fa-youtube"></i></a>
-          <a href="#" class="hover:scale-110 transition"><i class="fab fa-x-twitter"></i></a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Background Pattern (Referencing the bottom part of Capture.PNG) -->
-  <div class="absolute bottom-0 left-0 w-full h-48 opacity-20 pointer-events-none bg-repeat-x bg-bottom" 
-       style="background-image: url('path-to-your-pattern-icon.png'); background-size: contain;">
-  </div>
-
-  <!-- Bottom Copyright -->
-  <div class="mt-16 pt-4 border-t border-gray-700/50 flex justify-end relative z-10">
-    <p class="text-[10px] text-gray-500 uppercase tracking-widest">Site Design by PPx</p>
   </div>
 </footer>
 </body>
