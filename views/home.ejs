@@ -1707,14 +1707,44 @@ const swiper = new Swiper(".articleSwiper", {
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-10 border-b border-gray-700 pb-12">
       
       <div class="sm:col-span-2 lg:col-span-2">
-        <div class="flex items-center gap-3 mb-6">
-          <h2 class="text-white text-xl font-bold uppercase tracking-tight">Family World International</h2>
-          <div class="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center text-black font-bold">
-            <img src="/img/logo.png" 
-             alt="Logo" 
-             class="relative h-12 w-12 rounded-full border-2 border-white/10 object-cover shadow-2xl transition-transform duration-500 group-hover:rotate-[360deg]">
-          </div>
+           <!-- লোগো এবং স্লোগান সেকশন -->
+<section class="flex flex-col items-center justify-center py-0 px-2 group cursor-pointer select-none">
+    
+    <!-- লোগো মেইন রো (Compact Layout) -->
+    <div class="flex items-center gap-2 md:gap-3 transition-transform duration-500 group-hover:scale-105">
+        
+        <!-- 'Family' টেক্সট (Bold & Minimal) -->
+        <span class="text-2xl md:text-3xl font-black tracking-tight text-white transition-colors duration-300 group-hover:text-gray-200">
+            Family
+        </span>
+
+        <!-- লোগো ইমেজ (Size reduced for better UX) -->
+        <div class="relative flex items-center justify-center">
+            <img 
+                src="/img/logo-removebg-preview (1).png" 
+                alt="logo" 
+                class="w-8 md:w-12 h-auto invert brightness-[1.8] drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-500 group-hover:rotate-12"
+            >
+            <!-- Background Glow -->
+            <div class="absolute inset-0 bg-white/5 blur-xl rounded-full scale-150 group-hover:bg-cyan-500/10 transition-colors"></div>
         </div>
+
+        <!-- 'World' টেক্সট (Gradient Focus) -->
+        <span class="text-2xl md:text-3xl font-black tracking-tight bg-gradient-to-br from-white via-cyan-200 to-cyan-500 bg-clip-text text-transparent">
+            World
+        </span>
+    </div>
+
+    <!-- স্লোগান (Subtle & Clean) -->
+    <div class="mt-1 overflow-hidden">
+        <p class="text-[7px] md:text-[9px] uppercase tracking-[0.3em] text-gray-500 font-semibold group-hover:text-cyan-400/80 transition-all duration-500 transform translate-y-0 group-hover:translate-y-[-1px]">
+            stream together for every family
+        </p>
+        <!-- নিচে একটি চিকন আন্ডারলাইন এনিমেশন -->
+        <div class="h-[1.5px] w-0 group-hover:w-full bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent transition-all duration-700 mx-auto mt-0.5"></div>
+    </div>
+
+</section>
 
         <div class="grid grid-cols-1 gap-8 text-xs leading-relaxed">
           <div>
