@@ -6,6 +6,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+
+  
     <title>Advance Responsive Header</title>
 
     <style>
@@ -951,6 +954,14 @@ window.addEventListener('click', function(e) {
 </script>
 
 
+
+
+
+
+
+
+
+
 <section class="bg-stone-950 py-12 px-4 w-full overflow-hidden font-sans">
     <div class="max-w-7xl mx-auto text-center mb-12">
         <div class="flex justify-center mb-4">
@@ -1094,6 +1105,294 @@ window.addEventListener('click', function(e) {
 
     </style>
 </section>
+
+
+
+
+<section class="bg-slate-950 text-slate-100 min-h-screen overflow-x-hidden flex flex-col justify-between">
+   <style>
+
+    /* Orbit Rotation Setup */
+    @keyframes spin-clockwise {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* Keep icons upright during rotation */
+    @keyframes keep-upright {
+      from { transform: translate(var(--tx), var(--ty)) rotate(0deg); }
+      to { transform: translate(var(--tx), var(--ty)) rotate(-360deg); }
+    }
+
+    /* Dynamic orbital speed and state class */
+    .orbit-container {
+      animation: spin-clockwise var(--speed, 35s) linear infinite;
+    }
+
+    .orbit-item {
+      position: absolute;
+      transform: translate(var(--tx), var(--ty));
+      animation: keep-upright var(--speed, 35s) linear infinite;
+    }
+
+    /* Custom scrollbar for glassmorphic cards */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(6, 182, 212, 0.3);
+      border-radius: 9px;
+    }
+  </style>
+
+   <!-- Header Title -->
+  <div class="w-full max-w-7xl mx-auto px-6 pt-8 pb-4 flex flex-col md:flex-row justify-between items-center gap-4 z-20">
+    <div class="text-center md:text-left">
+      <h1 class="text-2xl md:text-4xl font-extrabold tracking-tight flex items-center gap-3 justify-center md:justify-start">
+        <span class="bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 bg-clip-text text-transparent">A Complete and Modern Smart OTT Ecosystem 
+with Powerful AI Tools.</span>
+      </h1>
+      <p class="text-xs md:text-sm text-slate-400 mt-1">A Complete and Modern Smart OTT Platform with Powerful AI Tools</p>
+    </div>
+    
+    <!-- Quick Stats Indicator -->
+    <div class="flex items-center gap-3 bg-slate-900/60 border border-slate-800/80 px-4 py-2 rounded-full text-xs">
+      <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+      <span class="text-slate-300 font-medium">10 Active AI Channels Connected</span>
+    </div>
+  </div>
+
+  <!-- Main Grid Layout -->
+  <main class="w-full max-w-7xl mx-auto px-4 md:px-6 flex-grow grid grid-cols-1 lg:grid-cols-12 gap-8 items-center z-10 py-4">
+    
+    <!-- Left column: Live Feature Viewer & Specs Panel -->
+    <section class="lg:col-span-4 order-2 lg:order-1 flex flex-col gap-6">
+      <div class="bg-slate-900/60 border border-slate-800 p-6 rounded-3xl shadow-2xl backdrop-blur-xl relative overflow-hidden group">
+        <!-- Accent Glow -->
+        <div class="absolute -top-16 -left-16 w-32 h-32 bg-cyan-500/10 rounded-full blur-2xl group-hover:bg-cyan-500/20 transition-all duration-500"></div>
+        
+        <div class="absolute top-0 right-0 bg-cyan-500 text-slate-950 font-bold text-[10px] uppercase px-3 py-1 rounded-bl-xl tracking-wider">
+          Active Node
+        </div>
+        
+        <div class="flex items-center gap-4 mb-4">
+          <div id="viewer-badge" class="w-14 h-14 rounded-2xl bg-cyan-500/10 flex items-center justify-center text-xl text-cyan-400 border border-cyan-500/20 shadow-inner">
+            <span id="viewer-index" class="font-bold tracking-tight">01</span>
+          </div>
+          <div>
+            <h2 id="viewer-title" class="text-xl md:text-2xl font-extrabold tracking-tight text-white">LIBRARY</h2>
+            <p class="text-xs text-cyan-400 font-semibold tracking-wider uppercase">Interactive Module</p>
+          </div>
+        </div>
+        
+        <p id="viewer-desc" class="text-slate-400 leading-relaxed text-sm min-h-[90px] transition-all duration-300">
+          Digital Database & Storage Management. Access thousands of categorized media libraries, secure user profiles, and high-speed data backup architectures with advanced encryption.
+        </p>
+
+        <!-- Technical Specs Metatags -->
+        <div class="mt-6 pt-6 border-t border-slate-800/80 grid grid-cols-2 gap-4">
+          <div class="bg-slate-950/40 p-3 rounded-xl border border-slate-900">
+            <span class="block text-[10px] text-slate-500 uppercase tracking-wider">Latency / Load</span>
+            <span id="viewer-stat-1" class="text-sm font-bold text-cyan-300">&lt; 14ms Latency</span>
+          </div>
+          <div class="bg-slate-950/40 p-3 rounded-xl border border-slate-900">
+            <span class="block text-[10px] text-slate-500 uppercase tracking-wider">Security Guard</span>
+            <span id="viewer-stat-2" class="text-sm font-bold text-cyan-300">AI Verified Safe</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right column: Massive interactive orbiting visual -->
+    <section class="lg:col-span-8 order-1 lg:order-2 flex items-center justify-center min-h-[460px] md:min-h-[580px] relative">
+      
+      <!-- Outer Track Glow Ring -->
+      <div class="absolute w-[330px] h-[330px] md:w-[450px] md:h-[450px] rounded-full border border-dashed border-cyan-500/20 pointer-events-none transition-all duration-500"></div>
+      <div class="absolute w-[220px] h-[220px] md:w-[310px] md:h-[310px] rounded-full border border-cyan-500/10 pointer-events-none transition-all duration-500"></div>
+
+      <!-- Center Logo Element (Glows and holds the logo image) -->
+      <div class="absolute w-44 h-44 md:w-56 md:h-56 rounded-full bg-slate-950 border-[3px] border-cyan-400/80 flex items-center justify-center shadow-[0_0_50px_rgba(34,211,238,0.25)] z-20 backdrop-blur-xl overflow-hidden transition-all duration-500 hover:scale-105 group/center">
+        <!-- Glowing Core Wave -->
+        <div class="absolute inset-0 bg-gradient-to-tr from-cyan-500/10 via-transparent to-indigo-500/10 opacity-60 pointer-events-none"></div>
+        <div class="w-[85%] h-[85%] rounded-full bg-slate-900 flex items-center justify-center overflow-hidden border border-slate-800">
+          <img src="/img/Logo 300X282.png" alt="Family World Core Logo" class="w-[90%] h-[90%] object-contain p-2 group-hover/center:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/300x282/020617/22d3ee?text=Family+World';">
+        </div>
+      </div>
+
+      <!-- Orbiting Node Shell (JavaScript populates 10 perfectly placed icons here) -->
+      <div id="orbit-track" class="relative w-[330px] h-[330px] md:w-[450px] md:h-[450px] flex items-center justify-center orbit-container transition-all duration-500">
+        <!-- 10 dynamic orbit items generated below -->
+      </div>
+
+    </section>
+  </main>
+
+  <!-- Bottom Status Bar -->
+  <div class="w-full max-w-7xl mx-auto border-t border-slate-900 mt-6 py-4 px-6 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 gap-3">
+    <p>&copy; 2026 Family World Ecosystem. All coordinates mathematically optimized.</p>
+    <div class="flex gap-4">
+      <span class="flex items-center gap-1"><i class="fa-solid fa-microchip text-cyan-400"></i> Auto 36° Spaced Layout</span>
+      <span class="flex items-center gap-1"><i class="fa-solid fa-circle-nodes text-cyan-400"></i> Counter-Rotation Enabled</span>
+    </div>
+  </div>
+
+  <script>
+    // Detailed list of 10 nodes with custom details to make the interaction vibrant
+    const nodesData = [
+      { id: "01", name: "LIBRARY", img: "/img/No- 01.jpg", desc: "Secure multi-tenant cloud storage containing classified family content packages. High redundancy and accelerated delivery metrics.", stat1: "1.2GB/s Transfer", stat2: "Active Replication" },
+      { id: "02", name: "FAMILY LIVE", img: "/img/No- 02.jpg", desc: "Interactive streaming and live community broadcast node supporting synchronized low-latency group feeds.", stat1: "< 80ms Latency", stat2: "Live Cast Enabled" },
+      { id: "03", name: "TEACHER AI", img: "/img/No- 03.jpg", desc: "Advanced virtual mentorship agent processing smart cognitive workflows to curate tailored educational routines.", stat1: "LLM Trained v4.2", stat2: "Active Learning" },
+      { id: "04", name: "FAMILY STUDIO", img: "/img/No- 04.jpg", desc: "Collaborative sandbox module engineered for user-driven asset creations, video processing, and dynamic timeline rendering.", stat1: "GPU Accelerated", stat2: "Auto Assembly" },
+      { id: "05", name: "FAMILY CONTENT", img: "/img/No- 05.jpg", desc: "Centralized curated catalog engine dynamically matching age-specific content with extreme filtering parameters.", stat1: "15M+ Indices", stat2: "Guard Filter ON" },
+      { id: "06", name: "ISLAMIC GUARD", desc: "Traditional values monitoring gateway ensuring religious preservation and context-appropriate filtration models.", img: "/img/No- 06.jpg", stat1: "100% Guard Active", stat2: "Traditional Safe" },
+      { id: "07", name: "MEMORIES LM", desc: "Intelligent neural engine scanning photo streams to compile automated cinematic memory packages for families.", img: "/img/No- 07.jpg", stat1: "Auto Synthesis", stat2: "AI Highlight Gen" },
+      { id: "08", name: "TOON GUARD", desc: "Cognitive computer vision module parsing animations in real time to filter out age-inappropriate scenarios.", img: "/img/No- 08.jpg", stat1: "Real-time AI Vision", stat2: "Parental Unit OK" },
+      { id: "09", name: "FAMILY BUILDER", desc: "Low-code customizable workspace interface enabling custom modules and third-party extensions deployment inside the ecosystem.", img: "/img/No- 09.jpg", stat1: "Extensible Core", stat2: "Custom Widgets" },
+      { id: "10", name: "VISION SHEETS", desc: "Data monitoring spreadsheet node translating stream feedback telemetry logs into beautiful visual analytical grids.", img: "/img/No- 10.jpg", stat1: "Real-time Sheet sync", stat2: "Auto Analytical logs" }
+    ];
+
+    const orbitTrack = document.getElementById('orbit-track');
+
+    // Build orbit with precise angle calculations (360 degrees divided by 10 elements = 36 degree intervals)
+    function initializeOrbit() {
+      orbitTrack.innerHTML = '';
+      const totalNodes = nodesData.length;
+      
+      // Determine radius based on viewport width (highly responsive)
+      const isMobile = window.innerWidth < 768;
+      const radius = isMobile ? 155 : 215; // Radius offset from center origin in pixels
+      
+      nodesData.forEach((node, index) => {
+        // Calculate angle in radians for each of the 10 elements
+        const angle = (index * (360 / totalNodes)) * (Math.PI / 180);
+        
+        // Calculate coordinate displacements
+        const tx = Math.cos(angle) * radius;
+        const ty = Math.sin(angle) * radius;
+        
+        // Build individual node elements
+        const nodeDiv = document.createElement('div');
+        nodeDiv.className = "orbit-item group/item cursor-pointer z-30 transition-all duration-300 hover:scale-125";
+        nodeDiv.style.setProperty('--tx', `${tx.toFixed(3)}px`);
+        nodeDiv.style.setProperty('--ty', `${ty.toFixed(3)}px`);
+        
+        // Populate the structure with your specified local images and custom fallbacks
+        nodeDiv.innerHTML = `
+          <div class="relative flex items-center justify-center w-12 h-12 md:w-[85px] md:h-[85px] bg-slate-900 border border-slate-700/80 hover:border-cyan-400 rounded-full shadow-lg hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-all duration-300" onclick="focusOnNode(${index})">
+            <img src="${node.img}" alt="${node.name}" class="w-[85%] h-[85%] object-cover rounded-full" onerror="this.onerror=null; this.src='https://placehold.co/100x100/020617/22d3ee?text=${node.id}';">
+            
+            <!-- Tooltip indicators -->
+            <span class="absolute whitespace-nowrap bg-slate-950 text-cyan-400 text-[10px] px-2.5 py-1 rounded-md opacity-0 group-hover/item:opacity-100 transition-all pointer-events-none -bottom-8 shadow-md border border-slate-800 tracking-wider font-semibold z-40">
+              ${node.name}
+            </span>
+          </div>
+        `;
+        
+        orbitTrack.appendChild(nodeDiv);
+      });
+    }
+
+    // Set focus detail inside left panel
+    function focusOnNode(index) {
+      const target = nodesData[index];
+      
+      // Animate update sequence inside details container
+      const titleEl = document.getElementById('viewer-title');
+      const descEl = document.getElementById('viewer-desc');
+      const badgeIndexEl = document.getElementById('viewer-index');
+      const badgeBox = document.getElementById('viewer-badge');
+      const stat1 = document.getElementById('viewer-stat-1');
+      const stat2 = document.getElementById('viewer-stat-2');
+
+      titleEl.classList.add('opacity-0');
+      descEl.classList.add('opacity-0');
+      
+      setTimeout(() => {
+        badgeIndexEl.innerText = target.id;
+        titleEl.innerText = target.name;
+        descEl.innerText = target.desc;
+        stat1.innerText = target.stat1;
+        stat2.innerText = target.stat2;
+
+        titleEl.classList.remove('opacity-0');
+        descEl.classList.remove('opacity-0');
+
+        // Tiny bounce effect on selection
+        badgeBox.classList.add('scale-110', 'bg-cyan-500/20');
+        setTimeout(() => badgeBox.classList.remove('scale-110', 'bg-cyan-500/20'), 300);
+      }, 150);
+    }
+
+    // Redraw and scale dynamically on resizing windows
+    window.addEventListener('resize', initializeOrbit);
+    
+    // Fire setup loops on initialization
+    window.onload = function() {
+      initializeOrbit();
+      focusOnNode(0);
+    };
+  </script>
+
+</section>
+
+
+
+
+<section class="bg-gray-50 p-6">
+
+  <div class="max-w-7xl mx-auto">
+    <h2 class="text-red-600 text-2xl font-bold mb-6">Family Powerful AI tools: Family Studio</h2>
+    
+    <div id="card-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      </div>
+  </div>
+
+  <script>
+    // কার্ডের ডেটা (আপনার ইমেজের সাথে মিল রেখে)
+    const toolsData = [
+      { title: "Streetwear Product Launch", img: "https://via.placeholder.com/300x180" },
+      { title: "Brand Design", img: "https://via.placeholder.com/300x180" },
+      { title: "Fashion Brand Promotion", img: "https://via.placeholder.com/300x180" },
+      { title: "Creative Monetization", img: "https://via.placeholder.com/300x180" },
+      { title: "Art & Design Sharing", img: "https://via.placeholder.com/300x180" },
+      { title: "Project Proposal", img: "https://via.placeholder.com/300x180" },
+      { title: "Creative Marketing Strategy", img: "https://via.placeholder.com/300x180" },
+      { title: "Interior Coordination Art", img: "https://via.placeholder.com/300x180" },
+      { title: "Business Partnership Proposal", img: "https://via.placeholder.com/300x180" },
+      { title: "Psychological Healing", img: "https://via.placeholder.com/300x180" },
+      { title: "Designer Portfolio", img: "https://via.placeholder.com/300x180" },
+      { title: "Company Profile", img: "https://via.placeholder.com/300x180" }
+    ];
+
+    const container = document.getElementById('card-container');
+
+    // জাভাস্ক্রিপ্ট দিয়ে লুপ চালিয়ে কার্ড তৈরি
+    toolsData.forEach(tool => {
+      const cardHtml = `
+        <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden group cursor-pointer">
+          <div class="relative aspect-[16/10] bg-gray-200 overflow-hidden">
+            <img src="${tool.img}" alt="${tool.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+          </div>
+          
+          <div class="p-4 flex justify-between items-center bg-white">
+            <span class="text-sm font-medium text-gray-700 truncate mr-2">${tool.title}</span>
+            <button class="w-8 h-8 flex items-center justify-center bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors duration-200 shrink-0">
+              <i class="fa-solid fa-wand-magic-sparkles text-xs"></i>
+            </button>
+          </div>
+        </div>
+      `;
+      container.innerHTML += cardHtml;
+    });
+  </script>
+
+</section>
+
+
+
 
 
 <section class="bg-yellow-400 min-h-screen flex items-center justify-center p-4 md:p-10 overflow-hidden">
