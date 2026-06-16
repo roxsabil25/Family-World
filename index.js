@@ -1,8 +1,18 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-
 const PORT = process.env.PORT || 3000;
+
+
+
+const mongoose = require('mongoose');
+const multer = require('multer');
+const path = require('path');
+const Video = require('./model/Video');
+
+
+
+
 
 // 1. EJS Setup
 app.set('view engine', 'ejs');
@@ -62,9 +72,83 @@ app.get('/healthz', (req, res) => {
 });
 
 
-app.get('/', (req, res) => {
-    res.render('home', { awareKeys });
+// MongoDB Atlas Connection
+mongoose.connect('mongodb+srv://roxmarjuk25_db_user:IpBd8VH3kOLIAInC@cluster0.miwqauj.mongodb.net/?appName=Cluster0')
+.then(() => console.log("MongoDB Connected"))
+.catch(err => console.log(err));
+
+// Multer Storage Setup (ভিডিও সেভ করার জন্য)
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'public/videos/'); // ভিডিও এই ফোল্ডারে সেভ হবে
+    },
+    filename: function (req, file, cb) {
+        // ফাইলের ইউনিক নাম দেওয়া হচ্ছে যেন এক নামের ফাইল ওভাররাইট না হয়
+        cb(null, Date.now() + path.extname(file.originalname));
+    }
 });
+const upload = multer({ storage: storage });
+
+
+app.get('/', async (req, res) => {
+    try {
+        const videos = await Video.find().sort({ createdAt: -1 }); // সব ভিডিও নিয়ে আসা হলো
+        res.render('home', { videos: videos , awareKeys}); // ইজেএস ফাইলে পাঠানো হলো
+    } catch (err) {
+        res.status(500).send("সার্ভার ত্রুটি");
+    }
+});
+
+
+// ২. অ্যাডমিন প্যানেল পেজ (ভিডিও আপলোড করার ফর্ম)
+app.get('/admin', (req, res) => {
+    res.render('admin');
+});
+
+
+
+// ৩. ভিডিও আপলোড করার POST রাউট
+app.post('/admin/upload', upload.single('videoFile'), async (req, res) => {
+    try {
+        const newVideo = new Video({
+            title: req.body.title,
+            videoUrl: '/videos/' + req.file.filename // ফ্রন্টএন্ডে প্লে করার জন্য পাথ সেভ হচ্ছে
+        });
+        await newVideo.save();
+        res.redirect('/'); // আপলোড শেষে মেইন পেজে রিডাইরেক্ট
+    } catch (err) {
+        res.status(500).send("আপলোড ব্যর্থ হয়েছে");
+    }
+});
+
+
+// লাইক আপডেট করার API রাউট
+app.post('/api/videos/:id/like', async (req, res) => {
+    try {
+        const videoId = req.params.id;
+        const action = req.body.action; // 'like' অথবা 'unlike'
+
+        let updateQuery = { $inc: { likes: 1 } }; // ডিফল্টভাবে ১ বাড়াবে
+        if (action === 'unlike') {
+            updateQuery = { $inc: { likes: -1 } }; // আনলাইক করলে ১ কমাবে
+        }
+
+        // ডাটাবেজে আপডেট করে নতুন ডাটাটি রিটার্ন করবে
+        const updatedVideo = await Video.findByIdAndUpdate(videoId, updateQuery, { new: true });
+        
+        if (!updatedVideo) {
+            return res.status(404).json({ success: false, message: 'ভিডিও পাওয়া যায়নি' });
+        }
+
+        res.json({ success: true, likes: updatedVideo.likes });
+    } catch (err) {
+        res.status(500).json({ success: false, message: 'সার্ভার ত্রুটি' });
+    }
+});
+
+
+
+
 
 // Post Route (Form data test korar jonno)
 app.post('/login', (req, res) => {
