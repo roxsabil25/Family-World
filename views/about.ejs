@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <title>Document</title>
+</head>
+<body>
+   <section class="bg-gray-100 w-full min-h-screen py-10 px-4 md:px-8">
+    <div class="max-w-7xl mx-auto space-y-12">
+        
+        <!-- ১. হিরো সেকশন (Hero Section with Glass-morphism Banner) -->
+        <div class="relative rounded-2xl overflow-hidden bg-gradient-to-r from-sky-500 to-blue-600 text-white p-8 md:p-16 shadow-xl text-center md:text-left flex flex-col md:flex-row items-center justify-between gap-8">
+            <div class="space-y-4 max-w-2xl">
+                <span class="bg-white/20 border border-white/30 text-xs uppercase font-bold tracking-wider px-3 py-1 rounded-full backdrop-blur-sm">
+                    Get to Know Us
+                </span>
+                <h1 class="text-3xl md:text-5xl font-extrabold leading-tight">
+                    Connecting Families Through Content That Matters
+                </h1>
+                <p class="text-sky-100 text-sm md:text-base font-normal">
+                    Welcome to <span class="font-bold text-white">Family World</span>. We are dedicated to providing a safe, clean, and inspiring digital ecosystem where every family member can learn, stream, and grow together.
+                </p>
+            </div>
+            <!-- ডেকোরেশন বা লোগো হোল্ডার -->
+            <div class="flex-shrink-0 bg-white/10 border border-white/20 backdrop-blur-md p-6 rounded-2xl shadow-inner hidden md:block">
+                <img src="/img/Logo 300X282.png" alt="Family World" class="h-32 w-auto object-contain drop-shadow-md">
+            </div>
+        </div>
+
+        <!-- ২. স্ট্যাটিসটিক্স এবং ভিশন কার্ড (Stats & Vision) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- ভিশন কার্ড -->
+            <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200/60 flex flex-col justify-between">
+                <div>
+                    <div class="h-12 w-12 rounded-lg bg-sky-100 text-sky-600 flex items-center justify-center text-xl mb-4 shadow-sm">
+                        <i class="fa-solid fa-eye"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">Our Vision</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        To become the world's leading family-friendly streaming and community platform, promoting positive values, education, and safe entertainment.
+                    </p>
+                </div>
+            </div>
+
+            <!-- মিশন কার্ড -->
+            <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200/60 flex flex-col justify-between">
+                <div>
+                    <div class="h-12 w-12 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center text-xl mb-4 shadow-sm">
+                        <i class="fa-solid fa-bullseye"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">Our Mission</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        To curate diverse content categories—from science and religion to lifestyle and tech—ensuring a wholesome and enriching digital experience.
+                    </p>
+                </div>
+            </div>
+
+            <!-- স্ট্যাটস কার্ড (ম্যাচিং গ্রেডিয়েন্ট বাটন ভাইব) -->
+            <div class="bg-gradient-to-br from-amber-500 to-orange-500 p-6 rounded-xl shadow-lg text-white flex flex-col justify-center items-center text-center">
+                <div class="text-4xl font-black mb-1">100%</div>
+                <div class="text-base font-bold uppercase tracking-wider mb-2">Family Safe</div>
+                <p class="text-orange-100 text-xs">
+                    Every video, article, and resource is carefully filtered and approved for audiences of all ages.
+                </p>
+            </div>
+        </div>
+
+        <!-- ৩. আমরা কি কি অফার করি (Core Categories Feature) -->
+        <div class="bg-white p-8 rounded-xl shadow-md border border-gray-200/60">
+            <div class="text-center max-w-xl mx-auto mb-10">
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">What We Bring to Your Home</h2>
+                <p class="text-gray-500 text-sm">Explore our multi-category platform designed with your family’s growth in mind.</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="p-4 bg-gray-50 rounded-lg text-center hover:bg-sky-50 transition border border-transparent hover:border-sky-200 group">
+                    <i class="fa-solid fa-kaaba text-2xl text-sky-500 mb-2 group-hover:scale-110 transition-transform"></i>
+                    <h4 class="font-semibold text-gray-800 text-sm">Faith & Values</h4>
+                </div>
+                <div class="p-4 bg-gray-50 rounded-lg text-center hover:bg-sky-50 transition border border-transparent hover:border-sky-200 group">
+                    <i class="fa-solid fa-graduation-cap text-2xl text-sky-500 mb-2 group-hover:scale-110 transition-transform"></i>
+                    <h4 class="font-semibold text-gray-800 text-sm">Education & Tech</h4>
+                </div>
+                <div class="p-4 bg-gray-50 rounded-lg text-center hover:bg-sky-50 transition border border-transparent hover:border-sky-200 group">
+                    <i class="fa-solid fa-heart-pulse text-2xl text-sky-500 mb-2 group-hover:scale-110 transition-transform"></i>
+                    <h4 class="font-semibold text-gray-800 text-sm">Lifestyle & Wellness</h4>
+                </div>
+                <div class="p-4 bg-gray-50 rounded-lg text-center hover:bg-sky-50 transition border border-transparent hover:border-sky-200 group">
+                    <i class="fa-solid fa-clapperboard text-2xl text-sky-500 mb-2 group-hover:scale-110 transition-transform"></i>
+                    <h4 class="font-semibold text-gray-800 text-sm">Clean Entertainment</h4>
+                </div>
+            </div>
+        </div>
+
+        <!-- ৪. কল-টু-অ্যাকশন / পার্টনারশিপ সেকশন (CTA Section) -->
+        <div class="bg-sky-600/90 backdrop-blur-md rounded-2xl p-8 text-center text-white space-y-6 shadow-xl border border-white/10">
+            <h2 class="text-2xl md:text-3xl font-bold">Want to Support Our Vision?</h2>
+            <p class="text-sky-100 max-w-xl mx-auto text-sm md:text-base font-normal">
+                Become a sponsor and help us grow this safe space for families worldwide. Together, we can create a brighter digital future.
+            </p>
+            <div class="pt-2">
+                <a href="#" class="inline-block bg-gradient-to-r from-amber-500 to-orange-500 hover:from-orange-500 hover:to-amber-500 text-white font-bold px-8 py-3 rounded-md shadow-md hover:scale-105 active:scale-95 transition-all text-sm border border-orange-400/30">
+                    Join As A Sponsor
+                </a>
+            </div>
+        </div>
+
+    </div>
+</section>
+</body>
+</html>

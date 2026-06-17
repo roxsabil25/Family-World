@@ -146,7 +146,9 @@ app.post('/api/videos/:id/like', async (req, res) => {
     }
 });
 
-
+app.get('/about', (req, res) => {
+    res.render('about');
+});
 
 
 

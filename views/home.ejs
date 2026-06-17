@@ -663,11 +663,14 @@
 
 
 <!-- Main Section -->
-<section class="bg-gradient-to-r from-stone-900 via-neutral-900 to-stone-950 text-white p-4 md:p-8 w-full min-h-[500px]">
-    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+<section class="bg-gradient-to-br from-sky-950 via-slate-900 to-blue-950 text-white p-4 md:p-8 w-full min-h-[500px] relative overflow-hidden">
+    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-sky-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch relative z-10">
         
-        <div class="lg:col-span-2 flex flex-col justify-between bg-white/5 p-3 rounded-xl border border-yellow-500/10 shadow-2xl">
-            <div class="relative w-full aspect-video bg-black rounded-lg overflow-hidden shadow-inner border border-yellow-500/20">
+        <div class="lg:col-span-2 flex flex-col justify-between bg-white/[0.03] backdrop-blur-md p-4 rounded-2xl border border-white/10 shadow-[inset_0_1px_2px_rgba(255,255,255,0.15),0_12px_36px_rgba(0,0,0,0.4)]">
+            <div class="relative w-full aspect-video bg-slate-950 rounded-xl overflow-hidden shadow-[0_8px_24px_rgba(0,0,0,0.5)] border border-sky-500/20">
                 <video 
                     id="promoVideo" 
                     class="absolute inset-0 w-full h-full object-cover" 
@@ -680,10 +683,10 @@
                 </video>
             </div>
             
-            <div class="mt-4 flex flex-wrap items-center gap-4 text-xs md:text-sm text-gray-300 border-t border-white/10 pt-3">
-                <span class="font-semibold text-yellow-400 cursor-pointer hover:text-yellow-300 hover:underline transition">Youtube Auto Connect Button</span>
-                <div class="flex flex-wrap gap-2 text-gray-400">
-                    <span class="hover:text-yellow-400 cursor-pointer transition">Video-1,</span>
+            <div class="mt-4 flex flex-wrap items-center gap-4 text-xs md:text-sm text-slate-300 border-t border-white/10 pt-3">
+                <span class="font-bold text-sky-400 cursor-pointer hover:text-sky-300 hover:underline transition drop-shadow-[0_2px_8px_rgba(56,189,248,0.3)]">Youtube Auto Connect Button</span>
+                <div class="flex flex-wrap gap-2 text-slate-400">
+                    <span class="hover:text-sky-400 cursor-pointer transition">Video-1,</span>
                     <span class="hover:text-white cursor-pointer transition">Video-2,</span>
                     <span class="hover:text-white cursor-pointer transition">Video-3,</span>
                     <span class="hover:text-white cursor-pointer transition">Video-4,</span>
@@ -692,40 +695,40 @@
             </div>
         </div>
 
-        <div class="flex flex-col justify-center items-center bg-stone-950/80 p-6 md:p-8 rounded-xl border border-yellow-500/30 shadow-[0_0_30px_rgba(234,179,8,0.1)] text-center relative overflow-hidden">
+        <div class="flex flex-col justify-center items-center bg-gradient-to-b from-sky-900/40 to-blue-950/60 backdrop-blur-lg p-6 md:p-8 rounded-2xl border border-sky-400/30 shadow-[inset_0_1px_3px_rgba(255,255,255,0.2),0_20px_50px_rgba(0,0,0,0.5),0_0_40px_rgba(14,165,233,0.15)] text-center relative overflow-hidden group">
             
-            <div class="absolute -top-10 -right-10 w-32 h-32 bg-yellow-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -top-12 -right-12 w-40 h-40 bg-sky-400/20 rounded-full blur-2xl pointer-events-none group-hover:bg-sky-400/30 transition-all duration-700"></div>
             
             <div class="flex flex-col items-center gap-2 mb-6 z-10">
-                <div class="w-12 h-12 bg-gradient-to-tr from-yellow-500 to-amber-400 rounded-lg flex items-center justify-center shadow-[0_4px_20px_rgba(234,179,8,0.3)]">
-                    <svg class="w-6 h-6 text-stone-950" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="w-14 h-14 bg-gradient-to-tr from-sky-500 to-blue-600 rounded-xl flex items-center justify-center shadow-[0_8px_20px_rgba(14,165,233,0.4),inset_0_1px_2px_rgba(255,255,255,0.4)] transform hover:rotate-6 transition duration-300">
+                    <svg class="w-7 h-7 text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                     </svg>
                 </div>
-                <h3 class="text-xl font-bold tracking-wide text-yellow-400 mt-2">Family World</h3>
-                <p class="text-xs text-stone-300 px-4 line-clamp-2">Family World Multiple and Unlimited OTT Platform In the World</p>
+                <h3 class="text-2xl font-black tracking-wide text-white mt-3 drop-shadow-[0_2px_10px_rgba(14,165,233,0.3)]">Family World</h3>
+                <p class="text-xs text-sky-200/80 px-4 line-clamp-2 font-light">Family World Multiple and Unlimited OTT Platform In the World</p>
             </div>
 
-            <div class="w-full border-t border-yellow-500/20 my-2 pt-4 z-10">
-                <span class="text-xs uppercase tracking-widest text-amber-500 font-bold">Lonching Date</span>
+            <div class="w-full border-t border-sky-500/20 my-2 pt-4 z-10">
+                <span class="text-xs uppercase tracking-widest text-sky-400 font-extrabold drop-shadow-[0_0_6px_rgba(56,189,248,0.5)]">Launching Date</span>
             </div>
 
-            <div class="grid grid-cols-4 gap-2 md:gap-3 mt-4 w-full max-w-sm z-10">
-                <div class="flex flex-col p-2 bg-yellow-500/5 rounded-lg border border-yellow-500/20 shadow-sm">
-                    <span id="days" class="text-2xl md:text-4xl font-mono font-bold text-white tracking-tight">150</span>
-                    <span class="text-[10px] uppercase tracking-wider text-yellow-500/80 font-medium mt-1">Day</span>
+            <div class="grid grid-cols-4 gap-2.5 md:gap-3.5 mt-4 w-full max-w-sm z-10">
+                <div class="flex flex-col p-3 bg-gradient-to-b from-slate-950/80 to-slate-900/90 rounded-xl border border-sky-500/30 shadow-[0_6px_12px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(255,255,255,0.1)]">
+                    <span id="days" class="text-2xl md:text-4xl font-mono font-black text-white tracking-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">150</span>
+                    <span class="text-[9px] md:text-[10px] uppercase tracking-wider text-sky-400 font-bold mt-1.5">Days</span>
                 </div>
-                <div class="flex flex-col p-2 bg-yellow-500/5 rounded-lg border border-yellow-500/20 shadow-sm">
-                    <span id="hours" class="text-2xl md:text-4xl font-mono font-bold text-white tracking-tight">12</span>
-                    <span class="text-[10px] uppercase tracking-wider text-yellow-500/80 font-medium mt-1">Hours</span>
+                <div class="flex flex-col p-3 bg-gradient-to-b from-slate-950/80 to-slate-900/90 rounded-xl border border-sky-500/30 shadow-[0_6px_12px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(255,255,255,0.1)]">
+                    <span id="hours" class="text-2xl md:text-4xl font-mono font-black text-white tracking-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">12</span>
+                    <span class="text-[9px] md:text-[10px] uppercase tracking-wider text-sky-400 font-bold mt-1.5">Hours</span>
                 </div>
-                <div class="flex flex-col p-2 bg-yellow-500/5 rounded-lg border border-yellow-500/20 shadow-sm">
-                    <span id="minutes" class="text-2xl md:text-4xl font-mono font-bold text-white tracking-tight">12</span>
-                    <span class="text-[10px] uppercase tracking-wider text-yellow-500/80 font-medium mt-1">Minute</span>
+                <div class="flex flex-col p-3 bg-gradient-to-b from-slate-950/80 to-slate-900/90 rounded-xl border border-sky-500/30 shadow-[0_6px_12px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(255,255,255,0.1)]">
+                    <span id="minutes" class="text-2xl md:text-4xl font-mono font-black text-white tracking-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">12</span>
+                    <span class="text-[9px] md:text-[10px] uppercase tracking-wider text-sky-400 font-bold mt-1.5">Mins</span>
                 </div>
-                <div class="flex flex-col p-2 bg-yellow-500/10 rounded-lg border border-yellow-500/40 shadow-[0_0_15px_rgba(234,179,8,0.15)]">
-                    <span id="seconds" class="text-2xl md:text-4xl font-mono font-bold text-yellow-400 tracking-tight">12</span>
-                    <span class="text-[10px] uppercase tracking-wider text-yellow-400 font-bold mt-1">Second</span>
+                <div class="flex flex-col p-3 bg-gradient-to-b from-sky-950 to-sky-900 rounded-xl border border-sky-400 shadow-[0_0_20px_rgba(14,165,233,0.3),inset_0_1px_2px_rgba(255,255,255,0.2)]">
+                    <span id="seconds" class="text-2xl md:text-4xl font-mono font-black text-sky-400 tracking-tight drop-shadow-[0_0_8px_rgba(56,189,248,0.6)]">12</span>
+                    <span class="text-[9px] md:text-[10px] uppercase tracking-wider text-white font-black mt-1.5 animate-pulse">Secs</span>
                 </div>
             </div>
         </div>
@@ -733,14 +736,13 @@
     </div>
 
     <script>
-        // আপনার কাঙ্খিত লঞ্চিং ডেট এখানে দিন
         const launchDate = new Date("October 25, 2026 00:00:00").getTime();
 
         const countdownX = setInterval(function() {
             const now = new Date().getTime();
             const distance = launchDate - now;
 
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const days = Math.block = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
@@ -2685,26 +2687,17 @@ with Powerful AI Tools.</span>
 <div class="col-span-8 relative flex flex-col items-center">
     <div id="video-wrapper-three" class="relative w-full aspect-video bg-[#040e1c] rounded-xl border border-sky-500/40 shadow-inner flex items-center justify-center overflow-hidden group">
         
-        <video id="main-catalog-video" class="absolute inset-0 w-full h-full object-cover hidden z-30" controls>
-            <source src="/videos/YTDown_YouTube_Media_FsP3rGx1pEE_001_1080p.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
+
 
 <div id="video-overlay" 
      class="absolute inset-0 bg-cover bg-center bg-gradient-to-tr from-blue-900/50 to-purple-900/30 opacity-80 group-hover:scale-105 transition duration-500 z-0"
-     style="background-image: linear-gradient(to top right, rgba(30, 58, 138, 0.5), rgba(88, 28, 135, 0.3)), url('/img/kaba.jpeg');">
+     style="background-image: linear-gradient(to top right, rgba(30, 59, 138, 0), rgba(89, 28, 135, 0)), url('/img/WhatsApp Image 2026-06-17 at 10.46.15 PM.jpeg');">
     
     </div>
         
-        <button onclick="startCatalogVideo()" id="video-play-btn" class="center-logo relative z-10 w-20 h-20 bg-gradient-to-r from-yellow-400 via-amber-500 to-red-500 p-0.5 rounded-full shadow-lg shadow-amber-500/50 hover:scale-110 active:scale-95 transition-all duration-300">
-            <div class="w-full h-full bg-[#040e1c] rounded-full flex items-center justify-center">
-                <i class="fa-solid fa-play text-amber-400 text-2xl ml-1"></i>
-            </div>
-        </button>
+
         
-        <div id="video-info-tag" class="absolute bottom-3 left-3 bg-black/60 backdrop-blur-sm px-2 py-1 rounded text-[10px] text-gray-300 z-10">
-            <i class="fa-solid fa-video text-sky-400 mr-1"></i> Video Upload & Channel Improvement
-        </div>
+
     </div>
 </div>
 
@@ -2846,20 +2839,20 @@ with Powerful AI Tools.</span>
 
 
 <section>
-  <div class="sponcerTalika1 w-full">
+  <div class="sponcerTalika1 w-full auto ">
 <img src="/img/WhatsApp Image 2026-06-17 at 8.34.08 PM.jpeg" alt="">
   </div>
 </section>
 
 
 <section>
-  <div class="sponcerTalika2 w-full">
+  <div class="sponcerTalika2 w-full auto">
 <img src="/img/WhatsApp Image 2026-06-17 at 8.34.16 PM.jpeg" alt="">
   </div>
 </section>
 
 <section>
-  <div class="sponcerTalika2 w-full">
+  <div class="sponcerTalika2 w-full auto">
 <img src="/img/WhatsApp Image 2026-06-17 at 8.34.36 PM.jpeg" alt="">
   </div>
 </section>
