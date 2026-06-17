@@ -41,27 +41,7 @@
 
 
 /* স্মুথ মোবাইল মেনু ড্রপডাউন অ্যানিমেশন */
-        .mobile-menu {
-            max-height: 0;
-            opacity: 0;
-            overflow: hidden;
-            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
-        }
-        .mobile-menu.open {
-            max-height: 100vh;
-            opacity: 1;
-        }
-        /* মোবাইল সাব-মেনু অ্যানিমেশন */
-        .submenu {
-            max-height: 0;
-            opacity: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease-in-out, opacity 0.2s ease;
-        }
-        .submenu.open {
-            max-height: 600px;
-            opacity: 1;
-        }
+
 
 
         /* কাস্টম গ্লসি ব্যাকগ্রাউন্ড এবং টেক্সট ইফেক্ট */
@@ -92,65 +72,113 @@
 <body class="bg-gray-200">
 
 <nav>
-
-<!-- হেডার (Sky Blue ব্যাকগ্রাউন্ড এবং গ্লাস-মরফিজম ভাইব) -->
+    <!-- হেডার (Sky Blue ব্যাকগ্রাউন্ড এবং গ্লাস-মরফিজম ভাইব) -->
     <header class="bg-sky-500 shadow-md sticky top-0 z-50 px-4 py-3">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             
-            <!-- লোগো এবং ল্যাঙ্গুয়েজ -->
-            <div class="flex items-center space-x-4">
+            <!-- লোগো এবং ল্যাঙ্গুয়েজ -->
+            <div class="flex items-center space-x-4 ml-[-20px]">
                 <!-- লোগো ইমেজ -->
-<div class="w-full flex flex-col items-center justify-center text-center p-3 select-none">
-    
-    <div class="flex items-center gap-2 justify-center">
-        <img src="/img/Logo 300X282.png" alt="Logo" class="h-10 w-auto object-contain rounded-md shadow-sm">
-        <div class="text-lg font-bold text-white">Family World</div>
-    </div> 
-    
-    <span class="text-[12px] text-white mt-1 block">Stream Together, for Every Family</span>
-
-</div>
+                <div class="w-full flex flex-col items-center justify-center text-center p-3 select-none">
+                    <div class="flex items-center gap-2 justify-center">
+                        <img src="/img/Logo 300X282.png" alt="Logo" class="h-10 w-auto object-contain rounded-md shadow-sm">
+                        <div class="text-lg font-bold text-white">Family World</div>
+                    </div> 
+                    <span class="text-[12px] text-white mt-1 block">Stream Together, for Every Family</span>
+                </div>
                 
-                <!-- ল্যাঙ্গুয়েজ সিলেক্টর (ট্যাবলেট ও ডেস্কটপ) -->
-                <div class="hidden md:flex items-center space-x-1 bg-sky-600/50 border border-sky-300 text-white text-sm px-3 py-1.5 rounded-md hover:bg-sky-600 shadow-sm hover:shadow transition cursor-pointer">
+                <!-- ল্যাঙ্গুয়েজ সিলেক্টর (ট্যাবলেট ও ডেস্কটপ) -->
+                <div class="w-[170px] text-[10px] hidden md:flex items-center space-x-1 bg-sky-600/50 border border-sky-300 text-white px-3 py-1.5 rounded-md hover:bg-sky-600 shadow-sm hover:shadow transition cursor-pointer">
                     <i class="fa-solid fa-globe mr-1"></i>
                     <span>বাংলা / EN</span>
                     <i class="fa-solid fa-chevron-down text-xs ml-1"></i>
                 </div>
             </div>
 
-          <nav class="hidden xl:flex items-center space-x-2 text-white font-medium text-sm">
-    
-    <a href="#" class="bg-sky-700/80 px-3 py-2 rounded-md shadow-[0_4px_6px_-1px_rgba(0,0,0,0.2)] border border-white/30 backdrop-blur-sm transition-all">Home</a>
-    
-    <a href="#" class="hover:bg-sky-600/80 px-3 py-2 rounded-md border border-white/10 hover:border-white/30 shadow-[0_2px_4px_rgba(0,0,0,0.1)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.25)] transition-all duration-200">About Us</a>
-    
-    <div class="relative group">
-        <button class="hover:bg-sky-600/80 px-3 py-2 rounded-md border border-white/10 hover:border-white/30 shadow-[0_2px_4px_rgba(0,0,0,0.1)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.25)] transition-all duration-200 flex items-center space-x-1.5">
-            <span>Services</span>
-            <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300 group-hover:rotate-180"></i>
-        </button>
-        
-        <div class="absolute left-0 mt-2 w-64 bg-sky-600/95 backdrop-blur-md border border-white/20 rounded-lg shadow-[0_10px_25px_-5px_rgba(0,0,0,0.3),0_8px_10px_-6px_rgba(0,0,0,0.3)] py-2 hidden group-hover:block transition-all z-50">
-            <a href="#" class="block px-4 py-2 mx-1 rounded-md hover:bg-sky-500 text-white font-normal border border-transparent hover:border-white/10 shadow-sm hover:shadow transition-all">Religion</a>
-            <a href="#" class="block px-4 py-2 mx-1 rounded-md hover:bg-sky-500 text-white font-normal border border-transparent hover:border-white/10 shadow-sm hover:shadow transition-all">Special Interest</a>
-            <a href="#" class="block px-4 py-2 mx-1 rounded-md hover:bg-sky-500 text-white font-normal border border-transparent hover:border-white/10 shadow-sm hover:shadow transition-all">Social Impact & Community</a>
-            <a href="#" class="block px-4 py-2 mx-1 rounded-md hover:bg-sky-500 text-white font-normal border border-transparent hover:border-white/10 shadow-sm hover:shadow transition-all">Business & Economy</a>
-            <a href="#" class="block px-4 py-2 mx-1 rounded-md hover:bg-sky-500 text-white font-normal border border-transparent hover:border-white/10 shadow-sm hover:shadow transition-all">Lifestyle & Wellness</a>
-            <a href="#" class="block px-4 py-2 mx-1 rounded-md hover:bg-sky-500 text-white font-normal border border-transparent hover:border-white/10 shadow-sm hover:shadow transition-all">Entertainment & Media</a>
-            <a href="#" class="block px-4 py-2 mx-1 rounded-md hover:bg-sky-500 text-white font-normal border border-transparent hover:border-white/10 shadow-sm hover:shadow transition-all">Education & Knowledge</a>
-            <a href="#" class="block px-4 py-2 mx-1 rounded-md hover:bg-sky-500 text-white font-normal border border-transparent hover:border-white/10 shadow-sm hover:shadow transition-all">Technology & Science</a>
-        </div>
-    </div>
+            <!-- ডেস্কটপ নেভিগেশন বার -->
+            <div class="hidden xl:flex items-center space-x-2 text-white font-medium text-sm">
+                <a href="#" class="bg-sky-700/80 px-3 py-2 rounded-md shadow-[0_4px_6px_-1px_rgba(0,0,0,0.2)] border border-white/30 backdrop-blur-sm transition-all">Home</a>
+                <a href="#" class="hover:bg-sky-600/80 px-3 py-2 rounded-md border border-white/10 hover:border-white/30 shadow-[0_2px_4px_rgba(0,0,0,0.1)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.25)] transition-all duration-200">About</a>
+                
+                <!-- Services মেগা ড্রপডাউন (৩টি কলামে বিভক্ত) -->
+                <div class="relative group">
+                    <button class="hover:bg-sky-600/80 px-3 py-2 rounded-md border border-white/10 hover:border-white/30 shadow-[0_2px_4px_rgba(0,0,0,0.1)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.25)] transition-all duration-200 flex items-center space-x-1.5">
+                        <span>Services</span>
+                        <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300 group-hover:rotate-180"></i>
+                    </button>
+                    
+                    <!-- ড্রপডাউন বক্স (৩ কলাম মেগা মেনু - চওড়া w-[780px]) -->
+                    <div class="absolute left-0 mt-2 w-[780px] bg-sky-600/95 backdrop-blur-md border border-white/20 rounded-lg shadow-[0_10px_25px_-5px_rgba(0,0,0,0.3),0_8px_10px_-6px_rgba(0,0,0,0.3)] p-4 hidden group-hover:grid grid-cols-3 gap-4 z-50">
+                        
+                        <!-- কলাম ১: মূল সার্ভিস ক্যাটাগরি সমূহ -->
+                        <div>
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-sky-200 border-b border-white/20 pb-1 mb-2 px-1">Main Categories</h4>
+                            <div class="space-y-1">
+                                <a href="#" class="block px-3 py-1.5 rounded-md hover:bg-sky-500 text-white font-normal text-xs transition-all">Religion</a>
+                                <a href="#" class="block px-3 py-1.5 rounded-md hover:bg-sky-500 text-white font-normal text-xs transition-all">Special Interest</a>
+                                <a href="#" class="block px-3 py-1.5 rounded-md hover:bg-sky-500 text-white font-normal text-xs transition-all">Social Impact & Community</a>
+                                <a href="#" class="block px-3 py-1.5 rounded-md hover:bg-sky-500 text-white font-normal text-xs transition-all">Business & Economy</a>
+                                <a href="#" class="block px-3 py-1.5 rounded-md hover:bg-sky-500 text-white font-normal text-xs transition-all">Lifestyle & Wellness</a>
+                                <a href="#" class="block px-3 py-1.5 rounded-md hover:bg-sky-500 text-white font-normal text-xs transition-all">Entertainment & Media</a>
+                                <a href="#" class="block px-3 py-1.5 rounded-md hover:bg-sky-500 text-white font-normal text-xs transition-all">Education & Knowledge</a>
+                                <a href="#" class="block px-3 py-1.5 rounded-md hover:bg-sky-500 text-white font-normal text-xs transition-all">Technology & Science</a>
+                            </div>
+                        </div>
 
-    <a href="#" class="hover:bg-sky-600/80 px-3 py-2 rounded-md border border-white/10 hover:border-white/30 shadow-[0_2px_4px_rgba(0,0,0,0.1)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.25)] transition-all duration-200">Resources</a>
-    <a href="#" class="hover:bg-sky-600/80 px-3 py-2 rounded-md border border-white/10 hover:border-white/30 shadow-[0_2px_4px_rgba(0,0,0,0.1)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.25)] transition-all duration-200">Event</a>
-    <a href="#" class="hover:bg-sky-600/80 px-3 py-2 rounded-md border border-white/10 hover:border-white/30 shadow-[0_2px_4px_rgba(0,0,0,0.1)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.25)] transition-all duration-200">Articles</a>
-    <a href="#" class="hover:bg-sky-600/80 px-3 py-2 rounded-md border border-white/10 hover:border-white/30 shadow-[0_2px_4px_rgba(0,0,0,0.1)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.25)] transition-all duration-200">Community</a>
-    <a href="#" class="hover:bg-sky-600/80 px-3 py-2 rounded-md border border-white/10 hover:border-white/30 shadow-[0_2px_4px_rgba(0,0,0,0.1)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.25)] transition-all duration-200">AI</a>
-    <a href="#" class="hover:bg-sky-600/80 px-3 py-2 rounded-md border border-white/10 hover:border-white/30 shadow-[0_2px_4px_rgba(0,0,0,0.1)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.25)] transition-all duration-200">Family Product</a>
-    <a href="#" class="hover:bg-sky-600/80 px-3 py-2 rounded-md border border-white/10 hover:border-white/30 shadow-[0_2px_4px_rgba(0,0,0,0.1)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.25)] transition-all duration-200">Safe Note</a>
-</nav>
+                        <!-- কলাম ২: Category A -->
+                        <div>
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-sky-200 border-b border-white/20 pb-1 mb-2 px-1">Category A</h4>
+                            <div class="space-y-1 max-h-[320px] overflow-y-auto custom-scrollbar">
+                                <a href="#" class="block px-3 py-1.5 rounded-md hover:bg-sky-500 text-white font-normal text-xs transition-all">ISLAM</a>
+                                <a href="#" class="block px-3 py-1.5 rounded-md hover:bg-sky-500 text-white font-normal text-xs transition-all">FAMILY</a>
+                                <a href="#" class="block px-3 py-1.5 rounded-md hover:bg-sky-500 text-white font-normal text-xs transition-all">SHORTS</a>
+                                <a href="#" class="block px-3 py-1.5 rounded-md hover:bg-sky-500 text-white font-normal text-xs transition-all">SPORTS</a>
+                                <a href="#" class="block px-3 py-1.5 rounded-md hover:bg-sky-500 text-white font-normal text-xs transition-all">MUSIC</a>
+                                <a href="#" class="block px-3 py-1.5 rounded-md hover:bg-sky-500 text-white font-normal text-xs transition-all">SHOWS</a>
+                                <a href="#" class="block px-3 py-1.5 rounded-md hover:bg-sky-500 text-white font-normal text-xs transition-all">BOOKS & EDUCATION</a>
+                                <a href="#" class="block px-3 py-1.5 rounded-md hover:bg-sky-500 text-white font-normal text-xs transition-all">GAMING</a>
+                                <a href="#" class="block px-3 py-1.5 rounded-md hover:bg-sky-500 text-white font-normal text-xs transition-all">COMEDY</a>
+                                <a href="#" class="block px-3 py-1.5 rounded-md hover:bg-sky-500 text-white font-normal text-xs transition-all">HORROR</a>
+                                <a href="#" class="block px-3 py-1.5 rounded-md hover:bg-sky-500 text-white font-normal text-xs transition-all">FILM & ANIMATION</a>
+                                <a href="#" class="block px-3 py-1.5 rounded-md hover:bg-sky-500 text-white font-normal text-xs transition-all">MOVIES</a>
+                                <a href="#" class="block px-3 py-1.5 rounded-md hover:bg-sky-500 text-white font-normal text-xs transition-all">THRILLER</a>
+                                <a href="#" class="block px-3 py-1.5 rounded-md hover:bg-sky-500 text-white font-normal text-xs transition-all">AUTOS & VEHICLES</a>
+                            </div>
+                        </div>
+
+                        <!-- কলাম ৩: Category B -->
+                        <div>
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-sky-200 border-b border-white/20 pb-1 mb-2 px-1">Category B</h4>
+                            <div class="space-y-1 max-h-[320px] overflow-y-auto custom-scrollbar">
+                                <a href="#" class="block px-3 py-1.5 rounded-md hover:bg-sky-500 text-white font-normal text-xs transition-all">SHORT MOVIES</a>
+                                <a href="#" class="block px-3 py-1.5 rounded-md hover:bg-sky-500 text-white font-normal text-xs transition-all">PETS & ANIMALS</a>
+                                <a href="#" class="block px-3 py-1.5 rounded-md hover:bg-sky-500 text-white font-normal text-xs transition-all">PEOPLE & BLOGS</a>
+                                <a href="#" class="block px-3 py-1.5 rounded-md hover:bg-sky-500 text-white font-normal text-xs transition-all">ACTION/ADVENTURE</a>
+                                <a href="#" class="block px-3 py-1.5 rounded-md hover:bg-sky-500 text-white font-normal text-xs transition-all">STYLE</a>
+                                <a href="#" class="block px-3 py-1.5 rounded-md hover:bg-sky-500 text-white font-normal text-xs transition-all">SCIENCE & TECH</a>
+                                <a href="#" class="block px-3 py-1.5 rounded-md hover:bg-sky-500 text-white font-normal text-xs transition-all">DOCUMENTARY</a>
+                                <a href="#" class="block px-3 py-1.5 rounded-md hover:bg-sky-500 text-white font-normal text-xs transition-all">VIDEO BLOGGING</a>
+                                <a href="#" class="block px-3 py-1.5 rounded-md hover:bg-sky-500 text-white font-normal text-xs transition-all">ANIME/ANIMATION</a>
+                                <a href="#" class="block px-3 py-1.5 rounded-md hover:bg-sky-500 text-white font-normal text-xs transition-all">NONPROFITS</a>
+                                <a href="#" class="block px-3 py-1.5 rounded-md hover:bg-sky-500 text-white font-normal text-xs transition-all">HOTEL</a>
+                                <a href="#" class="block px-3 py-1.5 rounded-md hover:bg-sky-500 text-white font-normal text-xs transition-all">BUILDING</a>
+                                <a href="#" class="block px-3 py-1.5 rounded-md hover:bg-sky-500 text-white font-normal text-xs transition-all">TRAVEL & EVENTS</a>
+                                <a href="#" class="block px-3 py-1.5 rounded-md hover:bg-sky-500 text-white font-normal text-xs transition-all">ENTERTAINMENT</a>
+                                <a href="#" class="block px-3 py-1.5 rounded-md hover:bg-sky-500 text-white font-normal text-xs transition-all">NEWS & POLITICS</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="#" class="hover:bg-sky-600/80 px-3 py-2 rounded-md border border-white/10 hover:border-white/30 shadow-[0_2px_4px_rgba(0,0,0,0.1)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.25)] transition-all duration-200">Resources</a>
+                <a href="#" class="hover:bg-sky-600/80 px-3 py-2 rounded-md border border-white/10 hover:border-white/30 shadow-[0_2px_4px_rgba(0,0,0,0.1)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.25)] transition-all duration-200">Event</a>
+                <a href="#" class="hover:bg-sky-600/80 px-3 py-2 rounded-md border border-white/10 hover:border-white/30 shadow-[0_2px_4px_rgba(0,0,0,0.1)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.25)] transition-all duration-200">Articles</a>
+                <a href="#" class="hover:bg-sky-600/80 px-3 py-2 rounded-md border border-white/10 hover:border-white/30 shadow-[0_2px_4px_rgba(0,0,0,0.1)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.25)] transition-all duration-200">Community</a>
+                <a href="#" class="hover:bg-sky-600/80 px-3 py-2 rounded-md border border-white/10 hover:border-white/30 shadow-[0_2px_4px_rgba(0,0,0,0.1)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.25)] transition-all duration-200">AI</a>
+                <a href="#" class="hover:bg-sky-600/80 px-3 py-2 rounded-md border border-white/10 hover:border-white/30 shadow-[0_2px_4px_rgba(0,0,0,0.1)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.25)] transition-all duration-200">Product</a>
+                <a href="#" class="hover:bg-sky-600/80 px-3 py-2 rounded-md border border-white/10 hover:border-white/30 shadow-[0_2px_4px_rgba(0,0,0,0.1)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.25)] transition-all duration-200">Note</a>
+            </div>
+
             <!-- রাইট সাইড স্পন্সরশিপ বাটন -->
             <div class="hidden md:block">
                 <a href="#" class="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-orange-500 hover:to-amber-500 text-white font-semibold px-5 py-2 rounded-md shadow-lg shadow-black/10 hover:scale-105 active:scale-95 transition-all duration-200 text-sm border border-orange-400/30">
@@ -167,94 +195,185 @@
 
         </div>
 
-        <!-- মোবাইল এবং ট্যাবলেট ড্রপডাউন মেনু (Phone & Tablet View) -->
-        <div id="mobile-menu" class="mobile-menu xl:hidden bg-sky-600 rounded-b-lg mt-3 shadow-inner">
-            <div class="flex flex-col text-white text-base font-medium px-4 py-4 space-y-2">
-                <a href="#" class="bg-sky-700/80 px-3 py-2 rounded-md shadow-md">Home</a>
-                <a href="#" class="hover:bg-sky-500/50 px-3 py-2 rounded-md shadow-sm hover:shadow transition">About Us</a>
+        <!-- মোবাইল এবং ট্যাবলেট ড্রপডাউন মেনু -->
+<!-- মোবাইল এবং ট্যাবলেট ড্রপডাউন মেনু -->
+<div id="mobile-menu" class="mobile-menu xl:hidden bg-sky-600 rounded-b-lg mt-3 shadow-inner hidden">
+    <div class="flex flex-col text-white text-base font-medium px-4 py-4 space-y-2">
+        <a href="#" class="bg-sky-700/80 px-3 py-2 rounded-md shadow-md">Home</a>
+        <a href="#" class="hover:bg-sky-500/50 px-3 py-2 rounded-md shadow-sm hover:shadow transition">About Us</a>
+        
+        <!-- মোবাইল সার্ভিস ড্রপডাউন -->
+        <div>
+            <button id="submenu-btn" class="w-full flex items-center justify-between hover:bg-sky-500/50 px-3 py-2 rounded-md shadow-sm hover:shadow transition text-left">
+                <span>Services</span>
+                <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300" id="submenu-arrow"></i>
+            </button>
+            
+            <!-- মোবাইল সাব-মেনু হোল্ডার (এখানে class="submenu" যুক্ত করা হয়েছে এবং hidden বাদ দেওয়া হয়েছে) -->
+            <div id="submenu-items" class="submenu pl-2 bg-sky-700/40 rounded-md mt-1 p-2 space-y-2">
                 
-                <!-- মোবাইল সার্ভিস ড্রপডাউন -->
+                <!-- ১. মূল ক্যাটাগরি সমূহ (Mobile Main Categories) -->
                 <div>
-                    <button id="submenu-btn" class="w-full flex items-center justify-between hover:bg-sky-500/50 px-3 py-2 rounded-md shadow-sm hover:shadow transition text-left">
-                        <span>Services</span>
-                        <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300" id="submenu-arrow"></i>
+                    <button id="main-cat-btn" class="w-full flex items-center justify-between text-xs font-bold uppercase tracking-wider text-sky-200 py-1 px-2 hover:bg-sky-600/50 rounded">
+                        <span>Main Categories</span>
+                        <i class="fa-solid fa-chevron-down text-[10px]" id="main-cat-arrow"></i>
                     </button>
-                    <!-- সাব-মেনু আইটেম (৮টি ক্যাটাগরি) -->
-                    <div id="submenu-items" class="submenu pl-4 bg-sky-700/40 rounded-md mt-1 space-y-1">
-                        <a href="#" class="block px-3 py-2 text-sm text-sky-100 hover:text-white transition">Religion</a>
-                        <a href="#" class="block px-3 py-2 text-sm text-sky-100 hover:text-white transition">Special Interest</a>
-                        <a href="#" class="block px-3 py-2 text-sm text-sky-100 hover:text-white transition">Social Impact & Community</a>
-                        <a href="#" class="block px-3 py-2 text-sm text-sky-100 hover:text-white transition">Business & Economy</a>
-                        <a href="#" class="block px-3 py-2 text-sm text-sky-100 hover:text-white transition">Lifestyle & Wellness</a>
-                        <a href="#" class="block px-3 py-2 text-sm text-sky-100 hover:text-white transition">Entertainment & Media</a>
-                        <a href="#" class="block px-3 py-2 text-sm text-sky-100 hover:text-white transition">Education & Knowledge</a>
-                        <a href="#" class="block px-3 py-2 text-sm text-sky-100 hover:text-white transition">Technology & Science</a>
+                    <!-- এখানে class="submenu" যুক্ত করা হয়েছে -->
+                    <div id="main-cat-items" class="submenu pl-3 mt-1 space-y-1 border-l border-white/10 hidden">
+                        <a href="#" class="block px-2 py-1 text-sm text-sky-100 hover:text-white transition">Religion</a>
+                        <a href="#" class="block px-2 py-1 text-sm text-sky-100 hover:text-white transition">Special Interest</a>
+                        <a href="#" class="block px-2 py-1 text-sm text-sky-100 hover:text-white transition">Social Impact & Community</a>
+                        <a href="#" class="block px-2 py-1 text-sm text-sky-100 hover:text-white transition">Business & Economy</a>
+                        <a href="#" class="block px-2 py-1 text-sm text-sky-100 hover:text-white transition">Lifestyle & Wellness</a>
+                        <a href="#" class="block px-2 py-1 text-sm text-sky-100 hover:text-white transition">Entertainment & Media</a>
+                        <a href="#" class="block px-2 py-1 text-sm text-sky-100 hover:text-white transition">Education & Knowledge</a>
+                        <a href="#" class="block px-2 py-1 text-sm text-sky-100 hover:text-white transition">Technology & Science</a>
                     </div>
                 </div>
 
-                <a href="#" class="hover:bg-sky-500/50 px-3 py-2 rounded-md shadow-sm hover:shadow transition">Resources</a>
-                <a href="#" class="hover:bg-sky-500/50 px-3 py-2 rounded-md shadow-sm hover:shadow transition">Event</a>
-                <a href="#" class="hover:bg-sky-500/50 px-3 py-2 rounded-md shadow-sm hover:shadow transition">Articles</a>
-                <a href="#" class="hover:bg-sky-500/50 px-3 py-2 rounded-md shadow-sm hover:shadow transition">Community</a>
-                <a href="#" class="hover:bg-sky-500/50 px-3 py-2 rounded-md shadow-sm hover:shadow transition">AI</a>
-                <a href="#" class="hover:bg-sky-500/50 px-3 py-2 rounded-md shadow-sm hover:shadow transition">Family Product</a>
-                <a href="#" class="hover:bg-sky-500/50 px-3 py-2 rounded-md shadow-sm hover:shadow transition">Safe Note</a>
-                
-                <!-- ল্যাঙ্গুয়েজ এবং স্পন্সরশিপ (শুধুমাত্র ছোট ফোনের জন্য নিচে চলে আসবে) -->
-                <div class="pt-3 border-t border-sky-400/50 flex md:hidden items-center justify-between gap-2">
-                    <div class="w-1/2 text-center bg-sky-700 text-sm py-2 rounded-md shadow-md">
-                        <i class="fa-solid fa-globe mr-1"></i> বাংলা / EN
+                <!-- ২. Mobile Category A -->
+                <div>
+                    <button id="cat-a-btn" class="w-full flex items-center justify-between text-xs font-bold uppercase tracking-wider text-sky-200 py-1 px-2 hover:bg-sky-600/50 rounded">
+                        <span>Category A</span>
+                        <i class="fa-solid fa-chevron-down text-[10px]" id="cat-a-arrow"></i>
+                    </button>
+                    <!-- এখানে class="submenu" যুক্ত করা হয়েছে -->
+                    <div id="cat-a-items" class="submenu pl-3 mt-1 space-y-1 border-l border-white/10 hidden">
+                        <a href="#" class="block px-2 py-1 text-sm text-sky-100 hover:text-white transition">ISLAM</a>
+                        <a href="#" class="block px-2 py-1 text-sm text-sky-100 hover:text-white transition">FAMILY</a>
+                        <a href="#" class="block px-2 py-1 text-sm text-sky-100 hover:text-white transition">SHORTS</a>
+                        <a href="#" class="block px-2 py-1 text-sm text-sky-100 hover:text-white transition">SPORTS</a>
+                        <a href="#" class="block px-2 py-1 text-sm text-sky-100 hover:text-white transition">MUSIC</a>
+                        <a href="#" class="block px-2 py-1 text-sm text-sky-100 hover:text-white transition">SHOWS</a>
+                        <a href="#" class="block px-2 py-1 text-sm text-sky-100 hover:text-white transition">BOOKS & EDUCATION</a>
+                        <a href="#" class="block px-2 py-1 text-sm text-sky-100 hover:text-white transition">GAMING</a>
+                        <a href="#" class="block px-2 py-1 text-sm text-sky-100 hover:text-white transition">COMEDY</a>
+                        <a href="#" class="block px-2 py-1 text-sm text-sky-100 hover:text-white transition">HORROR</a>
+                        <a href="#" class="block px-2 py-1 text-sm text-sky-100 hover:text-white transition">FILM & ANIMATION</a>
+                        <a href="#" class="block px-2 py-1 text-sm text-sky-100 hover:text-white transition">MOVIES</a>
+                        <a href="#" class="block px-2 py-1 text-sm text-sky-100 hover:text-white transition">THRILLER</a>
+                        <a href="#" class="block px-2 py-1 text-sm text-sky-100 hover:text-white transition">AUTOS & VEHICLES</a>
                     </div>
-                    <a href="#" class="w-1/2 text-center bg-gradient-to-r from-amber-500 to-orange-500 text-sm font-semibold py-2 rounded-md shadow-md">
-                        Sponsorship
-                    </a>
                 </div>
+
+                <!-- ৩. Mobile Category B -->
+                <div>
+                    <button id="cat-b-btn" class="w-full flex items-center justify-between text-xs font-bold uppercase tracking-wider text-sky-200 py-1 px-2 hover:bg-sky-600/50 rounded">
+                        <span>Category B</span>
+                        <i class="fa-solid fa-chevron-down text-[10px]" id="cat-b-arrow"></i>
+                    </button>
+                    <!-- এখানে class="submenu" যুক্ত করা হয়েছে -->
+                    <div id="cat-b-items" class="submenu pl-3 mt-1 space-y-1 border-l border-white/10 hidden">
+                        <a href="#" class="block px-2 py-1 text-sm text-sky-100 hover:text-white transition">SHORT MOVIES</a>
+                        <a href="#" class="block px-2 py-1 text-sm text-sky-100 hover:text-white transition">PETS & ANIMALS</a>
+                        <a href="#" class="block px-2 py-1 text-sm text-sky-100 hover:text-white transition">PEOPLE & BLOGS</a>
+                        <a href="#" class="block px-2 py-1 text-sm text-sky-100 hover:text-white transition">ACTION/ADVENTURE</a>
+                        <a href="#" class="block px-2 py-1 text-sm text-sky-100 hover:text-white transition">STYLE</a>
+                        <a href="#" class="block px-2 py-1 text-sm text-sky-100 hover:text-white transition">SCIENCE & TECH</a>
+                        <a href="#" class="block px-2 py-1 text-sm text-sky-100 hover:text-white transition">DOCUMENTARY</a>
+                        <a href="#" class="block px-2 py-1 text-sm text-sky-100 hover:text-white transition">VIDEO BLOGGING</a>
+                        <a href="#" class="block px-2 py-1 text-sm text-sky-100 hover:text-white transition">ANIME/ANIMATION</a>
+                        <a href="#" class="block px-2 py-1 text-sm text-sky-100 hover:text-white transition">NONPROFITS</a>
+                        <a href="#" class="block px-2 py-1 text-sm text-sky-100 hover:text-white transition">HOTEL</a>
+                        <a href="#" class="block px-2 py-1 text-sm text-sky-100 hover:text-white transition">BUILDING</a>
+                        <a href="#" class="block px-2 py-1 text-sm text-sky-100 hover:text-white transition">TRAVEL & EVENTS</a>
+                        <a href="#" class="block px-2 py-1 text-sm text-sky-100 hover:text-white transition">ENTERTAINMENT</a>
+                        <a href="#" class="block px-2 py-1 text-sm text-sky-100 hover:text-white transition">NEWS & POLITICS</a>
+                    </div>
+                </div>
+
             </div>
         </div>
+
+        <a href="#" class="hover:bg-sky-500/50 px-3 py-2 rounded-md shadow-sm hover:shadow transition">Resources</a>
+        <a href="#" class="hover:bg-sky-500/50 px-3 py-2 rounded-md shadow-sm hover:shadow transition">Event</a>
+        <a href="#" class="hover:bg-sky-500/50 px-3 py-2 rounded-md shadow-sm hover:shadow transition">Articles</a>
+        <a href="#" class="hover:bg-sky-500/50 px-3 py-2 rounded-md shadow-sm hover:shadow transition">Community</a>
+        <a href="#" class="hover:bg-sky-500/50 px-3 py-2 rounded-md shadow-sm hover:shadow transition">AI</a>
+        <a href="#" class="hover:bg-sky-500/50 px-3 py-2 rounded-md shadow-sm hover:shadow transition">Family Product</a>
+        <a href="#" class="hover:bg-sky-500/50 px-3 py-2 rounded-md shadow-sm hover:shadow transition">Safe Note</a>
+        
+        <!-- ল্যাঙ্গুয়েজ এবং স্পন্সরশিপ (মোবাইল ভিউ) -->
+        <div class="pt-3 border-t border-sky-400/50 flex md:hidden items-center justify-between gap-2">
+            <div class="w-1/2 text-center bg-sky-700 text-sm py-2 rounded-md shadow-md">
+                <i class="fa-solid fa-globe mr-1"></i> বাংলা / EN
+            </div>
+            <a href="#" class="w-1/2 text-center bg-gradient-to-r from-amber-500 to-orange-500 text-sm font-semibold py-2 rounded-md shadow-md">
+                Sponsorship
+            </a>
+        </div>
+    </div>
+</div>
     </header>
-
-
-
+</nav>
 
 <script>
-        // মোবাইল ও ট্যাবলেট মেনু টগল (Smooth Slide Down)
+    document.addEventListener("DOMContentLoaded", () => {
+        // মোবাইল হ্যামবার্গার মেনু টগল
         const menuBtn = document.getElementById('menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         const menuIcon = document.getElementById('menu-icon');
 
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('open');
-            
-            // বার্গার আইকন থেকে ক্রস (X) আইকন করার অ্যানিমেশন
-            if (mobileMenu.classList.contains('open')) {
-                menuIcon.classList.remove('fa-bars');
-                menuIcon.classList.add('fa-xmark');
-                menuIcon.style.transform = "rotate(90deg)";
-                menuIcon.style.transition = "all 0.3s ease";
-            } else {
-                menuIcon.classList.remove('fa-xmark');
-                menuIcon.classList.add('fa-bars');
-                menuIcon.style.transform = "rotate(0deg)";
-            }
-        });
+        if (menuBtn && mobileMenu) {
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                
+                if (!mobileMenu.classList.contains('hidden')) {
+                    menuIcon.classList.remove('fa-bars');
+                    menuIcon.classList.add('fa-xmark');
+                    menuIcon.style.transform = "rotate(90deg)";
+                    menuIcon.style.transition = "all 0.3s ease";
+                } else {
+                    menuIcon.classList.remove('fa-xmark');
+                    menuIcon.classList.add('fa-bars');
+                    menuIcon.style.transform = "rotate(0deg)";
+                }
+            });
+        }
 
-        // মোবাইলে Services সাব-মেনু টগল
-        const submenuBtn = document.getElementById('submenu-btn');
-        const submenuItems = document.getElementById('submenu-items');
-        const submenuArrow = document.getElementById('submenu-arrow');
+        // সাব-মেনু ও ক্যাটাগরি টগলের জন্য রিইউজেবল হেল্পার ফাংশন
+        function setupToggle(btnId, itemsId, arrowId) {
+            const btn = document.getElementById(btnId);
+            const items = document.getElementById(itemsId);
+            const arrow = document.getElementById(arrowId);
 
-        submenuBtn.addEventListener('click', () => {
-            submenuItems.classList.toggle('open');
-            
-            // তীর চিহ্ন ঘূর্ণন অ্যানিমেশন
-            if (submenuItems.classList.contains('open')) {
-                submenuArrow.classList.add('rotate-180');
-            } else {
-                submenuArrow.classList.remove('rotate-180');
+            if (btn && items) {
+                btn.addEventListener('click', () => {
+                    items.classList.toggle('hidden');
+                    if (arrow) arrow.classList.toggle('rotate-180');
+                });
             }
-        });
-    </script>
-</nav>
+        }
+
+        // সব মোবাইল সাব-মেনু একসাথে সেটআপ
+        setupToggle('submenu-btn', 'submenu-items', 'submenu-arrow');
+        setupToggle('main-cat-btn', 'main-cat-items', 'main-cat-arrow');
+        setupToggle('cat-a-btn', 'cat-a-items', 'cat-a-arrow');
+        setupToggle('cat-b-btn', 'cat-b-items', 'cat-b-arrow');
+    });
+</script>
+
+<!-- কাস্টম স্ক্রোলবার স্টাইল -->
+<style>
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 10px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.5);
+    }
+</style>
+
+
+
+
 
 <section class="bg-gray-100 w-full min-h-screen">
 
@@ -2726,53 +2845,22 @@ with Powerful AI Tools.</span>
 </section>
 
 
+<section>
+  <div class="sponcerTalika1 w-full">
+<img src="/img/WhatsApp Image 2026-06-17 at 8.34.08 PM.jpeg" alt="">
+  </div>
+</section>
 
-<section class="h-full bg-gradient-to-br from-indigo-700 via-blue-600 to-purple-700 flex items-center justify-center py-10 px-4 md:px-10">
-  <div class="max-w-6xl w-full flex flex-col md:flex-row items-center justify-between gap-12">
-    
-    <!-- Left Side: Logo/Brand -->
-    <div class="text-white flex items-center gap-4">
-      <div class="w-16 h-16 border-4 border-white rounded-xl flex items-center justify-center">
-        <span class="text-4xl font-bold italic">C</span>
-      </div>
-      <h1 class="text-6xl font-bold tracking-tighter italic">CHIP<sup class="text-sm font-normal">®</sup></h1>
-    </div>
 
-    <!-- Right Side: Payment Methods Grid (Referencing WhatsApp Image 2026-05-02 at 7.20.14 PM.jpeg) -->
-    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 auto-rows-max">
-      
-      <!-- Individual Card Style -->
-      <div class="bg-white/90 backdrop-blur-sm p-4 rounded-2xl shadow-xl flex items-center justify-center h-24 w-40 transform hover:-translate-y-1 transition-all">
-        <img src="/img/fpx.png" alt="FPX" class="max-h-full">
-      </div>
+<section>
+  <div class="sponcerTalika2 w-full">
+<img src="/img/WhatsApp Image 2026-06-17 at 8.34.16 PM.jpeg" alt="">
+  </div>
+</section>
 
-      <div class="bg-white/90 backdrop-blur-sm p-4 rounded-2xl shadow-xl flex items-center justify-center h-24 w-40 transform hover:-translate-y-1 transition-all">
-        <img src="/img/visa.jpeg" alt="Visa Mastercard" class="max-h-full">
-      </div>
-
-      <!-- Offset/Staggered Effect for QR Pay style -->
-      <div class="bg-white/90 backdrop-blur-sm p-4 rounded-2xl shadow-xl flex items-center justify-center h-28 w-44 md:ml-[-20px] transform hover:-translate-y-1 transition-all">
-        <img src="qrpay-logo.png" alt="QRPay" class="max-h-full">
-      </div>
-
-      <div class="bg-white/90 backdrop-blur-sm p-4 rounded-2xl shadow-xl flex items-center justify-center h-24 w-40 transform hover:-translate-y-1 transition-all">
-        <img src="boost-logo.png" alt="Boost" class="max-h-full">
-      </div>
-
-      <div class="bg-white/90 backdrop-blur-sm p-4 rounded-2xl shadow-xl flex items-center justify-center h-24 w-40 transform hover:-translate-y-1 transition-all">
-        <img src="shopeepay-logo.png" alt="ShopeePay" class="max-h-full">
-      </div>
-
-      <!-- Small Cards -->
-      <div class="bg-white/90 backdrop-blur-sm p-2 rounded-xl shadow-lg flex items-center justify-center h-20 w-24 transform hover:-translate-y-1 transition-all">
-        <img src="duitnow-logo.png" alt="DuitNow" class="max-h-full">
-      </div>
-
-      <div class="bg-white/90 backdrop-blur-sm p-4 rounded-2xl shadow-xl flex items-center justify-center h-24 w-48 col-span-2 md:col-span-1 transform hover:-translate-y-1 transition-all">
-        <img src="alipay-logo.png" alt="Alipay" class="max-h-full">
-      </div>
-
-    </div>
+<section>
+  <div class="sponcerTalika2 w-full">
+<img src="/img/WhatsApp Image 2026-06-17 at 8.34.36 PM.jpeg" alt="">
   </div>
 </section>
 
@@ -2781,119 +2869,10 @@ with Powerful AI Tools.</span>
 
 
 
-<section class="bg-white p-10 md:p-16 rounded-[40px] shadow-2xl w-full max-w-6xl mx-auto border border-gray-50">
-        <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Connect With Us</h2>
 
-        <!-- Responsive Grid for 15 Icons (matching WhatsApp Image 2026-05-02 at 7.20.14 PM.jpeg) -->
-        <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-y-10 gap-x-4 place-items-center">
 
-            <!-- 1. Facebook -->
-            <a href="#" class="group">
-                <div class="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center bg-[#1877F2] text-white shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-[#1877F2]/50">
-                    <i class="fa-brands fa-facebook-f text-3xl md:text-4xl"></i>
-                </div>
-            </a>
 
-            <!-- 2. X (Twitter) -->
-            <a href="#" class="group">
-                <div class="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center bg-black text-white shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-black/50">
-                    <i class="fa-brands fa-x-twitter text-3xl md:text-4xl"></i>
-                </div>
-            </a>
 
-            <!-- 3. Instagram -->
-            <a href="#" class="group">
-                <div class="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] text-white shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-[#ee2a7b]/50">
-                    <i class="fa-brands fa-instagram text-3xl md:text-4xl"></i>
-                </div>
-            </a>
-
-            <!-- 4. TikTok -->
-            <a href="#" class="group">
-                <div class="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center bg-black text-white shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-black/50">
-                    <i class="fa-brands fa-tiktok text-3xl md:text-4xl"></i>
-                </div>
-            </a>
-
-            <!-- 5. Discord -->
-            <a href="#" class="group">
-                <div class="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center bg-[#5865F2] text-white shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-[#5865F2]/50">
-                    <i class="fa-brands fa-discord text-3xl md:text-4xl"></i>
-                </div>
-            </a>
-
-            <!-- 6. Snapchat -->
-            <a href="#" class="group">
-                <div class="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center bg-[#FFFC00] text-black shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-[#FFFC00]/50">
-                    <i class="fa-brands fa-snapchat text-3xl md:text-4xl"></i>
-                </div>
-            </a>
-
-            <!-- 7. YouTube -->
-            <a href="#" class="group">
-                <div class="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center bg-[#FF0000] text-white shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-[#FF0000]/50">
-                    <i class="fa-brands fa-youtube text-3xl md:text-4xl"></i>
-                </div>
-            </a>
-
-            <!-- 8. WhatsApp -->
-            <a href="#" class="group">
-                <div class="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center bg-[#25D366] text-white shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-[#25D366]/50">
-                    <i class="fa-brands fa-whatsapp text-3xl md:text-4xl"></i>
-                </div>
-            </a>
-
-            <!-- 9. Behance -->
-            <a href="#" class="group">
-                <div class="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center bg-[#1769FF] text-white shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-[#1769FF]/50">
-                    <i class="fa-brands fa-behance text-3xl md:text-4xl"></i>
-                </div>
-            </a>
-
-            <!-- 10. Threads -->
-            <a href="#" class="group">
-                <div class="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center bg-black text-white shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-black/50">
-                    <i class="fa-solid fa-at text-3xl md:text-4xl"></i>
-                </div>
-            </a>
-
-            <!-- 11. LinkedIn -->
-            <a href="#" class="group">
-                <div class="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center bg-[#0077B5] text-white shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-[#0077B5]/50">
-                    <i class="fa-brands fa-linkedin-in text-3xl md:text-4xl"></i>
-                </div>
-            </a>
-
-            <!-- 12. Dribbble -->
-            <a href="#" class="group">
-                <div class="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center bg-[#EA4C89] text-white shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-[#EA4C89]/50">
-                    <i class="fa-brands fa-dribbble text-3xl md:text-4xl"></i>
-                </div>
-            </a>
-
-            <!-- 13. Pinterest -->
-            <a href="#" class="group">
-                <div class="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center bg-[#BD081C] text-white shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-[#BD081C]/50">
-                    <i class="fa-brands fa-pinterest-p text-3xl md:text-4xl"></i>
-                </div>
-            </a>
-
-            <!-- 14. Twitch -->
-            <a href="#" class="group">
-                <div class="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center bg-[#9146FF] text-white shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-[#9146FF]/50">
-                    <i class="fa-brands fa-twitch text-3xl md:text-4xl"></i>
-                </div>
-            </a>
-
-            <!-- 15. Telegram -->
-            <a href="#" class="group">
-                <div class="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center bg-[#229ED9] text-white shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-[#229ED9]/50">
-                    <i class="fa-brands fa-telegram text-3xl md:text-4xl"></i>
-                </div>
-            </a>
-
-        </div>
-    </section>
 
 <section class=" py-6 px-4 w-full shadow-sm rounded-xl overflow-hidden">
     <div class="max-w-7xl mx-auto">
