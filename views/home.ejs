@@ -2627,6 +2627,372 @@ with Powerful AI Tools.</span>
 
 
 
+<section>
+  <div class="container mx-auto p-4 bg-slate-950 text-white min-h-screen">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      
+      <!-- Main Video Column -->
+      <div class="lg:col-span-2 space-y-4">
+        <div class="relative aspect-video w-full bg-black rounded-lg overflow-hidden shadow-xl shadow-cyan-500/10 border border-slate-800">
+          <iframe 
+            id="secVideoPlayerIframe"
+            class="w-full h-full transition-opacity duration-200" 
+            src="https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1" 
+            title="Secondary Video Player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            allowfullscreen>
+          </iframe>
+        </div>
+
+        <div>
+          <h1 id="secVideoTitle" class="text-xl md:text-2xl font-bold tracking-tight text-slate-100">
+            Rick Astley - Never Gonna Give You Up (Official Music Video)
+          </h1>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-between gap-4 pt-2 border-t border-slate-800">
+          <div class="flex items-center space-x-6 text-sm text-slate-400">
+            <label class="flex items-center cursor-pointer select-none">
+              <input type="checkbox" id="secAutoSwitch" class="sr-only peer" checked>
+              <div class="w-9 h-5 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-cyan-500 relative"></div>
+              <span class="ms-3 font-medium">Auto Switch</span>
+            </label>
+            
+            <button id="secSwitchBtn" class="hover:text-cyan-400 transition font-medium">Switch</button>
+          </div>
+
+          <div class="flex items-center space-x-2">
+            <button class="flex items-center space-x-2 bg-slate-800 hover:bg-slate-700 px-4 py-2 rounded-full text-sm font-medium transition">
+              <span>👍 Like</span>
+            </button>
+            <button class="flex items-center space-x-2 bg-slate-800 hover:bg-slate-700 px-4 py-2 rounded-full text-sm font-medium transition">
+              <span>🔗 Share</span>
+            </button>
+            <button id="secNextBtn" class="bg-cyan-500 hover:bg-cyan-400 text-white px-4 py-2 rounded-full text-sm font-medium transition shadow-lg shadow-cyan-500/30">
+              Next Button
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar: Up Next (5 Songs) -->
+      <div class="lg:col-span-1 bg-slate-900/60 p-3 rounded-xl border border-slate-800 h-[calc(100vh-2rem)] overflow-y-auto space-y-3 custom-scrollbar">
+        <h3 class="font-bold text-cyan-400 text-sm uppercase tracking-wider mb-2 flex items-center gap-2">
+          <span>🎵 Up Next</span>
+          <span class="flex-1 border-b border-slate-800"></span>
+          <span class="text-slate-500 text-[10px]">5 SONGS</span>
+        </h3>
+        
+        <!-- Song 1 -->
+        <div class="sec-video-item flex gap-3 p-2 rounded-lg hover:bg-slate-800/80 cursor-pointer transition group bg-slate-800/40 border border-cyan-500/30" 
+             data-url="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+             data-title="Rick Astley - Never Gonna Give You Up (Official Music Video)"
+             data-index="0">
+          <div class="relative w-36 h-20 flex-shrink-0 bg-slate-800 rounded-md overflow-hidden">
+            <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/mqdefault.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" alt="thumbnail">
+            <span class="absolute bottom-1 right-1 bg-black/80 text-[10px] px-1 rounded text-slate-200">3:34</span>
+          </div>
+          <div class="flex flex-col justify-between py-1 flex-1 min-w-0">
+            <h4 class="text-sm font-semibold line-clamp-2 text-slate-200 group-hover:text-cyan-400 transition">Rick Astley - Never Gonna Give You Up</h4>
+            <p class="text-xs text-slate-400">Rick Astley</p>
+            <p class="text-[11px] text-slate-500">1.2B views • 15 years ago</p>
+          </div>
+        </div>
+
+        <!-- Song 2 -->
+        <div class="sec-video-item flex gap-3 p-2 rounded-lg hover:bg-slate-800/80 cursor-pointer transition group" 
+             data-url="https://www.youtube.com/embed/YQHsXMglC9A" 
+             data-title="Adele - Hello (Official Music Video)"
+             data-index="1">
+          <div class="relative w-36 h-20 flex-shrink-0 bg-slate-800 rounded-md overflow-hidden">
+            <img src="https://img.youtube.com/vi/YQHsXMglC9A/mqdefault.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" alt="thumbnail">
+            <span class="absolute bottom-1 right-1 bg-black/80 text-[10px] px-1 rounded text-slate-200">4:55</span>
+          </div>
+          <div class="flex flex-col justify-between py-1 flex-1 min-w-0">
+            <h4 class="text-sm font-semibold line-clamp-2 text-slate-200 group-hover:text-cyan-400 transition">Adele - Hello (Official Music Video)</h4>
+            <p class="text-xs text-slate-400">Adele</p>
+            <p class="text-[11px] text-slate-500">3.4B views • 5 years ago</p>
+          </div>
+        </div>
+
+        <!-- Song 3 -->
+        <div class="sec-video-item flex gap-3 p-2 rounded-lg hover:bg-slate-800/80 cursor-pointer transition group" 
+             data-url="https://www.youtube.com/embed/JGwWNGJdvx8" 
+             data-title="Ed Sheeran - Shape of You (Official Music Video)"
+             data-index="2">
+          <div class="relative w-36 h-20 flex-shrink-0 bg-slate-800 rounded-md overflow-hidden">
+            <img src="https://img.youtube.com/vi/JGwWNGJdvx8/mqdefault.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" alt="thumbnail">
+            <span class="absolute bottom-1 right-1 bg-black/80 text-[10px] px-1 rounded text-slate-200">4:24</span>
+          </div>
+          <div class="flex flex-col justify-between py-1 flex-1 min-w-0">
+            <h4 class="text-sm font-semibold line-clamp-2 text-slate-200 group-hover:text-cyan-400 transition">Ed Sheeran - Shape of You (Official)</h4>
+            <p class="text-xs text-slate-400">Ed Sheeran</p>
+            <p class="text-[11px] text-slate-500">6.2B views • 8 years ago</p>
+          </div>
+        </div>
+
+        <!-- Song 4 -->
+        <div class="sec-video-item flex gap-3 p-2 rounded-lg hover:bg-slate-800/80 cursor-pointer transition group" 
+             data-url="https://www.youtube.com/embed/OPf0YbXqDm0" 
+             data-title="Mark Ronson - Uptown Funk (Official Video) ft. Bruno Mars"
+             data-index="3">
+          <div class="relative w-36 h-20 flex-shrink-0 bg-slate-800 rounded-md overflow-hidden">
+            <img src="https://img.youtube.com/vi/OPf0YbXqDm0/mqdefault.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" alt="thumbnail">
+            <span class="absolute bottom-1 right-1 bg-black/80 text-[10px] px-1 rounded text-slate-200">4:30</span>
+          </div>
+          <div class="flex flex-col justify-between py-1 flex-1 min-w-0">
+            <h4 class="text-sm font-semibold line-clamp-2 text-slate-200 group-hover:text-cyan-400 transition">Mark Ronson - Uptown Funk ft. Bruno Mars</h4>
+            <p class="text-xs text-slate-400">Mark Ronson</p>
+            <p class="text-[11px] text-slate-500">5.1B views • 10 years ago</p>
+          </div>
+        </div>
+
+        <!-- Song 5 -->
+        <div class="sec-video-item flex gap-3 p-2 rounded-lg hover:bg-slate-800/80 cursor-pointer transition group" 
+             data-url="https://www.youtube.com/embed/kJQP7kiw5Fk" 
+             data-title="Luis Fonsi - Despacito ft. Daddy Yankee (Official Video)"
+             data-index="4">
+          <div class="relative w-36 h-20 flex-shrink-0 bg-slate-800 rounded-md overflow-hidden">
+            <img src="https://img.youtube.com/vi/kJQP7kiw5Fk/mqdefault.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" alt="thumbnail">
+            <span class="absolute bottom-1 right-1 bg-black/80 text-[10px] px-1 rounded text-slate-200">4:41</span>
+          </div>
+          <div class="flex flex-col justify-between py-1 flex-1 min-w-0">
+            <h4 class="text-sm font-semibold line-clamp-2 text-slate-200 group-hover:text-cyan-400 transition">Luis Fonsi - Despacito ft. Daddy Yankee</h4>
+            <p class="text-xs text-slate-400">Luis Fonsi</p>
+            <p class="text-[11px] text-slate-500">8.1B views • 7 years ago</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+
+  <script>
+    (function() {
+      // সব ভেরিয়েবল ও ফাংশন এই স্কোপে রাখা হয়েছে
+      let activeSecIdx = 0;
+      let secPlayer;
+      const secVideoItems = document.querySelectorAll('.sec-video-item');
+
+      function onSecPlayerStateChange(event) {
+        if (event.data === 0) {
+          const isAutoSwitchOn = document.getElementById('secAutoSwitch').checked;
+          if (isAutoSwitchOn) {
+            playNextSecVideo();
+          }
+        }
+      }
+
+      function changeSecVideo(index) {
+        if (index >= secVideoItems.length || index < 0) return;
+        activeSecIdx = index;
+        const selectedVideo = secVideoItems[index];
+        const videoUrl = selectedVideo.getAttribute('data-url');
+        const title = selectedVideo.getAttribute('data-title');
+
+        const playerElement = document.getElementById('secVideoPlayerIframe');
+        const videoTitle = document.getElementById('secVideoTitle');
+
+        playerElement.style.opacity = 0;
+        setTimeout(() => {
+          playerElement.src = `${videoUrl}?enablejsapi=1&autoplay=1`;
+          videoTitle.innerText = title;
+          playerElement.style.opacity = 1;
+          updateSecSidebarUI();
+        }, 200);
+      }
+
+      function playNextSecVideo() {
+        let nextIndex = activeSecIdx + 1;
+        if (nextIndex >= secVideoItems.length) {
+          nextIndex = 0;
+        }
+        changeSecVideo(nextIndex);
+      }
+
+      function updateSecSidebarUI() {
+        secVideoItems.forEach((item, idx) => {
+          if (idx === activeSecIdx) {
+            item.classList.add('bg-slate-800/40', 'border', 'border-cyan-500/30');
+          } else {
+            item.classList.remove('bg-slate-800/40', 'border', 'border-cyan-500/30');
+          }
+        });
+      }
+
+      function initSecPlayer() {
+        if (typeof YT !== 'undefined' && YT.loaded) {
+          secPlayer = new YT.Player('secVideoPlayerIframe', {
+            events: {
+              'onStateChange': onSecPlayerStateChange
+            }
+          });
+        } else {
+          YT.ready(function() {
+            secPlayer = new YT.Player('secVideoPlayerIframe', {
+              events: {
+                'onStateChange': onSecPlayerStateChange
+              }
+            });
+          });
+        }
+      }
+
+      function attachSecEventListeners() {
+        secVideoItems.forEach((item) => {
+          item.addEventListener('click', function(e) {
+            const index = parseInt(this.getAttribute('data-index'), 10);
+            if (!isNaN(index)) {
+              changeSecVideo(index);
+            }
+          });
+        });
+
+        const switchBtn = document.getElementById('secSwitchBtn');
+        if (switchBtn) {
+          switchBtn.addEventListener('click', playNextSecVideo);
+        }
+
+        const nextBtn = document.getElementById('secNextBtn');
+        if (nextBtn) {
+          nextBtn.addEventListener('click', playNextSecVideo);
+        }
+      }
+
+      initSecPlayer();
+      attachSecEventListeners();
+      updateSecSidebarUI();
+
+    })();
+  </script>
+
+  <style>
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: #0f172a; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #475569; }
+  </style>
+</section>
+
+<section>
+  <div class="max-w-7xl mx-auto p-4 bg-gray-900 text-white min-h-screen">
+  <h2 class="text-xl font-bold text-blue-500 mb-6">All Add & Worldwide Add</h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="content-grid">
+    
+    <div class="md:col-span-2 flex flex-col bg-gray-800 rounded-lg overflow-hidden shadow-lg group">
+      <div class="relative aspect-video bg-black">
+        <img src="/img/ads01.PNG" alt="Main Content" class="w-full h-full object-cover">
+        </div>
+      <div class="p-4">
+        <h3 class="font-semibold text-lg line-clamp-2 hover:text-blue-400 cursor-pointer">
+          Man Dole Mera Tan Dole - Remix | Party dance | latest hindi dj remix | old song edm mix
+        </h3>
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-6">
+      <div class="flex flex-col bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+        <div class="relative aspect-video bg-black">
+          <img src="/img/ads02.PNG" alt="Thumbnail" class="w-full h-full object-cover">
+        </div>
+        <div class="p-3">
+          <h4 class="font-medium text-sm line-clamp-2">Shreya Ghoshal Hits - Best of Romantic Songs Collection</h4>
+          <p class="text-xs text-gray-400 mt-1">90's Hindi Songs • 49K views</p>
+        </div>
+      </div>
+
+      <div class="flex flex-col bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+        <div class="relative aspect-video bg-black">
+          <img src="/img/ads03.PNG" alt="Thumbnail" class="w-full h-full object-cover">
+        </div>
+        <div class="p-3">
+          <h4 class="font-medium text-sm line-clamp-2">He started a new life at 40! | Powerful Movie | Drama</h4>
+          <p class="text-xs text-gray-400 mt-1">Movie Hub • 1.2M views</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-col bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+      <div class="relative aspect-video bg-black">
+        <img src="/img/ads04.PNG" alt="Thumbnail" class="w-full h-full object-cover">
+      </div>
+      <div class="p-3">
+        <h4 class="font-medium text-sm line-clamp-2">90's Old Hindi Songs ❤️ 90s Love Song</h4>
+        <p class="text-xs text-gray-400 mt-1">Sajid Bashir official</p>
+      </div>
+    </div>
+
+    <div class="flex flex-col bg-indigo-950 border border-indigo-500 rounded-lg overflow-hidden shadow-lg relative">
+      <div class="relative aspect-video bg-indigo-900 flex items-center justify-center p-4">
+        <div class="text-center">
+          <h3 class="text-xl font-extrabold text-white">Create <span class="text-pink-500">AI</span> Doodle Videos</h3>
+          <p class="text-xs text-indigo-300 mt-1">the only limit is your imagination</p>
+        </div>
+        <span class="absolute top-2 left-2 bg-yellow-500 text-black text-[10px] font-bold px-1.5 py-0.5 rounded">AD</span>
+      </div>
+      <div class="p-3 flex justify-between items-center bg-gray-800 h-full">
+        <div>
+          <h4 class="font-medium text-sm text-indigo-300">InstaDoodle - Special Offer</h4>
+          <p class="text-xs text-green-400 font-semibold">Special Offer - 87% Off</p>
+        </div>
+        <button class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-3 py-2 rounded transition">
+          Learn More
+        </button>
+      </div>
+    </div>
+
+    <div class="flex flex-col bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+      <div class="relative aspect-video bg-black">
+        <img src="/img/ads05.PNG" alt="Thumbnail" class="w-full h-full object-cover">
+      </div>
+      <div class="p-3">
+        <h4 class="font-medium text-sm line-clamp-2">AFRO HOUSE PARTY MIX 2026 🍹🔥</h4>
+        <p class="text-xs text-gray-400 mt-1">Golden Eyes VE • 2 weeks ago</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+</section>
+
+
+<section class="w-full auto">
+  <img class="w-full auto" src="/img/15page.PNG" alt="">
+</section>
+<section class="w-full auto mt-6">
+  <img class="w-full auto" src="/img/page16.PNG" alt="">
+</section>
+
+<section class="w-full max-w-7xl mx-auto mt-8 px-4 center">
+  <!-- Headline Container with Tailwind Styling -->
+<div class="flex flex-col items-center text-center border-b border-gray-700 pb-4 mb-6">
+  <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-400 uppercase">
+    FAMILY LIVE TV
+  </h1>
+  
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-center gap-2 sm:gap-4 mt-2">
+    <p class="text-sm md:text-base font-medium text-gray-400 flex items-center justify-center gap-1.5">
+      <span class="inline-block w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+      Worldwide 30000 Channel
+    </p>
+    
+    <span class="hidden sm:inline text-gray-600">|</span>
+    
+    <p class="text-xs md:text-sm font-semibold text-blue-400 tracking-wide hover:underline cursor-pointer">
+      www.familyworldplay.com
+    </p>
+  </div>
+</div>
+
+  <!-- Responsive Banner Image -->
+  <div class="w-full rounded-xl overflow-hidden shadow-2xl border border-gray-800">
+    <img class="w-full h-auto object-cover" src="/img/page17.PNG" alt="Family Live TV Showcase">
+  </div>
+</section>
 
 <section class="bg-[#050b14] text-white overflow-x-hidden font-sans">
   <section class="relative min-h-screen flex items-center justify-center py-16 px-4 md:px-10 lg:px-20 overflow-hidden">
@@ -2819,7 +3185,7 @@ with Powerful AI Tools.</span>
 
 
 
-<section class=" py-6 px-4 w-full shadow-sm rounded-xl overflow-hidden">
+<section class=" py-6 px-4 w-full shadow-sm  overflow-hidden bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900 border border-blue-500/30">
     <div class="max-w-7xl mx-auto">
         
         <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-3 scroll-smooth md:grid md:grid-cols-10 md:justify-items-center md:items-center md:pb-0 custom-slider">
