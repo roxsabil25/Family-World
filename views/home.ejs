@@ -74,7 +74,8 @@
 <nav>
     <!-- হেডার (Sky Blue ব্যাকগ্রাউন্ড এবং গ্লাস-মরফিজম ভাইব) -->
     <header class="bg-sky-500 shadow-md sticky top-0 z-50 px-4 py-3">
-        <div class="max-w-7xl mx-auto flex items-center justify-between">
+
+        <div class="w-full mx-auto flex items-center justify-between">
             
             <!-- লোগো এবং ল্যাঙ্গুয়েজ -->
             <div class="flex items-center space-x-4 ml-[-20px]">
@@ -96,7 +97,7 @@
             </div>
 
             <!-- ডেস্কটপ নেভিগেশন বার -->
-            <div class="hidden xl:flex items-center space-x-2 text-white font-medium text-sm">
+            <div class="hidden xl:flex items-center w-[60%] justify-between text-white font-medium text-sm">
                 <a href="#" class="bg-sky-700/80 px-3 py-2 rounded-md shadow-[0_4px_6px_-1px_rgba(0,0,0,0.2)] border border-white/30 backdrop-blur-sm transition-all">Home</a>
                 <a href="#" class="hover:bg-sky-600/80 px-3 py-2 rounded-md border border-white/10 hover:border-white/30 shadow-[0_2px_4px_rgba(0,0,0,0.1)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.25)] transition-all duration-200">About</a>
                 
@@ -1490,18 +1491,18 @@ with Powerful AI Tools.</span>
   <script>
     // কার্ডের ডেটা (আপনার ইমেজের সাথে মিল রেখে)
     const toolsData = [
-      { title: "Streetwear Product Launch", img: "https://via.placeholder.com/300x180" },
-      { title: "Brand Design", img: "https://via.placeholder.com/300x180" },
-      { title: "Fashion Brand Promotion", img: "https://via.placeholder.com/300x180" },
-      { title: "Creative Monetization", img: "https://via.placeholder.com/300x180" },
-      { title: "Art & Design Sharing", img: "https://via.placeholder.com/300x180" },
-      { title: "Project Proposal", img: "https://via.placeholder.com/300x180" },
-      { title: "Creative Marketing Strategy", img: "https://via.placeholder.com/300x180" },
-      { title: "Interior Coordination Art", img: "https://via.placeholder.com/300x180" },
-      { title: "Business Partnership Proposal", img: "https://via.placeholder.com/300x180" },
-      { title: "Psychological Healing", img: "https://via.placeholder.com/300x180" },
-      { title: "Designer Portfolio", img: "https://via.placeholder.com/300x180" },
-      { title: "Company Profile", img: "https://via.placeholder.com/300x180" }
+      { title: "Family Live", img: "/img/WhatsApp Image 2026-06-22 at 12.37.10 AM (1).jpeg" },
+      { title: "Teacher AI", img: "/img/WhatsApp Image 2026-06-22 at 12.37.10 AM (2).jpeg" },
+      { title: "Family Studio", img: "/img/WhatsApp Image 2026-06-22 at 12.37.10 AM.jpeg" },
+      { title: "Family Content", img: "/img/WhatsApp Image 2026-06-22 at 12.37.11 AM (1).jpeg" },
+      { title: "Islamic Guard ", img: "/img/WhatsApp Image 2026-06-22 at 12.37.17 AM.jpeg" },
+      { title: "MemoriesLM", img: "/img/WhatsApp Image 2026-06-22 at 12.37.17 AM (1).jpeg" },
+      { title: "Toon Guard", img: "/img/WhatsApp Image 2026-06-22 at 12.37.13 AM.jpeg" },
+      { title: "Family Builder", img: "/img/WhatsApp Image 2026-06-22 at 12.37.12 AM.jpeg" },
+      { title: "Vision Sheets", img: "/img/WhatsApp Image 2026-06-22 at 12.37.12 AM (2).jpeg" },
+      { title: "Frame Gen", img: "/img/WhatsApp Image 2026-06-22 at 12.37.12 AM (1).jpeg" },
+      { title: "Kids Game", img: "/img/WhatsApp Image 2026-06-22 at 12.37.11 AM.jpeg" },
+      { title: "Sin & Library", img: "/img/WhatsApp Image 2026-06-22 at 12.37.11 AM (2).jpeg" }
     ];
 
     const container = document.getElementById('card-container');
@@ -1510,9 +1511,30 @@ with Powerful AI Tools.</span>
     toolsData.forEach(tool => {
       const cardHtml = `
         <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden group cursor-pointer">
-          <div class="relative aspect-[16/10] bg-gray-200 overflow-hidden">
-            <img src="${tool.img}" alt="${tool.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-          </div>
+
+<div class="relative aspect-[16/10] bg-cover bg-center overflow-hidden flex items-center justify-center" 
+           style="background-image: url('${tool.img}');">
+        
+      <span class="relative z-10 text-xl md:text-2xl font-black text-center tracking-wide uppercase select-none transition-transform duration-300 group-hover:scale-105 text-transparent bg-clip-text bg-gradient-to-b from-yellow-200 via-amber-400 to-amber-700 drop-shadow-[0_4px_6px_rgba(0,0,0,0.8)]"
+      style="
+        -webkit-text-stroke: 1px rgba(255, 248, 220, 0.9);
+        text-shadow: 
+          0 1px 0 #b45309, 
+          0 2px 0 #92400e, 
+          0 3px 0 #78350f, 
+          0 4px 0 #451a03, 
+          0 5px 1px rgba(0,0,0,.3), 
+          0 0 5px rgba(0,0,0,.2), 
+          0 1px 3px rgba(0,0,0,.4), 
+          0 3px 5px rgba(0,0,0,.3), 
+          0 5px 10px rgba(0,0,0,.3), 
+          0 10px 10px rgba(0,0,0,.25);
+      ">
+    ${tool.title}
+</span>
+      </div>
+
+
           
           <div class="p-4 flex justify-between items-center bg-white">
             <span class="text-sm font-medium text-gray-700 truncate mr-2">${tool.title}</span>
@@ -1529,123 +1551,87 @@ with Powerful AI Tools.</span>
 </section>
 
 
+  
 
 
 
-<section class="bg-yellow-400 min-h-screen flex items-center justify-center p-4 md:p-10 overflow-hidden">
-  <div class="container mx-auto flex flex-col lg:flex-row items-center gap-10 lg:gap-20">
+
+<section class="bg-[#facc15] min-h-screen flex items-center justify-center py-16 px-4 font-sans">
+  <div class="max-w-4xl w-full text-center">
     
-    <div class="relative w-full lg:w-1/2 flex justify-center items-center h-[400px] sm:h-[500px] lg:h-[550px] order-2 lg:order-1">
+    <h1 class="text-3xl md:text-5xl lg:text-6xl font-black text-gray-900 leading-tight tracking-tight max-w-3xl mx-auto">
+      Explore a world of inspirations <span class="block sm:inline">Family World</span>
+    </h1>
+    
+    <p class="mt-4 text-base md:text-lg font-medium text-gray-800 max-w-2xl mx-auto">
+      Discover a personalized feed of endless diversity and possibilities.
+    </p>
+
+    <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 max-w-3xl mx-auto">
       
-      <div onclick="showCard(this)" class="card-item absolute w-36 h-52 sm:w-48 sm:h-64 lg:w-60 lg:h-80 bg-white rounded-2xl shadow-xl border-2 md:border-4 border-white overflow-hidden cursor-pointer transition-all duration-500 ease-in-out transform -rotate-[20deg] -translate-x-16 sm:-translate-x-24 lg:-translate-x-32 hover:scale-105">
-        <img src="/img/thamble02.jpeg" class="object-cover w-full h-full pointer-events-none" alt="Gallery 1">
-      </div>
+      <a href="#" class="flex items-center justify-between bg-black text-white px-5 py-3 rounded-xl hover:opacity-90 transition-opacity">
+        <div class="flex items-center gap-3 text-left">
+          <i class="fa-brands fa-apple text-2xl"></i>
+          <div>
+            <p class="text-[10px] uppercase tracking-wider text-gray-400">Download on the</p>
+            <p class="text-sm font-semibold -mt-0.5">App Store</p>
+          </div>
+        </div>
+      </a>
 
-      <div onclick="showCard(this)" class="card-item absolute w-36 h-52 sm:w-48 sm:h-64 lg:w-60 lg:h-80 bg-white rounded-2xl shadow-xl border-2 md:border-4 border-white overflow-hidden cursor-pointer transition-all duration-500 ease-in-out transform -rotate-[10deg] -translate-x-8 sm:-translate-x-12 lg:-translate-x-16 hover:scale-105">
-        <img src="/img/thamble03.jpeg" class="object-cover w-full h-full pointer-events-none" alt="Gallery 2">
-      </div>
+      <a href="#" class="flex items-center justify-between bg-black text-white px-5 py-3 rounded-xl hover:opacity-90 transition-opacity">
+        <div class="flex items-center gap-3 text-left">
+          <i class="fa-brands fa-google-play text-xl"></i>
+          <div>
+            <p class="text-[10px] uppercase tracking-wider text-gray-400">GET IT ON</p>
+            <p class="text-sm font-semibold -mt-0.5">Google Play</p>
+          </div>
+        </div>
+      </a>
 
-      <div onclick="showCard(this)" class="card-item active-card absolute w-36 h-52 sm:w-48 sm:h-64 lg:w-60 lg:h-80 bg-white rounded-2xl shadow-2xl border-2 md:border-4 border-white overflow-hidden cursor-pointer transition-all duration-500 ease-in-out transform z-30 scale-105 sm:scale-110">
-        <img src="/img/thamble04.jpeg" class="object-cover w-full h-full pointer-events-none" alt="Gallery 3">
-      </div>
+      <a href="#" class="flex items-center justify-between bg-black text-white px-5 py-4 rounded-xl hover:opacity-90 transition-opacity">
+        <div class="text-left">
+          <p class="text-[10px] uppercase tracking-wider text-gray-400">GET TO ON</p>
+          <p class="text-sm font-semibold -mt-0.5">Family Browser</p>
+        </div>
+        <i class="fa-brands fa-chrome text-xl text-white"></i>
+      </a>
 
-      <div onclick="showCard(this)" class="card-item absolute w-36 h-52 sm:w-48 sm:h-64 lg:w-60 lg:h-80 bg-white rounded-2xl shadow-xl border-2 md:border-4 border-white overflow-hidden cursor-pointer transition-all duration-500 ease-in-out transform rotate-[10deg] translate-x-8 sm:translate-x-12 lg:translate-x-16 hover:scale-105">
-        <img src="/img/thamble02.jpeg" class="object-cover w-full h-full pointer-events-none" alt="Gallery 4">
-      </div>
+      <a href="#" class="flex items-center justify-between bg-black text-white px-5 py-4 rounded-xl hover:opacity-90 transition-opacity">
+        <span class="text-sm font-semibold text-left">Download APK</span>
+        <i class="fa-brands fa-android text-xl text-white"></i>
+      </a>
 
-      <div onclick="showCard(this)" class="card-item absolute w-36 h-52 sm:w-48 sm:h-64 lg:w-60 lg:h-80 bg-white rounded-2xl shadow-xl border-2 md:border-4 border-white overflow-hidden cursor-pointer transition-all duration-500 ease-in-out transform rotate-[20deg] translate-x-16 sm:translate-x-24 lg:translate-x-32 hover:scale-105">
-        <img src="/img/thamble03.jpeg" class="object-cover w-full h-full pointer-events-none" alt="Gallery 5">
-      </div>
+      <a href="#" class="flex items-center justify-between bg-black text-white px-5 py-4 rounded-xl hover:opacity-90 transition-opacity">
+        <span class="text-sm font-semibold text-left">Download Extension</span>
+        <i class="fa-brands fa-chrome text-xl text-white"></i>
+      </a>
+
+      <a href="#" class="flex items-center justify-between bg-black text-white px-5 py-4 rounded-xl hover:opacity-90 transition-opacity">
+        <span class="text-sm font-semibold text-left">Microsoft Edge</span>
+        <i class="fa-brands fa-edge text-xl text-white"></i>
+      </a>
+
+      <a href="#" class="flex items-center justify-between bg-black text-white px-5 py-4 rounded-xl hover:opacity-90 transition-opacity">
+        <span class="text-sm font-semibold text-left">Family Store</span>
+        <i class="fa-brands fa-android text-xl text-white"></i>
+      </a>
+
+      <a href="#" class="flex items-center justify-between bg-black text-white px-5 py-4 rounded-xl hover:opacity-90 transition-opacity">
+        <span class="text-sm font-semibold text-left">Plam Store</span>
+        <i class="fa-brands fa-chrome text-xl text-white"></i>
+      </a>
+
+      <a href="#" class="flex items-center justify-between bg-black text-white px-5 py-4 rounded-xl hover:opacity-90 transition-opacity">
+        <span class="text-sm font-semibold text-left">Safari</span>
+        <i class="fa-brands fa-safari text-xl text-white"></i>
+      </a>
 
     </div>
-
-    <div class="w-full lg:w-1/2 space-y-4 md:space-y-6 text-center lg:text-left order-1 lg:order-2 px-4">
-      <h1 class="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold text-gray-900 leading-tight">
-        Explore a world of inspirations
-      </h1>
-      <p class="text-base sm:text-lg md:text-xl text-gray-800 max-w-xl mx-auto lg:mx-0">
-        Discover a personalized feed of endless diversity and possibilities.
-      </p>
-      <div class="flex flex-wrap justify-center lg:justify-start gap-4 pt-4">
-<div class="flex flex-wrap gap-4">
-  <!-- App Store Button -->
-  <button class="bg-black hover:bg-gray-800 text-white px-5 py-2.5 md:px-8 md:py-3.5 rounded-xl flex items-center gap-3 transition-all shadow-lg active:scale-95 group">
-    <!-- Apple Logo SVG -->
-<img class="w-8" src="/img/appleStor.png" alt="">
-    <div class="text-left flex flex-col line-height-xs">
-      <span class="text-[10px] uppercase tracking-wider text-gray-400 font-semibold leading-none">Download on the</span>
-      <span class="text-base md:text-lg font-bold font-sans leading-tight">App Store</span>
-    </div>
-  </button>
-
-  <!-- Google Play Button -->
-  <button class="bg-black hover:bg-gray-800 text-white px-5 py-2.5 md:px-8 md:py-3.5 rounded-xl flex items-center gap-3 transition-all shadow-lg active:scale-95 group">
-    <!-- Google Play Logo SVG -->
-    <img class="w-8" src="/img/playStor.png" alt="">
-    <div class="text-left flex flex-col line-height-xs">
-      <span class="text-[10px] uppercase tracking-wider text-gray-400 font-semibold leading-none">GET IT ON</span>
-      <span class="text-base md:text-lg font-bold font-sans leading-tight">Google Play</span>
-    </div>
-  </button>
-</div>
-
-
-<div class="flex flex-wrap gap-4">
-  <!-- App Store Button -->
-  <button class="bg-black hover:bg-gray-800 text-white px-5 py-2.5 md:px-8 md:py-3.5 rounded-xl flex items-center gap-3 transition-all shadow-lg active:scale-95 group">
-    <!-- Apple Logo SVG -->
-<img class="w-8" src="/img/apkIcon.png" alt="">
-    <div class="text-left flex flex-col line-height-xs">
-      <span class="text-[10px] uppercase tracking-wider text-gray-400 font-semibold leading-none">Download on the</span>
-      <span class="text-base md:text-lg font-bold font-sans leading-tight">APK Download</span>
-    </div>
-  </button>
-
-  <!-- Google Play Button -->
-  <button class="bg-black hover:bg-gray-800 text-white px-5 py-2.5 md:px-8 md:py-3.5 rounded-xl flex items-center gap-3 transition-all shadow-lg active:scale-95 group">
-    <!-- Google Play Logo SVG -->
-    <img class="w-8" src="/img/extention.jpeg" alt="">
-    <div class="text-left flex flex-col line-height-xs">
-      <span class="text-[10px] uppercase tracking-wider text-gray-400 font-semibold leading-none">GET IT ON</span>
-      <span class="text-base md:text-lg font-bold font-sans leading-tight">Chrome Extension</span>
-    </div>
-  </button>
-</div>
-
-      </div>
-    </div>
-
   </div>
 </section>
 
-<style>
-  /* ক্লিক করলে যে কার্ডটি সামনে আসবে */
-  .active-card {
-    z-index: 50 !important;
-    transform: rotate(0deg) scale(1.1) translateY(-10px) !important;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
-  }
-  
-  /* মোবাইলের জন্য হালকা অ্যাডজাস্টমেন্ট */
-  @media (max-width: 640px) {
-    .active-card {
-      transform: rotate(0deg) scale(1.15) translateY(-5px) !important;
-    }
-  }
-</style>
 
-<script>
-  function showCard(element) {
-    const allCards = document.querySelectorAll('.card-item');
-    allCards.forEach(card => {
-      card.classList.remove('active-card');
-      // সব কার্ডকে আগের জায়গায় ফিরিয়ে নেওয়া
-      card.style.zIndex = ""; 
-    });
-
-    element.classList.add('active-card');
-  }
-</script>
 
 
 
@@ -2564,15 +2550,16 @@ with Powerful AI Tools.</span>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
 
-<section class="bg-gradient-to-br from-slate-950 via-slate-900 to-zinc-950 text-white py-12 px-4 md:px-8 lg:px-16 min-h-screen font-sans">
+<section class="bg-gradient-to-tr from-amber-950 via-amber-500 to-yellow-400 text-slate-900 py-12 px-4 md:px-8 lg:px-16 min-h-screen font-sans relative overflow-hidden before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.3),transparent_50%)]">
   <div class="max-w-7xl mx-auto space-y-10">
     
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-gray-800/60 pb-6 gap-4">
       <div>
-        <h2 class="text-2xl md:text-4xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-400 to-indigo-400">
-          World News & Politex, Latest Articles
-        </h2>
-        <p class="text-gray-400 text-xs md:text-sm mt-1">Stay updated with the most trending and deeply researched topics</p>
+<h2 class="text-2xl md:text-4xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-300 to-zinc-900 transition-transform duration-300 hover:scale-[1.02]"
+    style="-webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.6); text-shadow: -5px 2px 17px #000000;">
+  World News & Politex, Latest Articles
+</h2>
+        <p class="text-white text-xs md:text-sm mt-1">Stay updated with the most trending and deeply researched topics</p>
       </div>
       <button class="bg-amber-500 hover:bg-amber-400 text-slate-9a50 font-extrabold text-xs md:text-sm px-6 py-2.5 rounded-full shadow-lg shadow-amber-500/20 transition duration-300 self-start sm:self-auto uppercase tracking-wider">
         See All
@@ -3174,31 +3161,30 @@ with Powerful AI Tools.</span>
 </section>
 
 
-<section>
-  <div class="sponcerTalika1 w-full auto ">
-<img src="/img/WhatsApp Image 2026-06-17 at 8.34.08 PM.jpeg" alt="">
-  </div>
-</section>
-
-
-<section>
-  <div class="sponcerTalika2 w-full auto">
-<img src="/img/WhatsApp Image 2026-06-17 at 8.34.16 PM.jpeg" alt="">
-  </div>
-</section>
-
-<section>
-  <div class="sponcerTalika3 w-full auto">
-<img src="/img/WhatsApp Image 2026-06-17 at 8.34.36 PM.jpeg" alt="">
-  </div>
+<section class="w-full auto mt-6">
+  <img class="w-full auto" src="/img/WhatsApp Image 2026-06-17 at 8.34.08 PM.jpeg" alt="">
 </section>
 
 
 
-<section>
-  <div class="sponcerTalika4 w-full auto">
-<img src="/img/bottom.jpeg" alt="">
-  </div>
+<section class="w-full auto mt-6">
+  
+<img class="w-full auto" src="/img/WhatsApp Image 2026-06-17 at 8.34.16 PM.jpeg" alt="">
+ 
+</section>
+
+<section class="w-full auto mt-6">
+  
+<img class="w-full auto" src="/img/WhatsApp Image 2026-06-17 at 8.34.36 PM.jpeg" alt="">
+ 
+</section>
+
+
+
+<section class="w-full auto mt-6">
+  
+<img class="w-full auto" src="/img/bottom.jpeg" alt="">
+
 </section>
 
 
