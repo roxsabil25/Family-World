@@ -9,7 +9,7 @@
 
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
   
-    <title>FAMILY</title>
+    <title>Family World</title>
     <link rel="icon" type="image/png" href="/img/Logo 300X282.png">
 
     <style>
@@ -80,12 +80,15 @@
             <!-- লোগো এবং ল্যাঙ্গুয়েজ -->
             <div class="flex items-center space-x-4 ml-[-20px]">
                 <!-- লোগো ইমেজ -->
-                <div class="w-full flex flex-col items-center justify-center text-center p-3 select-none">
+                <div class="w-full flex flex-col items-center justify-center  p-3 select-none">
                     <div class="flex items-center gap-2 justify-center">
                         <img src="/img/Logo 300X282.png" alt="Logo" class="h-10 w-auto object-contain rounded-md shadow-sm">
-                        <div class="text-lg font-bold text-white">Family World</div>
+                        <div>
+                          <div class="text-lg font-bold text-white">Family World</div>
+                        <div class="text-[12px] text-white mt-1 block">Stream Together, for Every Family</div>
+                        </div>
                     </div> 
-                    <span class="text-[12px] text-white mt-1 block">Stream Together, for Every Family</span>
+                    
                 </div>
                 
                 <!-- ল্যাঙ্গুয়েজ সিলেক্টর (ট্যাবলেট ও ডেস্কটপ) -->
@@ -180,11 +183,23 @@
                 <a href="#" class="hover:bg-sky-600/80 px-3 py-2 rounded-md border border-white/10 hover:border-white/30 shadow-[0_2px_4px_rgba(0,0,0,0.1)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.25)] transition-all duration-200">Note</a>
             </div>
 
-            <!-- রাইট সাইড স্পন্সরশিপ বাটন -->
-            <div class="hidden md:block">
-                <a href="#" class="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-orange-500 hover:to-amber-500 text-white font-semibold px-5 py-2 rounded-md shadow-lg shadow-black/10 hover:scale-105 active:scale-95 transition-all duration-200 text-sm border border-orange-400/30">
-                    Sponsorship
-                </a>
+            <!-- রাইট সাইড স্পন্সরশিপ ও অ্যাকাউন্ট বাটন -->
+            <div class="hidden md:flex items-center gap-3">
+                <button type="button" class="open-ads-modal bg-gradient-to-r from-amber-500 to-orange-500 hover:from-orange-500 hover:to-amber-500 text-white font-semibold px-4 py-2 rounded-md shadow-lg shadow-black/10 hover:scale-105 active:scale-95 transition-all duration-200 text-sm border border-orange-400/30">
+                    Publish Your Ads
+                </button>
+
+                <% if (currentUser) { %>
+                    <div class="flex items-center gap-3 rounded-full bg-sky-700/30 px-3 py-1.5 text-white ring-1 ring-white/20">
+                        <span class="text-sm font-medium"><%= currentUser.name %></span>
+                        <a href="/logout" class="rounded-full bg-white/10 px-2.5 py-1 text-xs font-medium hover:bg-white/20">Logout</a>
+                    </div>
+                <% } else { %>
+                    <div class="flex items-center gap-2">
+                        <a href="/login" class="rounded-md border border-white/20 bg-white/10 px-3 py-2 text-sm font-medium text-white hover:bg-white/20">Login</a>
+                        <a href="/signup" class="rounded-md bg-white px-3 py-2 text-sm font-semibold text-sky-700 hover:bg-sky-50">Sign Up</a>
+                    </div>
+                <% } %>
             </div>
 
             <!-- মোবাইল ও ট্যাবলেটের জন্য হামবার্গার মেনু আইকন -->
@@ -293,6 +308,13 @@
         <a href="#" class="hover:bg-sky-500/50 px-3 py-2 rounded-md shadow-sm hover:shadow transition">AI</a>
         <a href="#" class="hover:bg-sky-500/50 px-3 py-2 rounded-md shadow-sm hover:shadow transition">Family Product</a>
         <a href="#" class="hover:bg-sky-500/50 px-3 py-2 rounded-md shadow-sm hover:shadow transition">Safe Note</a>
+        <button type="button" class="open-ads-modal w-full rounded-md bg-gradient-to-r from-amber-500 to-orange-500 px-3 py-2 text-left font-semibold text-white shadow-sm">Publish Your Ads</button>
+        <% if (currentUser) { %>
+            <a href="/logout" class="rounded-md bg-white/10 px-3 py-2 text-left font-medium text-white">Logout</a>
+        <% } else { %>
+            <a href="/login" class="rounded-md bg-white/10 px-3 py-2 text-left font-medium text-white">Login</a>
+            <a href="/signup" class="rounded-md bg-white/10 px-3 py-2 text-left font-medium text-white">Sign Up</a>
+        <% } %>
         
         <!-- ল্যাঙ্গুয়েজ এবং স্পন্সরশিপ (মোবাইল ভিউ) -->
         <div class="pt-3 border-t border-sky-400/50 flex md:hidden items-center justify-between gap-2">
@@ -376,55 +398,54 @@
 
 
 
-<section class="bg-gray-100 w-full min-h-screen">
-
+<section class="bg-gray-100 w-full ">
     <div class="w-full px-0 md:px-0 flex flex-col gap-6">
 
         <div class="w-full flex-grow">
             <div class="relative w-full aspect-video bg-black rounded-lg overflow-hidden shadow-xl">
                 <video 
-                    id="mainVideo" 
+                    id="customPlaylistMainVideo" 
                     class="absolute inset-0 w-full h-full object-cover" 
                     controls 
                     autoplay 
                     muted 
                     playsinline
                     poster="/img/kaba.jpeg">
-                    <source id="videoSource" src="<%= videos.length > 0 ? videos[0].videoUrl : '' %>" type="video/mp4">
+                    <source id="customPlaylistVideoSource" src="<%= page1.length > 0 ? page1[0].videoUrl : '' %>" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>
             
             <div class="mt-4 bg-white p-4 rounded-lg shadow flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
-                    <h1 id="currentVideoTitle" class="text-base md:text-lg font-semibold text-gray-800">
-                        <%= videos.length > 0 ? videos[0].title + " - Playing Now" : "No Video Available" %>
+                    <h1 id="customPlaylistCurrentTitle" class="text-base md:text-lg font-semibold text-gray-800">
+                        <%= page1.length > 0 ? page1[0].title + " - Playing Now" : "No Video Available" %>
                     </h1>
                 </div>
                 
                 <div class="flex items-center gap-3 self-end sm:self-center">
-                    <button id="autoplayBtn" onclick="togglePlay()" class="flex items-center gap-1.5 px-3 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 transition">
+                    <button id="customPlaylistAutoplayBtn" onclick="toggleCustomPlaylistPlay()" class="flex items-center gap-1.5 px-3 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 transition">
                         <span>Pause</span>
                     </button>
 
                     <div class="flex items-center space-x-2">
-                        <button id="likeBtn" 
-                                data-id="<%= videos.length > 0 ? videos[0]._id : '' %>" 
-                                data-likes="<%= videos.length > 0 ? videos[0].likes : 0 %>"
-                                onclick="handleLike()" 
+                        <button id="customPlaylistLikeBtn" 
+                                data-id="<%= page1.length > 0 ? page1[0]._id : '' %>" 
+                                data-likes="<%= page1.length > 0 ? page1[0].likes : 0 %>"
+                                onclick="handleCustomPlaylistLike()" 
                                 class="flex items-center space-x-2 bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-full text-sm font-medium text-white transition">
-                            <span id="likeText">👍 Like (<%= videos.length > 0 ? videos[0].likes : 0 %>)</span>
+                            <span id="customPlaylistLikeText">👍 Like (<%= page1.length > 0 ? page1[0].likes : 0 %>)</span>
                         </button>
                     </div>
 
-                    <button onclick="handleShare()" class="flex items-center gap-1.5 px-3 py-2 border border-gray-300 text-gray-700 text-sm font-medium rounded-md hover:bg-gray-50 transition">
+                    <button onclick="handleCustomPlaylistShare()" class="flex items-center gap-1.5 px-3 py-2 border border-gray-300 text-gray-700 text-sm font-medium rounded-md hover:bg-gray-50 transition">
                         <svg class="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
                         </svg>
                         <span>Share</span>
                     </button>
 
-                    <button onclick="playNextVideo()" class="flex items-center gap-1.5 px-3 py-2 bg-gray-800 text-white text-sm font-medium rounded-md hover:bg-gray-900 transition">
+                    <button onclick="playCustomPlaylistNextVideo()" class="flex items-center gap-1.5 px-3 py-2 bg-gray-800 text-white text-sm font-medium rounded-md hover:bg-gray-900 transition">
                         <span>Next</span>
                         <svg class="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"/>
@@ -437,331 +458,825 @@
         <div class="w-full bg-white p-4 rounded-lg shadow-lg">
             <h2 class="text-xl font-semibold mb-4 text-gray-800">Video Playlist</h2>
             
-            <div id="playlistContainer" class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4 overflow-y-auto max-h-[500px] p-2 custom-scrollbar">
+            <div id="customPlaylistContainer" class="flex flex-row gap-4 overflow-x-auto p-2 custom-scrollbar whitespace-nowrap">
                 
-               <% if(videos.length > 0) { %>
-    <% videos.forEach((video, index) => { %>
-        <button onclick="playSelectedVideo(this)" 
-                data-id="<%= video._id %>" 
-                data-src="<%= video.videoUrl %>" 
-                data-title="<%= video.title %>" 
-                data-likes="<%= video.likes || 0 %>"
-                class="playlist-btn group flex flex-col items-center gap-2 w-full p-2 rounded-lg hover:bg-blue-50 transition-all duration-300 transform hover:scale-105">
-            <div class="relative overflow-hidden rounded-md w-full aspect-video bg-black flex items-center justify-center">
-                <video class="w-full h-full object-cover pointer-events-none" preload="metadata" muted playsinline>
-                    <source src="<%= video.videoUrl %>#t=0.1" type="video/mp4">
-                </video>
-                <div class="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors flex items-center justify-center">
-                    <div class="bg-white/80 p-1.5 rounded-full shadow-md transform group-hover:scale-110 transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M8 5v14l11-7z" />
-                        </svg>
-                    </div>
-                </div>
-            </div>
-            <span class="text-[10px] md:text-xs font-medium text-gray-700 line-clamp-2 text-center"><%= video.title %></span>
-        </button>
-    <% }) %>
-<% } else { %>
-    <p class="text-gray-500 col-span-full text-center">কোনো ভিডিও পাওয়া যায়নি।</p>
-<% } %>
+                <% if(page1.length > 0) { %>
+                    <% page1.forEach((video, index) => { %>
+                        <button onclick="playSelectedCustomVideo(this)" 
+                                data-id="<%= video._id %>" 
+                                data-src="<%= video.videoUrl %>" 
+                                data-title="<%= video.title.replace(/'/g, "\\'") %>" 
+                                data-likes="<%= video.likes || 0 %>"
+                                class="custom-playlist-btn group flex flex-col items-center gap-2 w-40 md:w-48 flex-shrink-0 p-2 rounded-lg hover:bg-blue-50 transition-all duration-300 transform hover:scale-105">
+                            <div class="relative overflow-hidden rounded-md w-full aspect-video bg-black flex items-center justify-center">
+                                <video class="w-full h-full object-cover pointer-events-none" preload="metadata" muted playsinline>
+                                    <source src="<%= video.videoUrl %>#t=0.1" type="video/mp4">
+                                </video>
+                                <div class="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+                                    <div class="bg-white/80 p-1.5 rounded-full shadow-md transform group-hover:scale-110 transition">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M8 5v14l11-7z" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="text-[10px] md:text-xs font-medium text-gray-700 line-clamp-2 text-center whitespace-normal w-full"><%= video.title %></span>
+                        </button>
+                    <% }) %>
+                <% } else { %>
+                    <p class="text-gray-500 w-full text-center">কোনো ভিডিও পাওয়া যায়নি।</p>
+                <% } %>
                 
             </div>
         </div>
 
+
     </div>
 
-<script>
-    const video = document.getElementById('mainVideo');
-    const videoSource = document.getElementById('videoSource');
-    const currentTitle = document.getElementById('currentVideoTitle');
-    const autoplayBtn = document.getElementById('autoplayBtn');
-    const likeBtn = document.getElementById('likeBtn');
-    const likeText = document.getElementById('likeText');
-    
-    let currentVideoIndex = 0;
-
-    function playSelectedVideo(buttonElement) {
-        const src = buttonElement.getAttribute('data-src');
-        const title = buttonElement.getAttribute('data-title');
-        const id = buttonElement.getAttribute('data-id');
-        const likes = buttonElement.getAttribute('data-likes') || 0;
+    <script>
+        const customMainVideoPlayer = document.getElementById('customPlaylistMainVideo');
+        const customMainVideoSource = document.getElementById('customPlaylistVideoSource');
+        const customMainVideoTitle = document.getElementById('customPlaylistCurrentTitle');
+        const customPlaylistAutoplayBtn = document.getElementById('customPlaylistAutoplayBtn');
+        const customPlaylistLikeBtn = document.getElementById('customPlaylistLikeBtn');
+        const customPlaylistLikeText = document.getElementById('customPlaylistLikeText');
         
-        const allButtons = document.querySelectorAll('.playlist-btn');
-        currentVideoIndex = Array.from(allButtons).indexOf(buttonElement);
-        
-        if(likeBtn) {
-            likeBtn.setAttribute('data-id', id || '');
-            likeBtn.setAttribute('data-likes', likes);
-        }
-        
-        changeVideo(src, title);
-    }
+        let customPlaylistCurrentIndex = 0;
 
-    function changeVideo(src, title) {
-        if (!videoSource || !video) return;
-
-        videoSource.src = src;
-        if(currentTitle) {
-            currentTitle.textContent = title + " - Playing Now";
-        }
-        
-        video.load(); 
-        
-        try {
-            loadLikeStatus(); 
-        } catch(e) {
-            console.log("Like UI Sync bypass", e);
-        }
-        
-        video.play()
-            .then(() => { 
-                if(autoplayBtn) autoplayBtn.innerText = "Pause"; 
-            })
-            .catch(error => {
-                console.log("Auto-play blocked", error);
-                if(autoplayBtn) autoplayBtn.innerText = "Play";
-            });
-    }
-
-    function playNextVideo() {
-        const allButtons = document.querySelectorAll('.playlist-btn');
-        if(allButtons.length === 0) return;
-        
-        currentVideoIndex = (currentVideoIndex + 1) % allButtons.length;
-        
-        const nextButton = allButtons[currentVideoIndex];
-        const nextSrc = nextButton.getAttribute('data-src');
-        const nextTitle = nextButton.getAttribute('data-title');
-        
-        if(likeBtn) {
-            likeBtn.setAttribute('data-id', nextButton.getAttribute('data-id') || '');
-            likeBtn.setAttribute('data-likes', nextButton.getAttribute('data-likes') || 0);
-        }
-        
-        changeVideo(nextSrc, nextTitle);
-    }
-
-    if(video) {
-        video.addEventListener('ended', playNextVideo);
-        video.addEventListener('play', () => { if(autoplayBtn) autoplayBtn.innerText = "Pause"; });
-        video.addEventListener('pause', () => { if(autoplayBtn) autoplayBtn.innerText = "Play"; });
-    }
-
-    function togglePlay() {
-        if (!video || !autoplayBtn) return;
-
-        if (video.paused) {
-            video.play();
-            autoplayBtn.innerText = "Pause";
-        } else {
-            video.pause();
-            autoplayBtn.innerText = "Play";
-        }
-    }
-
-    async function handleLike() {
-        if (!likeBtn || !likeText) return;
-
-        const videoId = likeBtn.getAttribute('data-id');
-        if (!videoId) {
-            const isLiked = likeBtn.classList.contains('bg-red-600');
-            let currentLikes = parseInt(likeBtn.getAttribute('data-likes') || 0);
-            let nextLikes = isLiked ? Math.max(0, currentLikes - 1) : currentLikes + 1;
-            likeBtn.setAttribute('data-likes', nextLikes);
-            toggleLikeButtonUI(!isLiked, nextLikes);
-            return;
-        }
-
-        const isLiked = likeBtn.classList.contains('bg-red-600');
-        const action = isLiked ? 'unlike' : 'like';
-
-        try {
-            const response = await fetch(`/api/videos/${videoId}/like`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ action: action })
-            });
-
-            const data = await response.json();
-
-            if (data.success) {
-                likeBtn.setAttribute('data-likes', data.likes);
-                const activePlaylistBtn = document.querySelector(`.playlist-btn[data-id="${videoId}"]`);
-                if(activePlaylistBtn) activePlaylistBtn.setAttribute('data-likes', data.likes);
-
-                localStorage.setItem(`liked_${videoId}`, !isLiked);
-                toggleLikeButtonUI(!isLiked, data.likes);
+        function playSelectedCustomVideo(buttonElement) {
+            const src = buttonElement.getAttribute('data-src');
+            const title = buttonElement.getAttribute('data-title');
+            const id = buttonElement.getAttribute('data-id');
+            const likes = buttonElement.getAttribute('data-likes') || 0;
+            
+            const allButtons = document.querySelectorAll('.custom-playlist-btn');
+            customPlaylistCurrentIndex = Array.from(allButtons).indexOf(buttonElement);
+            
+            if(customPlaylistLikeBtn) {
+                customPlaylistLikeBtn.setAttribute('data-id', id || '');
+                customPlaylistLikeBtn.setAttribute('data-likes', likes);
             }
-        } catch (err) {
-            console.error("API error, updating locally", err);
-            let currentLikes = parseInt(likeBtn.getAttribute('data-likes') || 0);
-            let nextLikes = isLiked ? Math.max(0, currentLikes - 1) : currentLikes + 1;
-            likeBtn.setAttribute('data-likes', nextLikes);
-            localStorage.setItem(`liked_${videoId}`, !isLiked);
-            toggleLikeButtonUI(!isLiked, nextLikes);
+            
+            changeCustomPlaylistVideo(src, title);
         }
-    }
 
-    function toggleLikeButtonUI(shouldLike, likesCount) {
-        if (shouldLike) {
-            likeBtn.classList.remove('bg-gray-800', 'hover:bg-gray-700');
-            likeBtn.classList.add('bg-red-600', 'hover:bg-red-500');
-            likeText.innerText = `❤️ Liked (${likesCount})`;
-        } else {
-            likeBtn.classList.remove('bg-red-600', 'hover:bg-red-500');
-            likeBtn.classList.add('bg-gray-800', 'hover:bg-gray-700');
-            likeText.innerText = `👍 Like (${likesCount})`;
+        function changeCustomPlaylistVideo(src, title) {
+            if (!customMainVideoSource || !customMainVideoPlayer) return;
+
+            customMainVideoSource.src = src;
+            if(customMainVideoTitle) {
+                customMainVideoTitle.textContent = title + " - Playing Now";
+            }
+            
+            customMainVideoPlayer.load(); 
+            
+            try {
+                loadCustomPlaylistLikeStatus(); 
+            } catch(e) {
+                console.log("Like UI Sync bypass", e);
+            }
+            
+            customMainVideoPlayer.play()
+                .then(() => { 
+                    if(customPlaylistAutoplayBtn) customPlaylistAutoplayBtn.innerText = "Pause"; 
+                })
+                .catch(error => {
+                    console.log("Auto-play blocked", error);
+                    if(customPlaylistAutoplayBtn) customPlaylistAutoplayBtn.innerText = "Play";
+                });
         }
-    }
 
-    function loadLikeStatus() {
-        if (!likeBtn) return;
-        const videoId = likeBtn.getAttribute('data-id');
-        const likesCount = likeBtn.getAttribute('data-likes') || 0;
-        
-        if (!videoId) {
-            toggleLikeButtonUI(false, likesCount);
-            return;
+        function playCustomPlaylistNextVideo() {
+            const allButtons = document.querySelectorAll('.custom-playlist-btn');
+            if(allButtons.length === 0) return;
+            
+            customPlaylistCurrentIndex = (customPlaylistCurrentIndex + 1) % allButtons.length;
+            
+            const nextButton = allButtons[customPlaylistCurrentIndex];
+            const nextSrc = nextButton.getAttribute('data-src');
+            const nextTitle = nextButton.getAttribute('data-title');
+            
+            if(customPlaylistLikeBtn) {
+                customPlaylistLikeBtn.setAttribute('data-id', nextButton.getAttribute('data-id') || '');
+                customPlaylistLikeBtn.setAttribute('data-likes', nextButton.getAttribute('data-likes') || 0);
+            }
+            
+            changeCustomPlaylistVideo(nextSrc, nextTitle);
         }
-        
-        const isLikedInStorage = localStorage.getItem(`liked_${videoId}`) === 'true';
-        toggleLikeButtonUI(isLikedInStorage, likesCount);
-    }
 
-    function handleShare() {
-        const currentUrl = window.location.href;
-        navigator.clipboard.writeText(currentUrl).then(() => {
-            alert("ভিডিওর লিঙ্ক কপি করা হয়েছে!");
-        }).catch(err => {
-            console.error("Could not copy text: ", err);
-        });
-    }
+        if(customMainVideoPlayer) {
+            customMainVideoPlayer.addEventListener('ended', playCustomPlaylistNextVideo);
+            customMainVideoPlayer.addEventListener('play', () => { if(customPlaylistAutoplayBtn) customPlaylistAutoplayBtn.innerText = "Pause"; });
+            customMainVideoPlayer.addEventListener('pause', () => { if(customPlaylistAutoplayBtn) customPlaylistAutoplayBtn.innerText = "Play"; });
+        }
 
-    document.addEventListener("DOMContentLoaded", loadLikeStatus);
-</script>
+        function toggleCustomPlaylistPlay() {
+            if (!customMainVideoPlayer || !customPlaylistAutoplayBtn) return;
+
+            if (customMainVideoPlayer.paused) {
+                customMainVideoPlayer.play();
+                customPlaylistAutoplayBtn.innerText = "Pause";
+            } else {
+                customMainVideoPlayer.pause();
+                customPlaylistAutoplayBtn.innerText = "Play";
+            }
+        }
+
+        async function handleCustomPlaylistLike() {
+            if (!customPlaylistLikeBtn || !customPlaylistLikeText) return;
+
+            const videoId = customPlaylistLikeBtn.getAttribute('data-id');
+            if (!videoId) {
+                const isLiked = customPlaylistLikeBtn.classList.contains('bg-red-600');
+                let currentLikes = parseInt(customPlaylistLikeBtn.getAttribute('data-likes') || 0);
+                let nextLikes = isLiked ? Math.max(0, currentLikes - 1) : currentLikes + 1;
+                customPlaylistLikeBtn.setAttribute('data-likes', nextLikes);
+                toggleCustomPlaylistLikeUI(!isLiked, nextLikes);
+                return;
+            }
+
+            const isLiked = customPlaylistLikeBtn.classList.contains('bg-red-600');
+            const action = isLiked ? 'unlike' : 'like';
+
+            try {
+                const response = await fetch(`/api/videos/${videoId}/like`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: action })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    customPlaylistLikeBtn.setAttribute('data-likes', data.likes);
+                    const activePlaylistBtn = document.querySelector(`.custom-playlist-btn[data-id="${videoId}"]`);
+                    if(activePlaylistBtn) activePlaylistBtn.setAttribute('data-likes', data.likes);
+
+                    localStorage.setItem(`liked_${videoId}`, !isLiked);
+                    toggleCustomPlaylistLikeUI(!isLiked, data.likes);
+                }
+            } catch (err) {
+                console.error("API error, updating locally", err);
+                let currentLikes = parseInt(customPlaylistLikeBtn.getAttribute('data-likes') || 0);
+                let nextLikes = isLiked ? Math.max(0, currentLikes - 1) : currentLikes + 1;
+                customPlaylistLikeBtn.setAttribute('data-likes', nextLikes);
+                localStorage.setItem(`liked_${videoId}`, !isLiked);
+                toggleCustomPlaylistLikeUI(!isLiked, nextLikes);
+            }
+        }
+
+        function toggleCustomPlaylistLikeUI(shouldLike, likesCount) {
+            if (shouldLike) {
+                customPlaylistLikeBtn.classList.remove('bg-gray-800', 'hover:bg-gray-700');
+                customPlaylistLikeBtn.classList.add('bg-red-600', 'hover:bg-red-500');
+                customPlaylistLikeText.innerText = `❤️ Liked (${likesCount})`;
+            } else {
+                customPlaylistLikeBtn.classList.remove('bg-red-600', 'hover:bg-red-500');
+                customPlaylistLikeBtn.classList.add('bg-gray-800', 'hover:bg-gray-700');
+                customPlaylistLikeText.innerText = `👍 Like (${likesCount})`;
+            }
+        }
+
+        function loadCustomPlaylistLikeStatus() {
+            if (!customPlaylistLikeBtn) return;
+            const videoId = customPlaylistLikeBtn.getAttribute('data-id');
+            const likesCount = customPlaylistLikeBtn.getAttribute('data-likes') || 0;
+            
+            if (!videoId) {
+                toggleCustomPlaylistLikeUI(false, likesCount);
+                return;
+            }
+            
+            const isLikedInStorage = localStorage.getItem(`liked_${videoId}`) === 'true';
+            toggleCustomPlaylistLikeUI(isLikedInStorage, likesCount);
+        }
+
+        function handleCustomPlaylistShare() {
+            const currentUrl = window.location.href;
+            navigator.clipboard.writeText(currentUrl).then(() => {
+                alert("ভিডিওর লিঙ্ক কপি করা হয়েছে!");
+            }).catch(err => {
+                console.error("Could not copy text: ", err);
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", loadCustomPlaylistLikeStatus);
+
+
+
+
+        // মাউস দিয়ে ড্র্যাগ করে স্ক্রোল করার কার্যকারিতা
+const playlistContainer = document.getElementById('customPlaylistContainer');
+
+if (playlistContainer) {
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    playlistContainer.addEventListener('mousedown', (e) => {
+        isDown = true;
+        playlistContainer.classList.add('active');
+        // ক্লিকের অবস্থান এবং বর্তমান স্ক্রোল পজিশন সংরক্ষণ
+        startX = e.pageX - playlistContainer.offsetLeft;
+        scrollLeft = playlistContainer.scrollLeft;
+        playlistContainer.style.cursor = 'grabbing';
+    });
+
+    playlistContainer.addEventListener('mouseleave', () => {
+        isDown = false;
+        playlistContainer.style.cursor = 'pointer';
+    });
+
+    playlistContainer.addEventListener('mouseup', () => {
+        isDown = false;
+        playlistContainer.style.cursor = 'pointer';
+    });
+
+    playlistContainer.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - playlistContainer.offsetLeft;
+        const walk = (x - startX) * 2; // স্ক্রোল স্পিড বাড়াতে গুণফল পরিবর্তন করতে পারেন
+        playlistContainer.scrollLeft = scrollLeft - walk;
+    });
+
+    // ডেক্সটপে মাউসের চাকা (Wheel) ঘুরালেও যেন ডানে-বামে স্ক্রোল হয়
+    playlistContainer.addEventListener('wheel', (e) => {
+        if (e.deltaY !== 0) {
+            e.preventDefault();
+            playlistContainer.scrollLeft += e.deltaY;
+        }
+    });
+}
+    </script>
 
     <style>
-        @media (min-width: 768px) {
-            .custom-scrollbar::-webkit-scrollbar {
-                width: 5px;
-            }
-            .custom-scrollbar::-webkit-scrollbar-track {
-                background: #f1f1f1;
-                border-radius: 10px;
-            }
-            .custom-scrollbar::-webkit-scrollbar-thumb {
-                background: #3b82f6; 
-                border-radius: 10px;
-            }
-            .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-                background: #2563eb;
-            }
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 6px; 
+            width: 5px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #3b82f6; 
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #2563eb;
         }
     </style>
 </section>
 
 
+<!-- Ads Section Container -->
+<!-- Ads Section Container -->
+<section class="w-full mx-auto px-4 py-16 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white overflow-hidden">
+  <!-- Section Title -->
+  <div class="mb-12 text-center relative">
+    <div class="absolute -top-6 left-1/2 -translate-x-1/2 w-40 h-40 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
+    <h3 class="text-xs font-bold uppercase tracking-widest text-sky-400 bg-sky-500/10 px-3 py-1 rounded-full inline-block backdrop-blur-sm border border-sky-500/20">
+      Featured Partners
+    </h3>
+    <h2 class="text-3xl md:text-5xl font-black mt-3 tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400">
+      Our Proud Sponsors
+    </h2>
+  </div>
+
+  <!-- Video Grid (সর্বদা ৪টি ফিক্সড সাইজের কার্ড থাকবে) -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+    
+    <% for(let cardIdx = 0; cardIdx < 4; cardIdx++) { %>
+      <% 
+        // প্রতিটি কার্ডের জন্য ৪টি অ্যাড ফিল্টার করে নেওয়া
+        let cardAds = ads.slice(cardIdx * 4, (cardIdx + 1) * 4); 
+      %>
+      
+      <!-- যদি এই কার্ডের গ্রুপে কোনো অ্যাড থেকে থাকে তবেই কার্ড রেন্ডার হবে -->
+      <% if (cardAds.length > 0) { %>
+        <div id="adCardSecond_<%= cardIdx %>" 
+             class="group relative h-[390px] w-full rounded-2xl overflow-hidden bg-slate-900/60 backdrop-blur-md border border-slate-800/80 transition-all duration-500 hover:border-sky-500/40 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(14,165,233,0.12)] flex flex-col justify-between">
+          
+          <!-- গ্লোসি বর্ডার ইফেক্ট (Hover-এ জ্বলবে) -->
+          <div class="absolute inset-0 bg-gradient-to-b from-sky-500/0 via-sky-500/0 to-sky-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+
+          <!-- Top Video Screen Section (Fixed Height Aspect) -->
+          <div class="relative h-[180px] w-full bg-slate-950 overflow-hidden shrink-0 border-b border-slate-800/50">
+            <video id="cardVideoSecond_<%= cardIdx %>" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" autoplay muted playsinline preload="auto">
+              <source src="<%= cardAds[0].adsVideo %>" type="video/mp4">
+            </video>
+            <!-- ভিডিওর ওপর হালকা প্রিমিয়াম শ্যাডো গ্রেডিয়েন্ট -->
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent pointer-events-none"></div>
+            
+            <!-- লাইভ স্পন্সর ব্যাজ -->
+            <span class="absolute top-3 right-3 text-[10px] font-bold tracking-wider uppercase bg-black/60 backdrop-blur-md text-sky-400 px-2 py-0.5 rounded border border-white/10 shadow-sm">
+              Sponsor
+            </span>
+          </div>
+          
+          <!-- Bottom Details & Controller Area (Fixed Height & Space Management) -->
+          <div class="p-5 flex-grow flex flex-col justify-between bg-gradient-to-b from-transparent to-slate-950/40">
+            
+            <!-- কোম্পানির নামের লিস্ট (কাস্টম স্ক্রলবার বা র্যাপ প্রটেকশন সহ ফিক্সড হাইট স্পেস) -->
+            <div class="flex flex-wrap items-center gap-2 max-h-[90px] overflow-y-auto no-scrollbar">
+              <% cardAds.forEach((ad, adIndex) => { %>
+                <div id="nameSecond_<%= cardIdx %>_<%= adIndex %>" 
+                     class="company-name-itemSecond text-xs font-bold px-2.5 py-1 rounded-lg border border-slate-800 bg-slate-950/50 transition-all duration-300 opacity-40 text-slate-400 select-none">
+                  <%= ad.companyName %> 
+                </div>
+              <% }) %>
+            </div>
+
+            <!-- ফুটারে ডট ইন্ডিকেটর এবং অ্যাকশন লিংকের কম্বিনেশন -->
+            <div class="flex items-center justify-between border-t border-slate-800/60 pt-4 mt-2">
+              <!-- Indicators -->
+              <div class="flex items-center gap-1.5">
+                <% cardAds.forEach((ad, adIndex) => { %>
+                  <span id="dotSecond_<%= cardIdx %>_<%= adIndex %>" 
+                        class="indicator-dotSecond h-1.5 w-1.5 rounded-full bg-slate-700 transition-all duration-300"></span>
+                <% }) %>
+              </div>
+              
+              <!-- অ্যাকশন বাটন (ভিডিও লিংকের জন্য ভিজিট বাটন) -->
+              <a href="<%= cardAds[0].targetUrl || '#' %>" target="_blank" 
+                 class="inline-flex items-center gap-1 text-xs font-semibold text-sky-400 hover:text-white transition-colors duration-300 bg-sky-500/10 hover:bg-sky-500 px-3 py-1.5 rounded-lg border border-sky-500/20 hover:border-sky-500 shadow-sm shadow-sky-500/5">
+                Visit Site
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-3 h-3">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                </svg>
+              </a>
+            </div>
+
+          </div>
+        </div>
+      <% } %>
+    <% } %>
+
+  </div>
+</section>
+
+<!-- স্ক্রলবার হাইড করার কাস্টম স্টাইল (যদি নাম অনেক বেশি হয়ে যায়) -->
+<style>
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  
+  /* একটি প্রিমিয়াম একটিভ ক্লাস যা আপনার স্ক্রিপ্টের সাথে ম্যাচ করবে */
+  .name-activeSecond {
+    opacity: 1 !important;
+    color: #38bdf8 !important; /* sky-400 */
+    border-color: rgba(14, 165, 233, 0.4) !important;
+    background-color: rgba(14, 165, 233, 0.1) !important;
+    box-shadow: 0 0 10px rgba(14, 165, 233, 0.1);
+  }
+  .dot-activeSecond {
+    background-color: #38bdf8 !important; /* sky-400 */
+    width: 16px !important; /* ডটটি লম্বা হয়ে প্রিমিয়াম লুক দিবে */
+    border-radius: 4px !important;
+  }
+</style>
+
+<!-- Active ও Border গ্লো স্টাইলের জন্য কাস্টম CSS -->
+<style>
+  .name-activeSecond {
+    opacity: 1 !important;
+    color: #38bdf8 !important; /* sky-400 */
+    transform: translateX(4px);
+  }
+  .dot-activeSecond {
+    background-color: #38bdf8 !important; /* sky-400 */
+    width: 16px !important; 
+    border-radius: 4px;
+  }
+</style>
+
+<script>
+// ব্যাকএন্ড থেকে আসা বিজ্ঞাপনের ডাটা জাভাস্ক্রিপ্ট ভ্যারিয়েবলে নেওয়া
+const rawAdsDataSecond = <%- JSON.stringify(ads) %>;
+
+// ডাটাকে ৪টি গ্রুপের অ্যারেতে ভাগ করার ফাংশন
+function chunkArraySecond(array, chunkSize) {
+    const results = [];
+    for (let i = 0; i < array.length; i += chunkSize) {
+        results.push(array.slice(i, i + chunkSize));
+    }
+    return results;
+}
+
+// ৪টি কার্ডের জন্য বিজ্ঞাপনগুলো সাজিয়ে নেওয়া
+const chunkedAdsSecond = chunkArraySecond(rawAdsDataSecond, 4);
+const cardStatesSecond = {};
+
+// কার্ডের ইন্টারফেস আপডেট এবং ফোর্স প্লে করার মূল ফাংশন
+function updateCardUISecond(cardIdx, adIndex) {
+    const currentGroup = chunkedAdsSecond[cardIdx];
+    if (!currentGroup || !currentGroup[adIndex]) return;
+
+    // ১. নাম এবং ডট ইন্ডিকেটর হাইলাইট করা
+    currentGroup.forEach((_, idx) => {
+        const nameEl = document.getElementById(`nameSecond_${cardIdx}_${idx}`);
+        const dotEl = document.getElementById(`dotSecond_${cardIdx}_${idx}`);
+        
+        if (nameEl) nameEl.classList.remove('name-activeSecond');
+        if (dotEl) dotEl.classList.remove('dot-activeSecond');
+        
+        if (idx === adIndex) {
+            if (nameEl) nameEl.classList.add('name-activeSecond');
+            if (dotEl) dotEl.classList.add('dot-activeSecond');
+        }
+    });
+
+    // ২. ভিডিও প্লেয়ার সোর্স আপডেট এবং ব্রাউজার পলিসি বাইপাস করে প্লে করা
+    const videoPlayer = document.getElementById(`cardVideoSecond_${cardIdx}`);
+    if (videoPlayer) {
+        // মিউটেড প্রোপার্টি ট্রু করা (অটোপ্লের জন্য এটি ১০০০% বাধ্যতামূলক)
+        videoPlayer.muted = true;
+        
+        const targetSrc = currentGroup[adIndex].adsVideo;
+
+        // ফিক্সড: জেনুইন রিলেটিভ পাথ চেক করার জন্য getAttribute ব্যবহার করা হলো
+        if (videoPlayer.getAttribute('src') !== targetSrc) {
+            videoPlayer.setAttribute('src', targetSrc);
+            videoPlayer.load();
+        }
+        
+        // প্রোমিজ হ্যান্ডেল করে ভিডিও ফোর্স প্লে করা
+        const playPromise = videoPlayer.play();
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                console.log(`Card ${cardIdx} Video ${adIndex} is playing smoothly.`);
+            }).catch(err => {
+                console.log(`Autoplay engine retrying for card ${cardIdx}:`, err);
+                // ফেইলড হলে পুনরায় প্লে করার কুইক ট্রাই লজিক
+                setTimeout(() => { 
+                    videoPlayer.muted = true;
+                    videoPlayer.play().catch(() => {}); 
+                }, 200);
+            });
+        }
+    }
+}
+
+// পেজ লোড হওয়ার পর লুপ ও লিসেনার সেটআপ করা
+document.addEventListener('DOMContentLoaded', () => {
+    
+    for (let cardIdx = 0; cardIdx < 4; cardIdx++) {
+        if (!chunkedAdsSecond[cardIdx] || chunkedAdsSecond[cardIdx].length === 0) continue;
+
+        // প্রারম্ভিক অবস্থা সেট করা
+        cardStatesSecond[cardIdx] = 0;
+        updateCardUISecond(cardIdx, 0);
+
+        const videoPlayer = document.getElementById(`cardVideoSecond_${cardIdx}`);
+        
+        if (videoPlayer) {
+            // ভিডিও যখনই শেষ (Ended) হবে, পরবর্তী ভিডিওতে জাম্প করবে
+            videoPlayer.addEventListener('ended', () => {
+                let nextAdIndex = cardStatesSecond[cardIdx] + 1;
+                
+                if (nextAdIndex >= chunkedAdsSecond[cardIdx].length) {
+                    nextAdIndex = 0;
+                }
+                
+                cardStatesSecond[cardIdx] = nextAdIndex;
+                updateCardUISecond(cardIdx, nextAdIndex);
+            });
+
+            // প্রথম ভিডিওটি কোনো কারণে নেটওয়ার্ক স্লো এর জন্য আটকে গেলে ফোর্স প্লে ট্রিকার
+            videoPlayer.addEventListener('stalled', () => {
+                videoPlayer.play().catch(() => {});
+            });
+            
+            // মাউস ও ইউজার অ্যাক্টিভিটি ডিটেক্ট করে প্লে করা (ব্রাউজার সিকিউরিটি আনলক করার জন্য)
+            window.addEventListener('click', () => {
+                if (videoPlayer.paused) {
+                    videoPlayer.play().catch(() => {});
+                }
+            }, { once: true }); // একবার ক্লিক করলেই আনলক হয়ে যাবে
+        }
+    }
+});
+</script>
+
 
 <!-- Main Section -->
-<section class="bg-gradient-to-br from-sky-950 via-slate-900 to-blue-950 text-white p-4 md:p-8 w-full min-h-[500px] relative overflow-hidden">
+
+<section class="mt-12 mb-12 py-8 px-4 w-full bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 text-white relative overflow-hidden rounded-2xl border border-white/5 shadow-2xl ">
+    <!-- Background Glows -->
     <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-sky-500/10 rounded-full blur-[120px] pointer-events-none"></div>
     <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px] pointer-events-none"></div>
 
-    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch relative z-10">
+    <div class=" mx-auto flex flex-col gap-6 relative z-10">
         
-        <div class="lg:col-span-2 flex flex-col justify-between bg-white/[0.03] backdrop-blur-md p-4 rounded-2xl border border-white/10 shadow-[inset_0_1px_2px_rgba(255,255,255,0.15),0_12px_36px_rgba(0,0,0,0.4)]">
-            <div class="relative w-full aspect-video bg-slate-950 rounded-xl overflow-hidden shadow-[0_8px_24px_rgba(0,0,0,0.5)] border border-sky-500/20">
+        <!-- Main Video Player Container -->
+        <div class="w-full  bg-white/[0.02] backdrop-blur-md rounded-2xl border border-white/10 p-3 shadow-[inset_0_1px_2px_rgba(255,255,255,0.15),0_12px_36px_rgba(0,0,0,0.5)]">
+            <div class="relative w-full aspect-video bg-black rounded-xl overflow-hidden shadow-[0_8px_24px_rgba(0,0,0,0.7)] border border-sky-500/20">
                 <video 
-                    id="promoVideo" 
+                    id="promoVideoSecond" 
                     class="absolute inset-0 w-full h-full object-cover" 
                     controls 
-                    autoplay 
-                    muted 
+                    autoplay
+                    muted
                     playsinline>
-                    <source src="/videos/YTDown_YouTube_Media_FsP3rGx1pEE_001_1080p.mp4" type="video/mp4">
+                    <% if(typeof page2 !== 'undefined' && page2.length > 0) { %>
+                        <source id="videoSourceSecond" src="<%= page2[0].videoUrl %>" type="video/mp4">
+                    <% } else { %>
+                        <source id="videoSourceSecond" src="/videos/default.mp4" type="video/mp4">
+                    <% } %>
                     Your browser does not support the video tag.
                 </video>
             </div>
             
-            <div class="mt-4 flex flex-wrap items-center gap-4 text-xs md:text-sm text-slate-300 border-t border-white/10 pt-3">
-                <span class="font-bold text-sky-400 cursor-pointer hover:text-sky-300 hover:underline transition drop-shadow-[0_2px_8px_rgba(56,189,248,0.3)]">Youtube Auto Connect Button</span>
-                <div class="flex flex-wrap gap-2 text-slate-400">
-                    <span class="hover:text-sky-400 cursor-pointer transition">Video-1,</span>
-                    <span class="hover:text-white cursor-pointer transition">Video-2,</span>
-                    <span class="hover:text-white cursor-pointer transition">Video-3,</span>
-                    <span class="hover:text-white cursor-pointer transition">Video-4,</span>
-                    <span class="hover:text-white cursor-pointer transition">Video-5</span>
+            <!-- Now Playing Status -->
+            <div class="mt-4 flex items-center justify-between gap-4 text-xs md:text-sm text-slate-300 border-t border-white/10 pt-3 px-1">
+                <div class="font-medium text-sky-400 drop-shadow-[0_2px_8px_rgba(56,189,248,0.3)] truncate">
+                    <% if(typeof page2 !== 'undefined' && page2.length > 0) { %>
+                        <span class="text-slate-400 font-normal">Now Playing:</span> <span id="currentTitleSecond"><%= page2[0].title %></span>
+                    <% } else { %>
+                        No Video Available
+                    <% } %>
                 </div>
             </div>
         </div>
 
-        <div class="flex flex-col justify-center items-center bg-gradient-to-b from-sky-900/40 to-blue-950/60 backdrop-blur-lg p-6 md:p-8 rounded-2xl border border-sky-400/30 shadow-[inset_0_1px_3px_rgba(255,255,255,0.2),0_20px_50px_rgba(0,0,0,0.5),0_0_40px_rgba(14,165,233,0.15)] text-center relative overflow-hidden group">
+        <!-- Video Playlist Container -->
+        <div class="w-full bg-slate-900/60 border border-white/10 p-5 rounded-2xl shadow-xl backdrop-blur-md">
+            <h2 class="text-lg font-semibold mb-4 text-slate-100 flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-sky-400 animate-pulse"></span>
+                Video Playlist
+            </h2>
             
-            <div class="absolute -top-12 -right-12 w-40 h-40 bg-sky-400/20 rounded-full blur-2xl pointer-events-none group-hover:bg-sky-400/30 transition-all duration-700"></div>
-            
-            <div class="flex flex-col items-center gap-2 mb-6 z-10">
-                <div class="w-14 h-14 bg-gradient-to-tr from-sky-500 to-blue-600 rounded-xl flex items-center justify-center shadow-[0_8px_20px_rgba(14,165,233,0.4),inset_0_1px_2px_rgba(255,255,255,0.4)] transform hover:rotate-6 transition duration-300">
-                    <svg class="w-7 h-7 text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                    </svg>
-                </div>
-                <h3 class="text-2xl font-black tracking-wide text-white mt-3 drop-shadow-[0_2px_10px_rgba(14,165,233,0.3)]">Family World</h3>
-                <p class="text-xs text-sky-200/80 px-4 line-clamp-2 font-light">Family World Multiple and Unlimited OTT Platform In the World</p>
-            </div>
-
-            <div class="w-full border-t border-sky-500/20 my-2 pt-4 z-10">
-                <span class="text-xs uppercase tracking-widest text-sky-400 font-extrabold drop-shadow-[0_0_6px_rgba(56,189,248,0.5)]">Launching Date</span>
-            </div>
-
-            <div class="grid grid-cols-4 gap-2.5 md:gap-3.5 mt-4 w-full max-w-sm z-10">
-                <div class="flex flex-col p-3 bg-gradient-to-b from-slate-950/80 to-slate-900/90 rounded-xl border border-sky-500/30 shadow-[0_6px_12px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(255,255,255,0.1)]">
-                    <span id="days" class="text-2xl md:text-4xl font-mono font-black text-white tracking-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">150</span>
-                    <span class="text-[9px] md:text-[10px] uppercase tracking-wider text-sky-400 font-bold mt-1.5">Days</span>
-                </div>
-                <div class="flex flex-col p-3 bg-gradient-to-b from-slate-950/80 to-slate-900/90 rounded-xl border border-sky-500/30 shadow-[0_6px_12px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(255,255,255,0.1)]">
-                    <span id="hours" class="text-2xl md:text-4xl font-mono font-black text-white tracking-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">12</span>
-                    <span class="text-[9px] md:text-[10px] uppercase tracking-wider text-sky-400 font-bold mt-1.5">Hours</span>
-                </div>
-                <div class="flex flex-col p-3 bg-gradient-to-b from-slate-950/80 to-slate-900/90 rounded-xl border border-sky-500/30 shadow-[0_6px_12px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(255,255,255,0.1)]">
-                    <span id="minutes" class="text-2xl md:text-4xl font-mono font-black text-white tracking-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">12</span>
-                    <span class="text-[9px] md:text-[10px] uppercase tracking-wider text-sky-400 font-bold mt-1.5">Mins</span>
-                </div>
-                <div class="flex flex-col p-3 bg-gradient-to-b from-sky-950 to-sky-900 rounded-xl border border-sky-400 shadow-[0_0_20px_rgba(14,165,233,0.3),inset_0_1px_2px_rgba(255,255,255,0.2)]">
-                    <span id="seconds" class="text-2xl md:text-4xl font-mono font-black text-sky-400 tracking-tight drop-shadow-[0_0_8px_rgba(56,189,248,0.6)]">12</span>
-                    <span class="text-[9px] md:text-[10px] uppercase tracking-wider text-white font-black mt-1.5 animate-pulse">Secs</span>
-                </div>
+            <div id="PlaylistContainerSecond" class="flex flex-row gap-4 overflow-x-auto p-1 custom-scrollbarSecond whitespace-nowrap scroll-smooth cursor-grab select-none">
+                <% if(typeof page2 !== 'undefined' && page2.length > 0) { %>
+                    <% page2.forEach((video, index) => { %>
+                        <button onclick="playSelectedCustomVideoSecond(this, <%= index %>)" 
+                                data-index-second="<%= index %>"
+                                data-src-second="<%= video.videoUrl %>" 
+                                data-title-second="<%= video.title.replace(/'/g, "\\'") %>" 
+                                class="custom-playlist-btnSecond group flex flex-col items-center gap-2 w-40 md:w-48 flex-shrink-0 p-2 rounded-xl transition-all duration-300 border border-white/5 bg-white/[0.02] hover:bg-sky-500/10 hover:border-sky-500/30">
+                            
+                            <div class="relative overflow-hidden rounded-lg w-full aspect-video bg-black flex items-center justify-center shadow-md">
+                                <video class="w-full h-full object-cover pointer-events-none" preload="metadata" muted playsinline>
+                                    <source src="<%= video.videoUrl %>#t=0.1" type="video/mp4">
+                                </video>
+                                <div class="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-colors flex items-center justify-center">
+                                    <div class="play-icon-bgSecond bg-white/10 backdrop-blur-sm p-2 rounded-full shadow-md transform group-hover:scale-110 transition duration-300 border border-white/20">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M8 5v14l11-7z" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="text-[11px] md:text-xs font-medium text-slate-300 group-hover:text-sky-300 line-clamp-2 text-center whitespace-normal w-full px-1 transition-colors"><%= video.title %></span>
+                        </button>
+                    <% }) %>
+                <% } else { %>
+                    <p class="text-slate-500 w-full text-center py-4">কোনো ভিডিও পাওয়া যায়নি।</p>
+                <% } %>
             </div>
         </div>
+        
+    </div>
+</section>
 
+<!-- CSS Styles -->
+<style>
+    .custom-scrollbarSecond::-webkit-scrollbar {
+        height: 6px;
+    }
+    .custom-scrollbarSecond::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.02);
+        border-radius: 10px;
+    }
+    .custom-scrollbarSecond::-webkit-scrollbar-thumb {
+        background: rgba(56, 189, 248, 0.2);
+        border-radius: 10px;
+    }
+    .custom-scrollbarSecond::-webkit-scrollbar-thumb:hover {
+        background: rgba(56, 189, 248, 0.4);
+    }
+    /* Active Video Style */
+    .playlist-activeSecond {
+        background: rgba(56, 189, 248, 0.15) !important;
+        border-color: rgba(56, 189, 248, 0.5) !important;
+    }
+    .playlist-activeSecond .play-icon-bgSecond {
+        background-color: rgb(56, 189, 248) !important;
+    }
+</style>
+
+<!-- JavaScript Logic -->
+<script>
+let currentVideoIndexSecond = 0;
+const playlistButtonsSecond = document.querySelectorAll('.custom-playlist-btnSecond');
+const videoPlayerSecond = document.getElementById('promoVideoSecond');
+
+// UI Update Function
+function updateActivePlaylistUISecond(indexSecond) {
+    playlistButtonsSecond.forEach((btnSecond, iSecond) => {
+        if (iSecond === indexSecond) {
+            btnSecond.classList.add('playlist-activeSecond');
+        } else {
+            btnSecond.classList.remove('playlist-activeSecond');
+        }
+    });
+}
+
+// Main Play Function
+function playSelectedCustomVideoSecond(elementSecond, indexSecond) {
+    if (!videoPlayerSecond) return;
+    
+    currentVideoIndexSecond = indexSecond;
+    const videoPathSecond = elementSecond.getAttribute('data-src-second');
+    const videoTitleSecond = elementSecond.getAttribute('data-title-second');
+    
+    const sourceSecond = document.getElementById('videoSourceSecond');
+    const titleTextSecond = document.getElementById('currentTitleSecond');
+    
+    if (sourceSecond) sourceSecond.src = videoPathSecond;
+    videoPlayerSecond.src = videoPathSecond; 
+    if (titleTextSecond) titleTextSecond.innerText = videoTitleSecond;
+    
+    updateActivePlaylistUISecond(indexSecond);
+    
+    videoPlayerSecond.load();  
+    videoPlayerSecond.play().catch(errSecond => {
+        console.log("Autoplay context blocked or interrupted:", errSecond);
+    });
+}
+
+// Auto-play Next Video Loop Logic
+if (videoPlayerSecond) {
+    videoPlayerSecond.addEventListener('ended', function() {
+        let nextIndexSecond = currentVideoIndexSecond + 1;
+        
+        if (nextIndexSecond >= playlistButtonsSecond.length) {
+            nextIndexSecond = 0;
+        }
+        
+        const nextButtonSecond = document.querySelector(`.custom-playlist-btnSecond[data-index-second="${nextIndexSecondSecond = nextIndexSecond}"]`);
+        if (nextButtonSecond) {
+            playSelectedCustomVideoSecond(nextButtonSecond, nextIndexSecond);
+            nextButtonSecond.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+    });
+}
+
+// Initial Active State
+document.addEventListener('DOMContentLoaded', () => {
+    updateActivePlaylistUISecond(0);
+});
+
+/* Drag to Scroll Setup */
+const sliderSecond = document.getElementById('PlaylistContainerSecond');
+let isDownSecond = false;
+let startXSecond;
+let scrollLeftSecond;
+
+if (sliderSecond) {
+    sliderSecond.addEventListener('mousedown', (eSecond) => {
+        isDownSecond = true;
+        sliderSecond.classList.remove('cursor-grab');
+        sliderSecond.classList.add('cursor-grabbing');
+        startXSecond = eSecond.pageX - sliderSecond.offsetLeft;
+        scrollLeftSecond = sliderSecond.scrollLeft;
+    });
+
+    sliderSecond.addEventListener('mouseleave', () => {
+        isDownSecond = false;
+        sliderSecond.classList.remove('cursor-grabbing');
+        sliderSecond.classList.add('cursor-grab');
+    });
+
+    sliderSecond.addEventListener('mouseup', () => {
+        isDownSecond = false;
+        sliderSecond.classList.remove('cursor-grabbing');
+        sliderSecond.classList.add('cursor-grab');
+    });
+
+    sliderSecond.addEventListener('mousemove', (eSecond) => {
+        if(!isDownSecond) return;
+        eSecond.preventDefault();
+        const xSecond = eSecond.pageX - sliderSecond.offsetLeft;
+        const walkSecond = (xSecond - startXSecond) * 2;
+        sliderSecond.scrollLeft = scrollLeftSecond - walkSecond;
+    });
+}
+</script>
+
+
+
+
+<section>
+  <div class="py-10 mb-10 w-full min-h-[450px]  flex flex-col items-center justify-center font-sans text-center px-4 relative overflow-hidden border-4 border-[#bca364]/30  shadow-2xl"
+  style="background-image:  url('/img/images (1).jpeg');">
+  
+  <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-400 via-transparent to-transparent pointer-events-none"></div>
+
+  <div class="w-24 h-24 rounded-full bg-gradient-to-b from-[#dfca8d] to-[#997a3a] p-1 shadow-lg mb-4 flex items-center justify-center z-10">
+    <div class="w-full h-full rounded-full bg-[#072444] flex items-center justify-center overflow-hidden">
+      <img src="/img/Logo 300X282.png" alt="Logo" class="w-full h-full object-contain rounded-md shadow-sm">
+    </div>
+  </div>
+
+  <h1 class="text-4xl md:text-6xl font-serif font-extrabold tracking-wide bg-gradient-to-b from-[#f3e7c4] via-[#dfca8d] to-[#997a3a] bg-clip-text text-transparent drop-shadow-md mb-2 z-10">
+    Family World
+  </h1>
+  
+  <p class="text-[#a4c5e6] text-sm md:text-lg tracking-normal font-medium mb-8 max-w-2xl z-10">
+    Family World Multiple and Unlimited OTT Platform In The World
+  </p>
+
+  <h3 class="text-[#dfca8d] tracking-[0.2em] text-sm md:text-base font-semibold mb-6 z-10">
+    LAUNCHING DATE
+  </h3>
+
+  <div class="flex flex-wrap items-center justify-center gap-4 md:gap-6 z-10">
+    
+    <div class="flex flex-col items-center">
+      <div class="w-20 h-24 md:w-28 md:h-32 bg-gradient-to-b from-[#092d53] to-[#041931] border-2 border-[#bca364] rounded-xl shadow-[0_0_15px_rgba(188,163,100,0.2)] flex flex-col items-center justify-center">
+        <span id="days" class="text-3xl md:text-5xl font-bold bg-gradient-to-b from-[#fef7dd] via-[#d6b76d] to-[#a3833b] bg-clip-text text-transparent drop-shadow">
+          141
+        </span>
+        <span class="text-[10px] md:text-xs text-[#bca364] mt-1 font-medium tracking-wider">DAY</span>
+      </div>
+      <span class="text-xs md:text-sm text-[#dfca8d] font-semibold mt-2 tracking-widest">DAY</span>
     </div>
 
-    <script>
-        const launchDate = new Date("October 25, 2026 00:00:00").getTime();
+    <div class="flex flex-col items-center">
+      <div class="w-20 h-24 md:w-28 md:h-32 bg-gradient-to-b from-[#092d53] to-[#041931] border-2 border-[#bca364] rounded-xl shadow-[0_0_15px_rgba(188,163,100,0.2)] flex flex-col items-center justify-center">
+        <span id="hours" class="text-3xl md:text-5xl font-bold bg-gradient-to-b from-[#fef7dd] via-[#d6b76d] to-[#a3833b] bg-clip-text text-transparent drop-shadow">
+          10
+        </span>
+        <span class="text-[10px] md:text-xs text-[#bca364] mt-1 font-medium tracking-wider">HOURS</span>
+      </div>
+      <span class="text-xs md:text-sm text-[#dfca8d] font-semibold mt-2 tracking-widest">HOURS</span>
+    </div>
 
-        const countdownX = setInterval(function() {
-            const now = new Date().getTime();
-            const distance = launchDate - now;
+    <div class="flex flex-col items-center">
+      <div class="w-20 h-24 md:w-28 md:h-32 bg-gradient-to-b from-[#092d53] to-[#041931] border-2 border-[#bca364] rounded-xl shadow-[0_0_15px_rgba(188,163,100,0.2)] flex flex-col items-center justify-center">
+        <span id="minutes" class="text-3xl md:text-5xl font-bold bg-gradient-to-b from-[#fef7dd] via-[#d6b76d] to-[#a3833b] bg-clip-text text-transparent drop-shadow">
+          01
+        </span>
+        <span class="text-[10px] md:text-xs text-[#bca364] mt-1 font-medium tracking-wider">MINUTE</span>
+      </div>
+      <span class="text-xs md:text-sm text-[#dfca8d] font-semibold mt-2 tracking-widest">MINUTE</span>
+    </div>
 
-            const days = Math.block = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    <div class="flex flex-col items-center">
+      <div class="w-20 h-24 md:w-28 md:h-32 bg-gradient-to-b from-[#092d53] to-[#041931] border-2 border-[#bca364] rounded-xl shadow-[0_0_15px_rgba(188,163,100,0.2)] flex flex-col items-center justify-center">
+        <span id="seconds" class="text-3xl md:text-5xl font-bold bg-gradient-to-b from-[#fef7dd] via-[#d6b76d] to-[#a3833b] bg-clip-text text-transparent drop-shadow">
+          16
+        </span>
+        <span class="text-[10px] md:text-xs text-[#bca364] mt-1 font-medium tracking-wider">SECOND</span>
+      </div>
+      <span class="text-xs md:text-sm text-[#dfca8d] font-semibold mt-2 tracking-widest">SECOND</span>
+    </div>
 
-            document.getElementById("days").innerText = String(days).padStart(2, '0');
-            document.getElementById("hours").innerText = String(hours).padStart(2, '0');
-            document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
-            document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+  </div>
+</div>
 
-            if (distance < 0) {
-                clearInterval(countdownX);
-                document.getElementById("days").innerText = "00";
-                document.getElementById("hours").innerText = "00";
-                document.getElementById("minutes").innerText = "00";
-                document.getElementById("seconds").innerText = "00";
-            }
-        }, 1000);
-    </script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // এখানে আপনার টার্গেট ডেট ও টাইম সেট করুন (YYYY-MM-DDTHH:MM:SS)
+    const targetDate = new Date('2026-11-13T00:00:00').getTime();
+
+    // DOM Elements
+    const daysEl = document.getElementById('days');
+    const hoursEl = document.getElementById('hours');
+    const minutesEl = document.getElementById('minutes');
+    const secondsEl = document.getElementById('seconds');
+
+    function updateTimer() {
+      const now = new Date().getTime();
+      const difference = targetDate - now;
+
+      if (difference <= 0) {
+        if(daysEl) daysEl.innerText = '00';
+        if(hoursEl) hoursEl.innerText = '00';
+        if(minutesEl) minutesEl.innerText = '00';
+        if(secondsEl) secondsEl.innerText = '00';
+        return;
+      }
+
+      // টাইম ক্যালকুলেশন
+      const d = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const h = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const s = Math.floor((difference % (1000 * 60)) / 1000);
+
+      // DOM-এ ডেটা পুশ (ডিজিট সিঙ্গেল হলে সামনে ০ বসানোর জন্য শর্ত)
+      if(daysEl) daysEl.innerText = d < 10 ? `0${d}` : d;
+      if(hoursEl) hoursEl.innerText = h < 10 ? `0${h}` : h;
+      if(minutesEl) minutesEl.innerText = m < 10 ? `0${m}` : m;
+      if(secondsEl) secondsEl.innerText = s < 10 ? `0${s}` : s;
+    }
+
+    // প্রতি সেকেন্ডে টাইমার রান হবে
+    setInterval(updateTimer, 1000);
+    updateTimer(); // ইনিশিয়াল কল যাতে ১ সেকেন্ড লেট না হয়
+  });
+</script>
 </section>
 
 <!-- Functional Modal (Hidden by Default) -->
@@ -821,9 +1336,17 @@
 </script>
 
 
-<div class="bg-gray-900 text-white font-sans min-h-screen">
+<div
+
+ class="bg-gray-900 text-white font-sans min-h-screen border-t-[3px] border-t-white">
+
+ <div 
+ style="background-image:  url('/img/secondbg.jpeg');">
     <!-- Hero Section -->
-    <section class="flex flex-col items-center justify-center pt-20 px-4 text-center">
+    <section class="flex flex-col items-center justify-center pt-20 px-4 text-center "
+    >
+
+
         <h1 class="text-2xl md:text-3xl font-bold mb-6 tracking-tight bg-gradient-to-r from-white via-pink-200 to-pink-500 bg-clip-text text-transparent">
             The Family World User Used Unlimited Video & AI Video App 
         </h1>
@@ -836,25 +1359,20 @@
             <span>Try now</span>
         </button>
 
-        <p class="text-gray-500 text-sm mb-6">Join 4M+ creators on Family World</p>
+        <p class="text-white text-sm mb-6">Join 4M+ creators on Family World</p>
         
-        <div class="flex space-x-6 text-2xl text-gray-400 mb-20">
-            <i class="fa-brands fa-discord hover:text-white cursor-pointer transition-colors"></i>
-            <i class="fa-brands fa-google hover:text-white cursor-pointer transition-colors"></i>
-            <i class="fa-solid fa-brain hover:text-white cursor-pointer transition-colors"></i>
-            <i class="fa-brands fa-github hover:text-white cursor-pointer transition-colors"></i>
-        </div>
+
     </section>
 
-<section class="bg-[#050b14] py-10 px-4 overflow-hidden select-none">
+<section class=" py-10 px-4 overflow-hidden select-none">
     <div class="container mx-auto">
         
         <div class="w-full h-[1px] bg-gradient-to-r from-transparent via-sky-500/20 to-transparent mb-8"></div>
 
-        <div class="w-full bg-[#0d2342]/40 backdrop-blur-md rounded-xl p-4 border border-blue-500/20 shadow-xl overflow-hidden relative">
+        <div class="w-full  rounded-xl p-4 border border-blue-500/20 shadow-xl overflow-hidden relative">
             
-            <div class="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-[#050b14] to-transparent z-10 pointer-events-none"></div>
-            <div class="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-[#050b14] to-transparent z-10 pointer-events-none"></div>
+            <div class="absolute inset-y-0 left-0 w-12  z-10 pointer-events-none"></div>
+            <div class="absolute inset-y-0 right-0 w-12  z-10 pointer-events-none"></div>
 
             <div id="pc-image-slider" class="flex flex-nowrap gap-6 items-center overflow-x-auto no-scrollbar py-4 scroll-smooth cursor-grab active:cursor-grabbing">
                 
@@ -909,12 +1427,17 @@
                 </div>
 
             </div>
+            
+
+
         </div>
 
         <div class="w-full h-[1px] bg-gradient-to-r from-transparent via-sky-500/20 to-transparent mt-8"></div>
 
     </div>
 </section>
+
+</div>
 
 <style>
     .no-scrollbar::-webkit-scrollbar {
@@ -977,8 +1500,8 @@
         </div>
 
         <!-- Video Grid Section -->
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        <div class="w-full mx-auto px-4">
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
                 
                 <!-- Video Card Template -->
                 <!-- নিচের প্রতিটি ডিভ একটি করে ভিডিও কার্ড -->
@@ -1026,6 +1549,49 @@
                     </video>
                 </div>
                 <!-- Add more cards as needed -->
+                                 <div class="relative group cursor-pointer overflow-hidden rounded-2xl bg-black border border-gray-800 hover:border-pink-500/50 transition-all duration-500 hover:scale-[1.03] hover:shadow-2xl hover:shadow-pink-500/20" 
+                     onclick="openModal('/videos/9.mp4')">
+                    <video class="w-full aspect-[9/16] object-cover opacity-80 group-hover:opacity-100 transition-opacity" autoplay loop muted playsinline>
+                        <source src="/videos/32.mp4" type="video/mp4">
+                    </video>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                        <span class="text-xs font-semibold uppercase tracking-wider">Play Now</span>
+                    </div>
+                </div>
+
+                <!-- Repeat this structure for other videos (10, 11, 12, etc.) -->
+                <div class="relative group cursor-pointer overflow-hidden rounded-2xl bg-black border border-gray-800 hover:border-pink-500/50 transition-all duration-500 hover:scale-[1.03]" onclick="openModal('/videos/10.mp4')">
+                    <video class="w-full aspect-[9/16] object-cover opacity-80 group-hover:opacity-100 transition-opacity" autoplay loop muted playsinline>
+                        <source src="/videos/33.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+
+                <div class="relative group cursor-pointer overflow-hidden rounded-2xl bg-black border border-gray-800 hover:border-pink-500/50 transition-all duration-500 hover:scale-[1.03]" onclick="openModal('/videos/WhatsApp Video 2026-05-10 at 11.53.21 PM.mp4')">
+                    <video class="w-full aspect-[9/16] object-cover opacity-80 group-hover:opacity-100 transition-opacity" autoplay loop muted playsinline>
+                        <source src="/videos/31.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+
+                <div class="relative group cursor-pointer overflow-hidden rounded-2xl bg-black border border-gray-800 hover:border-pink-500/50 transition-all duration-500 hover:scale-[1.03]" onclick="openModal('/videos/50.mp4')">
+                    <video class="w-full aspect-[9/16] object-cover opacity-80 group-hover:opacity-100 transition-opacity" autoplay loop muted playsinline>
+                        <source src="/videos/30.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <div class="relative group cursor-pointer overflow-hidden rounded-2xl bg-black border border-gray-800 hover:border-pink-500/50 transition-all duration-500 hover:scale-[1.03]" onclick="openModal('/videos/51.mp4')">
+                    <video class="w-full aspect-[9/16] object-cover opacity-80 group-hover:opacity-100 transition-opacity" autoplay loop muted playsinline>
+                        <source src="/videos/15.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+
+                                <div class="relative group cursor-pointer overflow-hidden rounded-2xl bg-black border border-gray-800 hover:border-pink-500/50 transition-all duration-500 hover:scale-[1.03]" onclick="openModal('/videos/52.mp4')">
+                    <video class="w-full aspect-[9/16] object-cover opacity-80 group-hover:opacity-100 transition-opacity" autoplay loop muted playsinline>
+                        <source src="/videos/17.mp4" type="video/mp4">
+                    </video>
+                </div>
             </div>
         </div>
     </section>
@@ -1095,8 +1661,197 @@
 
 
 
+<section class="w-full mx-auto px-4 py-16 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white overflow-hidden border-t border-slate-900">
+  <!-- Section Title -->
+  <div class="mb-12 text-center relative">
+    <div class="absolute -top-6 left-1/2 -translate-x-1/2 w-40 h-40 bg-purple-500/10 rounded-full blur-3xl pointer-events-none"></div>
+    <h3 class="text-xs font-bold uppercase tracking-widest text-purple-400 bg-purple-500/10 px-3 py-1 rounded-full inline-block backdrop-blur-sm border border-purple-500/20">
+      Premium Partners
+    </h3>
+    <h2 class="text-3xl md:text-5xl font-black mt-3 tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400">
+      More Featured Sponsors
+    </h2>
+  </div>
 
+  <!-- Video Grid (১৬ থেকে ৩১ ইনডেক্সের বিজ্ঞাপনের জন্য ৪টি ফিক্সড সাইজের কার্ড) -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+    
+    <% for(let cardIdx = 0; cardIdx < 4; cardIdx++) { %>
+      <% 
+        // ১৬ নম্বর ইনডেক্স থেকে শুরু করে ৪টি করে অ্যাড প্রতিটি কার্ডের জন্য ফিল্টার করা
+        let startIndex = 16 + (cardIdx * 4);
+        let cardAds = ads.slice(startIndex, startIndex + 4); 
+      %>
+      
+      <!-- যদি এই কার্ডের রেঞ্জে বিজ্ঞাপন থাকে তবেই কার্ড রেন্ডার হবে -->
+      <% if (cardAds.length > 0) { %>
+        <div id="adCardThird_<%= cardIdx %>" 
+             class="group relative h-[390px] w-full rounded-2xl overflow-hidden bg-slate-900/60 backdrop-blur-md border border-slate-800/80 transition-all duration-500 hover:border-purple-500/40 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(168,85,247,0.12)] flex flex-col justify-between">
+          
+          <!-- গ্লোসি বর্ডার ইফেক্ট -->
+          <div class="absolute inset-0 bg-gradient-to-b from-purple-500/0 via-purple-500/0 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
 
+          <!-- Video Screen Section -->
+          <div class="relative h-[180px] w-full bg-slate-950 overflow-hidden shrink-0 border-b border-slate-800/50">
+            <video id="cardVideoThird_<%= cardIdx %>" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" autoplay muted playsinline preload="auto">
+              <source src="<%= cardAds[0].adsVideo %>" type="video/mp4">
+            </video>
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent pointer-events-none"></div>
+            
+            <span class="absolute top-3 right-3 text-[10px] font-bold tracking-wider uppercase bg-black/60 backdrop-blur-md text-purple-400 px-2 py-0.5 rounded border border-white/10 shadow-sm">
+              Partner
+            </span>
+          </div>
+          
+          <!-- Bottom Details Area -->
+          <div class="p-5 flex-grow flex flex-col justify-between bg-gradient-to-b from-transparent to-slate-950/40">
+            
+            <!-- কোম্পানির নামের লিস্ট -->
+            <div class="flex flex-wrap items-center gap-2 max-h-[90px] overflow-y-auto no-scrollbar">
+              <% cardAds.forEach((ad, adIndex) => { %>
+                <div id="nameThird_<%= cardIdx %>_<%= adIndex %>" 
+                     class="company-name-itemThird text-xs font-bold px-2.5 py-1 rounded-lg border border-slate-800 bg-slate-950/50 transition-all duration-300 opacity-40 text-slate-400 select-none">
+                  <%= ad.companyName %> 
+                </div>
+              <% }) %>
+            </div>
+
+            <!-- ফুটার ও অ্যাকশন বাটন -->
+            <div class="flex items-center justify-between border-t border-slate-800/60 pt-4 mt-2">
+              <!-- Indicators -->
+              <div class="flex items-center gap-1.5">
+                <% cardAds.forEach((ad, adIndex) => { %>
+                  <span id="dotThird_<%= cardIdx %>_<%= adIndex %>" 
+                        class="indicator-dotThird h-1.5 w-1.5 rounded-full bg-slate-700 transition-all duration-300"></span>
+                <% }) %>
+              </div>
+              
+              <!-- অ্যাকশন বাটন -->
+              <a href="<%= cardAds[0].targetUrl || '#' %>" target="_blank" 
+                 class="inline-flex items-center gap-1 text-xs font-semibold text-purple-400 hover:text-white transition-colors duration-300 bg-purple-500/10 hover:bg-purple-500 px-3 py-1.5 rounded-lg border border-purple-500/20 hover:border-purple-500 shadow-sm shadow-purple-500/5">
+                Visit Site
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-3 h-3">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                </svg>
+              </a>
+            </div>
+
+          </div>
+        </div>
+      <% } %>
+    <% } %>
+
+  </div>
+</section>
+
+<!-- এই নতুন সেকশনের জন্য একটিভ স্টাইল ইফেক্ট (Purple Theme) -->
+<style>
+  .name-activeThird {
+    opacity: 1 !important;
+    color: #c084fc !important; /* purple-400 */
+    border-color: rgba(168, 85, 247, 0.4) !important;
+    background-color: rgba(168, 85, 247, 0.1) !important;
+    box-shadow: 0 0 10px rgba(168, 85, 247, 0.1);
+  }
+  .dot-activeThird {
+    background-color: #c084fc !important;
+    width: 16px !important;
+    border-radius: 4px !important;
+  }
+</style>
+<script>
+  // ৩ নম্বর সেকশনের জন্য বিজ্ঞপ্তির ডাটা ফিল্টার করা ফাংশন
+const rawAdsDataThird = <%- JSON.stringify(ads) %>;
+
+// এই সেকশনের জন্য শুধু ১৬ থেকে ৩১ নম্বর বিজ্ঞাপনগুলো স্লাইস করা হলো
+const filteredAdsThird = rawAdsDataThird.slice(16, 32);
+
+// ডাটাকে ৪টি গ্রুপের অ্যারেতে ভাগ করার ফাংশন
+const chunkedAdsThird = chunkArraySecond(filteredAdsThird, 4);
+const cardStatesThird = {};
+
+function updateCardUIThird(cardIdx, adIndex) {
+    const currentGroup = chunkedAdsThird[cardIdx];
+    if (!currentGroup || !currentGroup[adIndex]) return;
+
+    // ১. নাম এবং ডট ইন্ডিকেটর একটিভ করা
+    currentGroup.forEach((_, idx) => {
+        const nameEl = document.getElementById(`nameThird_${cardIdx}_${idx}`);
+        const dotEl = document.getElementById(`dotThird_${cardIdx}_${idx}`);
+        
+        if (nameEl) nameEl.classList.remove('name-activeThird');
+        if (dotEl) dotEl.classList.remove('dot-activeThird');
+        
+        if (idx === adIndex) {
+            if (nameEl) nameEl.classList.add('name-activeThird');
+            if (dotEl) dotEl.classList.add('dot-activeThird');
+        }
+    });
+
+    // ২. ভিডিও প্লেয়ার হ্যান্ডেল করা
+    const videoPlayer = document.getElementById(`cardVideoThird_${cardIdx}`);
+    if (videoPlayer) {
+        videoPlayer.muted = true;
+        
+        const targetSrc = currentGroup[adIndex].adsVideo;
+
+        if (videoPlayer.getAttribute('src') !== targetSrc) {
+            videoPlayer.setAttribute('src', targetSrc);
+            videoPlayer.load();
+        }
+        
+        const playPromise = videoPlayer.play();
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                console.log(`Third Section Card ${cardIdx} Video ${adIndex} is playing.`);
+            }).catch(err => {
+                setTimeout(() => { 
+                    videoPlayer.muted = true;
+                    videoPlayer.play().catch(() => {}); 
+                }, 200);
+            });
+        }
+    }
+}
+
+// DOMContentLoaded ইভেন্টের ভেতর এই লুপটি সেট করে দিন 
+document.addEventListener('DOMContentLoaded', () => {
+    // (আপনার আগের কোডের নিচে এই অংশটি যোগ করবেন)
+    
+    for (let cardIdx = 0; cardIdx < 4; cardIdx++) {
+        if (!chunkedAdsThird[cardIdx] || chunkedAdsThird[cardIdx].length === 0) continue;
+
+        cardStatesThird[cardIdx] = 0;
+        updateCardUIThird(cardIdx, 0);
+
+        const videoPlayer = document.getElementById(`cardVideoThird_${cardIdx}`);
+        
+        if (videoPlayer) {
+            // ভিডিও শেষ হলে অটোমেটিক নেক্সট ভিডিও চালু হওয়ার লিসেনার
+            videoPlayer.addEventListener('ended', () => {
+                let nextAdIndex = cardStatesThird[cardIdx] + 1;
+                
+                if (nextAdIndex >= chunkedAdsThird[cardIdx].length) {
+                    nextAdIndex = 0;
+                }
+                
+                cardStatesThird[cardIdx] = nextAdIndex;
+                updateCardUIThird(cardIdx, nextAdIndex);
+            });
+
+            videoPlayer.addEventListener('stalled', () => {
+                videoPlayer.play().catch(() => {});
+            });
+            
+            window.addEventListener('click', () => {
+                if (videoPlayer.paused) {
+                    videoPlayer.play().catch(() => {});
+                }
+            }, { once: true });
+        }
+    }
+});
+</script>
 
 
 
@@ -1104,13 +1859,12 @@
     <div class="max-w-7xl mx-auto text-center mb-12">
         <div class="flex justify-center mb-4">
             <div class="w-16 h-16 bg-gradient-to-tr from-yellow-500 to-amber-400 rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(245,158,11,0.2)] p-1">
-                <div class="w-full h-full bg-stone-950 rounded-full flex items-center justify-center text-yellow-400 font-black text-xl"><img src="/img/logo-removebg-preview (1).png" alt=""></div>
+                <div class="w-full h-full bg-stone-950 rounded-full flex items-center justify-center text-yellow-400 font-black text-xl"><img src="/img/Logo 300X282.png" alt=""></div>
             </div>
         </div>
         
         <h1 class="text-2xl md:text-3xl font-extrabold text-white tracking-tight max-w-4xl mx-auto leading-tight">
-            Family World will have <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-500">45 full video categories</span>, with a total prize pool of $45 Million for Content Creators.
-        </h1>
+            Family World will have <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-500">45 full video categories</span>
         <p class="text-sm md:text-base text-stone-400 mt-4 font-medium max-w-2xl mx-auto">
             At Family World all of our content encompasses Seven Key areas necessary to live your best life possible.
         </p>
@@ -1127,35 +1881,35 @@
         
         <div class="overflow-hidden w-full relative py-4">
             <div class="flex gap-6 w-max animate-scroll-left hover:[animation-play-state:paused]">
-                <div class="category-card"><span>ISLAM</span></div>
-                <div class="category-card"><span>FAMILY</span></div>
-                <div class="category-card"><span>SHORTS</span></div>
-                <div class="category-card"><span>SPORTS</span></div>
-                <div class="category-card"><span>MUSIC</span></div>
-                <div class="category-card"><span>SHOWS</span></div>
-                <div class="category-card"><span>BOOKS & EDUCATION</span></div>
-                <div class="category-card"><span>GAMING</span></div>
-                <div class="category-card"><span>COMEDY</span></div>
-                <div class="category-card"><span>HORROR</span></div>
-                <div class="category-card"><span>FILM & ANIMATION</span></div>
-                <div class="category-card"><span>MOVIES</span></div>
-                <div class="category-card"><span>THRILLER</span></div>
-                <div class="category-card"><span>AUTOS & VEHICLES</span></div>
+                <div class="category-card bg-amber-500 py-2 px-4  rounded-full"><span>ISLAM</span></div>
+                <div class="category-card bg-amber-500 py-2 px-4  rounded-full"><span>FAMILY</span></div>
+                <div class="category-card bg-amber-500 py-2 px-4  rounded-full"><span>SHORTS</span></div>
+                <div class="category-card bg-amber-500 py-2 px-4 rounded-full"><span>SPORTS</span></div>
+                <div class="category-card bg-amber-500 py-2 px-4 rounded-full"><span>MUSIC</span></div>
+                <div class="category-card bg-amber-500 py-2 px-4  rounded-full"><span>SHOWS</span></div>
+                <div class="category-card bg-amber-500 py-2 px-4 rounded-full"><span>BOOKS & EDUCATION</span></div>
+                <div class="category-card bg-amber-500 py-2 px-4 rounded-full"><span>GAMING</span></div>
+                <div class="category-card bg-amber-500 py-2 px-4 rounded-full"><span>COMEDY</span></div>
+                <div class="category-card bg-amber-500 py-2 px-4 rounded-full"><span>HORROR</span></div>
+                <div class="category-card bg-amber-500 py-2 px-4 rounded-full"><span>FILM & ANIMATION</span></div>
+                <div class="category-card bg-amber-500 py-2 px-4 rounded-full"><span>MOVIES</span></div>
+                <div class="category-card bg-amber-500 py-2 px-4 rounded-full"><span>THRILLER</span></div>
+                <div class="category-card bg-amber-500 py-2 px-4 rounded-full"><span>AUTOS & VEHICLES</span></div>
 
-                <div class="category-card"><span>ISLAM</span></div>
-                <div class="category-card"><span>FAMILY</span></div>
-                <div class="category-card"><span>SHORTS</span></div>
-                <div class="category-card"><span>SPORTS</span></div>
-                <div class="category-card"><span>MUSIC</span></div>
-                <div class="category-card"><span>SHOWS</span></div>
-                <div class="category-card"><span>BOOKS & EDUCATION</span></div>
-                <div class="category-card"><span>GAMING</span></div>
-                <div class="category-card"><span>COMEDY</span></div>
-                <div class="category-card"><span>HORROR</span></div>
-                <div class="category-card"><span>FILM & ANIMATION</span></div>
-                <div class="category-card"><span>MOVIES</span></div>
-                <div class="category-card"><span>THRILLER</span></div>
-                <div class="category-card"><span>AUTOS & VEHICLES</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>ISLAM</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>FAMILY</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>SHORTS</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>SPORTS</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>MUSIC</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>SHOWS</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>BOOKS & EDUCATION</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>GAMING</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>COMEDY</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>HORROR</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>FILM & ANIMATION</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>MOVIES</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>THRILLER</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>AUTOS & VEHICLES</span></div>
             </div>
         </div>
     </div>
@@ -1167,37 +1921,37 @@
 
         <div class="overflow-hidden w-full relative py-4">
             <div class="flex gap-6 w-max animate-scroll-right hover:[animation-play-state:paused]">
-                <div class="category-card"><span>SHORT MOVIES</span></div>
-                <div class="category-card"><span>PETS & ANIMALS</span></div>
-                <div class="category-card"><span>PEOPLE & BLOGS</span></div>
-                <div class="category-card"><span>ACTION/ADVENTURE</span></div>
-                <div class="category-card"><span>STYLE</span></div>
-                <div class="category-card"><span>SCIENCE & TECH</span></div>
-                <div class="category-card"><span>DOCUMENTARY</span></div>
-                <div class="category-card"><span>VIDEO BLOGGING</span></div>
-                <div class="category-card"><span>ANIME/ANIMATION</span></div>
-                <div class="category-card"><span>NONPROFITS</span></div>
-                <div class="category-card"><span>HOTEL</span></div>
-                <div class="category-card"><span>BUILDING</span></div>
-                <div class="category-card"><span>TRAVEL & EVENTS</span></div>
-                <div class="category-card"><span>ENTERTAINMENT</span></div>
-                <div class="category-card"><span>NEWS & POLITICS</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>SHORT MOVIES</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>PETS & ANIMALS</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>PEOPLE & BLOGS</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>ACTION/ADVENTURE</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>STYLE</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>SCIENCE & TECH</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>DOCUMENTARY</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>VIDEO BLOGGING</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>ANIME/ANIMATION</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>NONPROFITS</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>HOTEL</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>BUILDING</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>TRAVEL & EVENTS</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>ENTERTAINMENT</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>NEWS & POLITICS</span></div>
 
-                <div class="category-card"><span>SHORT MOVIES</span></div>
-                <div class="category-card"><span>PETS & ANIMALS</span></div>
-                <div class="category-card"><span>PEOPLE & BLOGS</span></div>
-                <div class="category-card"><span>ACTION/ADVENTURE</span></div>
-                <div class="category-card"><span>STYLE</span></div>
-                <div class="category-card"><span>SCIENCE & TECH</span></div>
-                <div class="category-card"><span>DOCUMENTARY</span></div>
-                <div class="category-card"><span>VIDEO BLOGGING</span></div>
-                <div class="category-card"><span>ANIME/ANIMATION</span></div>
-                <div class="category-card"><span>NONPROFITS</span></div>
-                <div class="category-card"><span>HOTEL</span></div>
-                <div class="category-card"><span>BUILDING</span></div>
-                <div class="category-card"><span>TRAVEL & EVENTS</span></div>
-                <div class="category-card"><span>ENTERTAINMENT</span></div>
-                <div class="category-card"><span>NEWS & POLITICS</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>SHORT MOVIES</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>PETS & ANIMALS</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>PEOPLE & BLOGS</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>ACTION/ADVENTURE</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>STYLE</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>SCIENCE & TECH</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>DOCUMENTARY</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>VIDEO BLOGGING</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>ANIME/ANIMATION</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>NONPROFITS</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>HOTEL</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>BUILDING</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>TRAVEL & EVENTS</span></div>
+                <div class="category-card  bg-amber-500 py-2 px-4 rounded-full"><span>ENTERTAINMENT</span></div>
+                <div class="category-card  bg-amber-500 py=2 px=4 rounded-full"><span>NEWS & POLITICS</span></div>
             </div>
         </div>
     </div>
@@ -1247,7 +2001,7 @@
 
 
 
-<section class="bg-slate-950 text-slate-100 min-h-screen overflow-x-hidden flex flex-col justify-between">
+<section class=" mt-12 bg-slate-950 text-slate-100 min-h-screen overflow-x-hidden flex flex-col justify-between">
    <style>
 
     /* Orbit Rotation Setup */
@@ -1287,7 +2041,7 @@
   </style>
 
    <!-- Header Title -->
-  <div class="w-full max-w-7xl mx-auto px-6 pt-8 pb-4 flex flex-col md:flex-row justify-between items-center gap-4 z-20">
+  <div class="  w-full max-w-7xl mx-auto px-6 pt-8 pb-4 flex flex-col md:flex-row justify-between items-center gap-4 z-20">
     <div class="text-center md:text-left">
       <h1 class="text-2xl md:text-4xl font-extrabold tracking-tight flex items-center gap-3 justify-center md:justify-start">
         <span class="bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 bg-clip-text text-transparent text-lg md:text-xl">A Complete and Modern Smart OTT Ecosystem 
@@ -1307,42 +2061,95 @@ with Powerful AI Tools.</span>
   <main class="w-full max-w-7xl mx-auto px-4 md:px-6 flex-grow grid grid-cols-1 lg:grid-cols-12 gap-8 items-center z-10 py-4">
     
     <!-- Left column: Live Feature Viewer & Specs Panel -->
-    <section class="lg:col-span-4 order-2 lg:order-1 flex flex-col gap-6">
-      <div class="bg-slate-900/60 border border-slate-800 p-6 rounded-3xl shadow-2xl backdrop-blur-xl relative overflow-hidden group">
-        <!-- Accent Glow -->
-        <div class="absolute -top-16 -left-16 w-32 h-32 bg-cyan-500/10 rounded-full blur-2xl group-hover:bg-cyan-500/20 transition-all duration-500"></div>
-        
-        <div class="absolute top-0 right-0 bg-cyan-500 text-slate-950 font-bold text-[10px] uppercase px-3 py-1 rounded-bl-xl tracking-wider">
-          Active Node
-        </div>
-        
-        <div class="flex items-center gap-4 mb-4">
-          <div id="viewer-badge" class="w-14 h-14 rounded-2xl bg-cyan-500/10 flex items-center justify-center text-xl text-cyan-400 border border-cyan-500/20 shadow-inner">
-            <span id="viewer-index" class="font-bold tracking-tight">01</span>
-          </div>
-          <div>
-            <h2 id="viewer-title" class="text-xl md:text-2xl font-extrabold tracking-tight text-white">LIBRARY</h2>
-            <p class="text-xs text-cyan-400 font-semibold tracking-wider uppercase">Interactive Module</p>
-          </div>
-        </div>
-        
-        <p id="viewer-desc" class="text-slate-400 leading-relaxed text-sm min-h-[90px] transition-all duration-300">
-          Digital Database & Storage Management. Access thousands of categorized media libraries, secure user profiles, and high-speed data backup architectures with advanced encryption.
-        </p>
-
-        <!-- Technical Specs Metatags -->
-        <div class="mt-6 pt-6 border-t border-slate-800/80 grid grid-cols-2 gap-4">
-          <div class="bg-slate-950/40 p-3 rounded-xl border border-slate-900">
-            <span class="block text-[10px] text-slate-500 uppercase tracking-wider">Latency / Load</span>
-            <span id="viewer-stat-1" class="text-sm font-bold text-cyan-300">&lt; 14ms Latency</span>
-          </div>
-          <div class="bg-slate-950/40 p-3 rounded-xl border border-slate-900">
-            <span class="block text-[10px] text-slate-500 uppercase tracking-wider">Security Guard</span>
-            <span id="viewer-stat-2" class="text-sm font-bold text-cyan-300">AI Verified Safe</span>
-          </div>
-        </div>
+<section class="lg:col-span-4 order-2 lg:order-1 flex flex-col gap-6">
+  <div id="viewer-container" class="bg-slate-900/60 border border-slate-800 p-6 rounded-3xl shadow-2xl backdrop-blur-xl relative overflow-hidden group transition-all duration-300 opacity-100">
+    
+    <div class="absolute -top-16 -left-16 w-32 h-32 bg-cyan-500/10 rounded-full blur-2xl group-hover:bg-cyan-500/20 transition-all duration-500"></div>
+    
+    <div class="absolute top-0 right-0 bg-cyan-500 text-slate-950 font-bold text-[10px] uppercase px-3 py-1 rounded-bl-xl tracking-wider">
+      Active Node
+    </div>
+    
+    <div class="flex items-center gap-4 mb-4">
+      <div id="viewer-badge" class="w-14 h-14 rounded-2xl bg-cyan-500/10 flex items-center justify-center text-xl text-cyan-400 border border-cyan-500/20 shadow-inner">
+        <span id="viewer-index" class="font-bold tracking-tight">01</span>
       </div>
-    </section>
+      <div>
+        <h2 id="viewer-title" class="text-xl md:text-2xl font-extrabold tracking-tight text-white">LIBRARY</h2>
+        <p class="text-xs text-cyan-400 font-semibold tracking-wider uppercase">Interactive Module</p>
+      </div>
+    </div>
+    
+    <p id="viewer-desc" class="text-slate-400 leading-relaxed text-sm min-h-[90px]">
+      Digital Database & Storage Management. Access thousands of categorized media libraries, secure user profiles, and high-speed data backup architectures with advanced encryption.
+    </p>
+
+    <div class="mt-6 pt-6 border-t border-slate-800/80 grid grid-cols-2 gap-4">
+      <div class="bg-slate-950/40 p-3 rounded-xl border border-slate-900">
+        <span class="block text-[10px] text-slate-500 uppercase tracking-wider">Latency / Load</span>
+        <span id="viewer-stat-1" class="text-sm font-bold text-cyan-300">&lt; 14ms Latency</span>
+      </div>
+      <div class="bg-slate-950/40 p-3 rounded-xl border border-slate-900">
+        <span class="block text-[10px] text-slate-500 uppercase tracking-wider">Security Guard</span>
+        <span id="viewer-stat-2" class="text-sm font-bold text-cyan-300">AI Verified Safe</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+  const nodesData = [
+    { id: "01", name: "LIBRARY", img: "/img/No- 01.jpg", desc: "Secure multi-tenant cloud storage containing classified family content packages. High redundancy and accelerated delivery metrics.", stat1: "1.2GB/s Transfer", stat2: "Active Replication" },
+    { id: "02", name: "FAMILY LIVE", img: "/img/No- 02.jpg", desc: "Interactive streaming and live community broadcast node supporting synchronized low-latency group feeds.", stat1: "< 80ms Latency", stat2: "Live Cast Enabled" },
+    { id: "03", name: "TEACHER AI", img: "/img/No- 03.jpg", desc: "Advanced virtual mentorship agent processing smart cognitive workflows to curate tailored educational routines.", stat1: "LLM Trained v4.2", stat2: "Active Learning" },
+    { id: "04", name: "FAMILY STUDIO", img: "/img/No- 04.jpg", desc: "Collaborative sandbox module engineered for user-driven asset creations, video processing, and dynamic timeline rendering.", stat1: "GPU Accelerated", stat2: "Auto Assembly" },
+    { id: "05", name: "FAMILY CONTENT", img: "/img/No- 05.jpg", desc: "Centralized curated catalog engine dynamically matching age-specific content with extreme filtering parameters.", stat1: "15M+ Indices", stat2: "Guard Filter ON" },
+    { id: "06", name: "ISLAMIC GUARD", desc: "Traditional values monitoring gateway ensuring religious preservation and context-appropriate filtration models.", img: "/img/No- 06.jpg", stat1: "100% Guard Active", stat2: "Traditional Safe" },
+    { id: "07", name: "MEMORIES LM", desc: "Intelligent neural engine scanning photo streams to compile automated cinematic memory packages for families.", img: "/img/No- 07.jpg", stat1: "Auto Synthesis", stat2: "AI Highlight Gen" },
+    { id: "08", name: "TOON GUARD", desc: "Cognitive computer vision module parsing animations in real time to filter out age-inappropriate scenarios.", img: "/img/No- 08.jpg", stat1: "Real-time AI Vision", stat2: "Parental Unit OK" },
+    { id: "09", name: "FAMILY BUILDER", desc: "Low-code customizable workspace interface enabling custom modules and third-party extensions deployment inside the ecosystem.", img: "/img/No- 09.jpg", stat1: "Extensible Core", stat2: "Custom Widgets" },
+    { id: "10", name: "VISION SHEETS", desc: "Data monitoring spreadsheet node translating stream feedback telemetry logs into beautiful visual analytical grids.", img: "/img/No- 10.jpg", stat1: "Real-time Sheet sync", stat2: "Auto Analytical logs" }
+  ];
+
+  let currentIndex = 0;
+
+  // DOM এলিমেন্টগুলো সিলেক্ট করা
+  const container = document.getElementById('viewer-container');
+  const indexEl = document.getElementById('viewer-index');
+  const titleEl = document.getElementById('viewer-title');
+  const descEl = document.getElementById('viewer-desc');
+  const stat1El = document.getElementById('viewer-stat-1');
+  const stat2El = document.getElementById('viewer-stat-2');
+
+  function updateContent() {
+    const data = nodesData[currentIndex];
+
+    // ১. প্রথমে কন্টেইনারটিকে হাইড (Fade Out) করা
+    container.classList.remove('opacity-100');
+    container.classList.add('opacity-0');
+
+    // ২. ৩ চশমকা (300ms) ট্রানজিশন শেষ হওয়ার পর ডেটা পরিবর্তন করা
+    setTimeout(() => {
+      if (indexEl) indexEl.innerText = data.id;
+      if (titleEl) titleEl.innerText = data.name;
+      if (descEl) descEl.innerText = data.desc;
+      if (stat1El) stat1El.innerText = data.stat1;
+      if (stat2El) stat2El.innerText = data.stat2;
+
+      // ৩. নতুন ডেটাসহ কন্টেইনারটি শো (Fade In) করা
+      container.classList.remove('opacity-0');
+      container.classList.add('opacity-100');
+
+      // পরবর্তী ইনডেক্স সেট করা (১০ এর পর আবার ০১ এ ব্যাক করবে)
+      currentIndex = (currentIndex + 1) % nodesData.length;
+    }, 300); 
+  }
+
+  // প্রতি ৫ সেকেন্ড (৫০০০ মিলিসেকেন্ড) পর পর ফাংশন রান হবে
+  setInterval(updateContent, 5000);
+});
+  </script>
+</section>
 
     <!-- Right column: Massive interactive orbiting visual -->
     <section class="lg:col-span-8 order-1 lg:order-2 flex items-center justify-center min-h-[460px] md:min-h-[580px] relative">
@@ -1472,12 +2279,160 @@ with Powerful AI Tools.</span>
       initializeOrbit();
       focusOnNode(0);
     };
+
+
+
+
   </script>
 
 </section>
 
 
+<section>
+  <div class="w-full max-w-5xl mx-auto my-8 px-4">
+    <div class="relative rounded-2xl overflow-hidden bg-slate-950 border border-slate-800 shadow-xl p-1">
+      
+      <div class="absolute top-4 left-4 z-10 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
+        <span id="adTag" class="text-[10px] font-bold tracking-widest text-sky-400 uppercase">Sponsored Showcase</span>
+      </div>
 
+      <div class="aspect-[21/9] w-full bg-black">
+        <video id="autoPlayAd" class="w-full h-full object-cover" autoplay muted playsinline>
+          <source id="adSource" src="/videos/1782703232282.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+
+
+<script>
+  // ১. এখানে তোমার ১০-১২টি ভিডিওর পাথ (Path) এবং ব্র্যান্ডের নাম সাজিয়ে রাখো
+  const adsPlaylist = [
+    { src: "/videos/1782703232282.mp4", brand: "Samsung Mobile" },
+    { src: "/videos/1782703247056.mp4", brand: "The City Bank" },
+    { src: "/videos/dbbl-ad.mp4", brand: "Dutch-Bangla Bank" },
+    { src: "/videos/bashundhara-ad.mp4", brand: "Bashundhara Group" },
+    // এভাবে বাকি ১০-১২টি অ্যাড এখানে এক এক করে যোগ করে দাও...
+  ];
+
+  let currentAdIndex = 0;
+
+  const videoElement = document.getElementById('autoPlayAd');
+  const sourceElement = document.getElementById('adSource');
+  const tagElement = document.getElementById('adTag');
+
+  // প্রথম ভিডিওর ব্র্যান্ড নেম সেট করা
+  tagElement.innerText = `Sponsored: ${adsPlaylist[currentAdIndex].brand}`;
+
+  // ২. ভিডিও শেষ হলে পরবর্তী ভিডিও প্লে করার ম্যাজিক ফাংশন
+  videoElement.addEventListener('ended', function() {
+    // ইনডেক্স ১ বাড়িয়ে পরের ভিডিওতে যাওয়া (শেষ ভিডিওতে পৌঁছালে আবার ০ থেকে শুরু হবে)
+    currentAdIndex = (currentAdIndex + 1) % adsPlaylist.length;
+    
+    // নতুন ভিডিওর সোর্স এবং ব্র্যান্ড ট্যাগ আপডেট
+    sourceElement.src = adsPlaylist[currentAdIndex].src;
+    tagElement.innerText = `Sponsored: ${adsPlaylist[currentAdIndex].brand}`;
+    
+    // ভিডিও রিলোড এবং অটো-প্লে
+    videoElement.load();
+    videoElement.play().catch(error => {
+      console.log("Autoplay blocked or interrupted: ", error);
+    });
+  });
+</script>
+
+
+
+
+</section>
+
+
+<section class="w-full mx-auto px-4 py-12 bg-slate-950 text-white">
+  <div class="mb-6 flex items-center justify-between">
+    <div>
+      <span class="text-[10px] font-bold uppercase tracking-widest text-red-500 bg-red-500/10 px-2 py-0.5 rounded-full border border-red-500/20">Live</span>
+      <h2 class="text-xl md:text-3xl font-black mt-2 text-white">Top Headlines & Breaking News</h2>
+    </div>
+    <span class="text-xs text-slate-500 animate-pulse hidden md:inline">Swipe or Scroll Shift + Wheel →</span>
+  </div>
+
+  <div id="newsContainer" class="flex gap-4 overflow-x-auto pb-4 scroll-smooth snap-x snap-mandatory custom-scrollbar">
+    <div class="text-slate-400 animate-pulse">Loading latest news...</div>
+  </div>
+</section>
+
+<style>
+  .custom-scrollbar::-webkit-scrollbar {
+    height: 5px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #0f172a; 
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #334155; 
+    border-radius: 9999px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #475569; 
+  }
+</style>
+
+<script>
+  const API_KEY = '0c2a62a05b014df388433af45b70412b'; 
+  const NEWS_URL = `https://newsapi.org/v2/top-headlines?language=en&apiKey=${API_KEY}`;
+
+  async function fetchTopNews() {
+    try {
+      const response = await fetch(NEWS_URL);
+      const data = await response.json();
+      
+      if (data.status === "ok" && data.articles) {
+        displayNews(data.articles);
+      } else {
+        document.getElementById('newsContainer').innerHTML = `<p class="text-red-400">Failed to load news at this moment.</p>`;
+      }
+    } catch (error) {
+      console.error("Error fetching news:", error);
+      document.getElementById('newsContainer').innerHTML = `<p class="text-red-400">Something went wrong.</p>`;
+    }
+  }
+
+  function displayNews(articles) {
+    const container = document.getElementById('newsContainer');
+    container.innerHTML = ''; 
+
+    articles.forEach(article => {
+      if (!article.title || !article.urlToImage) return;
+
+      // CARD DESIGN UPDATED: width ফিক্সড করা হয়েছে (w-[280px] বা w-[320px]) এবং টেক্সট ছোট করা হয়েছে
+      const newsCard = `
+        <div class="group bg-slate-900 border border-slate-800 rounded-xl overflow-hidden transition-all duration-300 hover:border-slate-700 w-[260px] md:w-[300px] shrink-0 snap-start">
+          <div class="aspect-video w-full overflow-hidden bg-slate-800">
+            <img src="${article.urlToImage}" alt="News Image" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.src='https://placehold.co/600x400/0f172a/fff?text=News'">
+          </div>
+          <div class="p-4">
+            <span class="text-[10px] font-semibold text-sky-400">${article.source.name || 'News Source'}</span>
+            <h3 class="text-sm font-bold text-white mt-1 line-clamp-2 group-hover:text-sky-400 transition-colors h-10">
+              ${article.title}
+            </h3>
+            <p class="text-slate-400 text-xs mt-1 line-clamp-2 h-8">
+              ${article.description || 'Click the link below to read the full coverage.'}
+            </p>
+            <div class="mt-3 pt-3 border-t border-slate-800/60 flex items-center justify-between">
+              <span class="text-[10px] text-slate-500">${new Date(article.publishedAt).toLocaleDateString()}</span>
+              <a href="${article.url}" target="_blank" class="text-[10px] font-bold text-sky-400 hover:underline flex items-center gap-1">
+                Read →
+              </a>
+            </div>
+          </div>
+        </div>
+      `;
+      container.innerHTML += newsCard;
+    });
+  }
+
+  window.onload = fetchTopNews;
+</script>
 
 <section class="bg-gray-50 p-6">
 
@@ -1515,14 +2470,14 @@ with Powerful AI Tools.</span>
 <div class="relative aspect-[16/10] bg-cover bg-center overflow-hidden flex items-center justify-center" 
            style="background-image: url('${tool.img}');">
         
-      <span class="relative z-10 text-xl md:text-2xl font-black text-center tracking-wide uppercase select-none transition-transform duration-300 group-hover:scale-105 text-transparent bg-clip-text bg-gradient-to-b from-yellow-200 via-amber-400 to-amber-700 drop-shadow-[0_4px_6px_rgba(0,0,0,0.8)]"
+<span class="relative z-10 text-xl md:text-2xl font-black text-center tracking-wide uppercase select-none transition-transform duration-300 group-hover:scale-105 text-black"
       style="
-        -webkit-text-stroke: 1px rgba(255, 248, 220, 0.9);
+        -webkit-text-stroke: 1px #fff;
         text-shadow: 
-          0 1px 0 #b45309, 
-          0 2px 0 #92400e, 
-          0 3px 0 #78350f, 
-          0 4px 0 #451a03, 
+          0 1px 0 #e2e8f0, 
+          0 2px 0 #cbd5e1, 
+          0 3px 0 #94a3b8, 
+          0 4px 0 #64748b, 
           0 5px 1px rgba(0,0,0,.3), 
           0 0 5px rgba(0,0,0,.2), 
           0 1px 3px rgba(0,0,0,.4), 
@@ -1635,7 +2590,7 @@ with Powerful AI Tools.</span>
 
 
 
-<section class="w-full max-w-7xl mx-auto mt-8 px-4 center">
+<section class="w-full  mx-auto mt-8  center">
   <!-- Headline Container with Tailwind Styling -->
 <
 
@@ -1650,105 +2605,161 @@ with Powerful AI Tools.</span>
 
 <div class="main">
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
-<section class="bg-gray-50 py-12 px-4 md:px-10">
-  <div class="container mx-auto">
-    
-    <div class="flex items-center justify-between mb-8">
-      <div class="flex items-center gap-4">
-        <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900">Family Recent Video Episodes</h2>
-        <button class="bg-yellow-500 text-white px-4 py-1 rounded-full text-sm font-semibold hover:bg-yellow-600 transition">See All</button>
+  <section class="bg-gray-50 py-12 px-4 md:px-10">
+    <div class="container mx-auto">
+      
+      <div class="flex items-center justify-between mb-8">
+        <div class="flex items-center gap-4">
+          <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900">Family Recent Video Episodes</h2>
+          <button class="bg-yellow-500 text-white px-4 py-1 rounded-full text-sm font-semibold hover:bg-yellow-600 transition">See All</button>
+        </div>
+        <div class="hidden md:flex gap-2">
+          <button class="recent-prev-btn p-2 border border-gray-300 rounded-full hover:bg-white hover:shadow-md transition">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+          </button>
+          <button class="recent-next-btn p-2 border border-gray-300 rounded-full hover:bg-white hover:shadow-md transition">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+          </button>
+        </div>
       </div>
-      <div class="hidden md:flex gap-2">
-        <button class="episode-prev-btn p-2 border border-gray-300 rounded-full hover:bg-white hover:shadow-md transition">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
-        </button>
-        <button class="episode-next-btn p-2 border border-gray-300 rounded-full hover:bg-white hover:shadow-md transition">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
-        </button>
+
+      <div class="swiper recentSwiper mb-12">
+        <div class="swiper-wrapper episode-card-container">
+          </div>
+        <div class="swiper-pagination recent-pagination !static mt-6"></div>
       </div>
-    </div>
-
-    <div class="swiper episodeSwiper">
-      <div class="swiper-wrapper" id="episode-card-container">
-      </div>
-      <div class="swiper-pagination !static mt-6"></div>
-    </div>
-  </div>
-</section>
-
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    // ইউনিক আইডি এবং ভ্যারিয়েবল নাম ব্যবহার করা হয়েছে
-    const episodeContainer = document.getElementById('episode-card-container');
-
-    const episodeList = [
-      { id: 1, title: "Episode 01: Getting Started", video: "/videos/9.mp4", duration: "10:15" },
-      { id: 2, title: "Episode 02: Advanced Design", video: "/videos/10.mp4", duration: "15:30" },
-      { id: 3, title: "Episode 03: Performance Tips", video: "/videos/11.mp4", duration: "12:00" },
-      { id: 4, title: "Episode 04: Performance Tips", video: "/videos/12.mp4", duration: "12:00" },
-      { id: 5, title: "Episode 05: Performance Tips", video: "/videos/13.mp4", duration: "12:00" },
-      { id: 6, title: "Episode 06: Performance Tips", video: "/videos/52.mp4", duration: "12:00" },
-      { id: 7, title: "Episode 07: Performance Tips", video: "/videos/51.mp4", duration: "12:00" },
-      { id: 8, title: "Episode 08: Performance Tips", video: "/videos/50.mp4", duration: "12:00" }
-    ];
-
-    // নতুন ফাংশন নাম triggerEpisodeVideo ম্যাপ করা হয়েছে
-    episodeList.forEach(ep => {
-      episodeContainer.innerHTML += `
-        <div class="swiper-slide">
-          <div class="bg-[#e0f2f7] p-4 rounded-2xl h-full flex flex-col group shadow-sm hover:shadow-md transition-all">
-            <div class="relative overflow-hidden rounded-xl aspect-video bg-black flex items-center justify-center">
-              
-              <video class="w-full h-full object-cover pointer-events-none" preload="metadata" muted playsinline>
-                <source src="${ep.video}#t=0.1" type="video/mp4">
-              </video>
-              
-              <button onclick="triggerEpisodeVideo('${ep.video}', this)" class="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/30 transition-all">
-                <div class="bg-white/90 p-3 rounded-full shadow-lg hover:scale-110 transition active:scale-95 pointer-events-auto">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                </div>
-              </button>
-            </div>
-            
-            <div class="mt-4">
-              <h3 class="font-bold text-gray-800 text-lg leading-tight line-clamp-2 mb-2">${ep.title}</h3>
-              <span class="text-blue-500 text-sm font-semibold">${ep.duration}</span>
-            </div>
+      
+      <div class="second mt-12">
+        <div class="flex items-center justify-between mb-8">
+          <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900">Family All Video Episodes</h2>
+          <div class="hidden md:flex gap-2">
+            <button class="all-prev-btn p-2 border border-gray-300 rounded-full hover:bg-white hover:shadow-md transition">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+            </button>
+            <button class="all-next-btn p-2 border border-gray-300 rounded-full hover:bg-white hover:shadow-md transition">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            </button>
           </div>
         </div>
+
+        <div class="swiper allSwiper mb-12">
+          <div class="swiper-wrapper episode-card-container">
+            </div>
+          <div class="swiper-pagination all-pagination !static mt-6"></div>
+        </div>
+      </div>
+
+
+
+    </div>
+  </section>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // querySelectorAll দিয়ে সব কন্টেইনার একসাথে সিলেক্ট করা হলো
+      const episodeContainers = document.querySelectorAll('.episode-card-container');
+
+      const episodeList = [
+        { id: 1, title: "Episode 01: Getting Started", video: "/videos/9.mp4", duration: "10:15" },
+        { id: 2, title: "Episode 02: Advanced Design", video: "/videos/10.mp4", duration: "15:30" },
+        { id: 3, title: "Episode 03: Performance Tips", video: "/videos/11.mp4", duration: "12:00" },
+        { id: 4, title: "Episode 04: Performance Tips", video: "/videos/12.mp4", duration: "12:00" },
+        { id: 5, title: "Episode 05: Performance Tips", video: "/videos/13.mp4", duration: "12:00" },
+        { id: 6, title: "Episode 06: Performance Tips", video: "/videos/52.mp4", duration: "12:00" },
+        { id: 7, title: "Episode 07: Performance Tips", video: "/videos/51.mp4", duration: "12:00" },
+        { id: 8, title: "Episode 08: Performance Tips", video: "/videos/50.mp4", duration: "12:00" }
+      ];
+
+      // HTML কার্ড জেনারেট করার টেক্সট বা টেমপ্লেট
+      let cardHTML = '';
+      episodeList.forEach(ep => {
+        cardHTML += `
+          <div class="swiper-slide">
+            <div class="bg-[#e0f2f7] p-4 rounded-2xl h-full flex flex-col group shadow-sm hover:shadow-md transition-all">
+              <div class="relative overflow-hidden rounded-xl aspect-video bg-black flex items-center justify-center">
+                
+                <video class="w-full h-full object-cover pointer-events-none" preload="metadata" muted playsinline>
+                  <source src="${ep.video}#t=0.1" type="video/mp4">
+                </video>
+                
+                <button onclick="triggerEpisodeVideo('${ep.video}', this)" class="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/30 transition-all">
+                  <div class="bg-white/90 p-3 rounded-full shadow-lg hover:scale-110 transition active:scale-95 pointer-events-auto">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </div>
+                </button>
+              </div>
+              
+              <div class="mt-4">
+                <h3 class="font-bold text-gray-800 text-lg leading-tight line-clamp-2 mb-2">${ep.title}</h3>
+                <span class="text-blue-500 text-sm font-semibold">${ep.duration}</span>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+
+      // প্রত্যেকটি কন্টেইনারে ডেটা পুশ করার সঠিক লুপ পদ্ধতি
+      episodeContainers.forEach(container => {
+        container.innerHTML = cardHTML;
+      });
+
+      // স্লাইডার ১: Recent Episodes
+      new Swiper(".recentSwiper", {
+        slidesPerView: 1.2,
+        spaceBetween: 20,
+        navigation: { nextEl: ".recent-next-btn", prevEl: ".recent-prev-btn" },
+        pagination: { el: ".recent-pagination", clickable: true },
+        breakpoints: {
+          640: { slidesPerView: 2.2 },
+          1024: { slidesPerView: 3.2 },
+          1280: { slidesPerView: 4 }
+        }
+      });
+
+      // স্লাইডার ২: All Episodes
+      new Swiper(".allSwiper", {
+        slidesPerView: 1.2,
+        spaceBetween: 20,
+        navigation: { nextEl: ".all-next-btn", prevEl: ".all-prev-btn" },
+        pagination: { el: ".all-pagination", clickable: true },
+        breakpoints: {
+          640: { slidesPerView: 2.2 },
+          1024: { slidesPerView: 3.2 },
+          1280: { slidesPerView: 4 }
+        }
+      });
+
+      // স্লাইডার ৩: Extra Bottom Swiper
+      new Swiper(".extraSwiper", {
+        slidesPerView: 1.2,
+        spaceBetween: 20,
+        pagination: { el: ".extra-pagination", clickable: true },
+        breakpoints: {
+          640: { slidesPerView: 2.2 },
+          1024: { slidesPerView: 3.2 },
+          1280: { slidesPerView: 4 }
+        }
+      });
+    });
+
+    // ভিডিও প্লে করার ইউনিক ফাংশন
+    function triggerEpisodeVideo(videoPath, btn) {
+      const videoWrapper = btn.parentElement;
+      videoWrapper.innerHTML = `
+        <video class="w-full h-full object-cover rounded-xl" controls autoplay>
+          <source src="${videoPath}" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
       `;
-    });
-
-    // Swiper ইনিশিয়ালাইজেশন এবং নেভিগেশন ক্লাস আপডেট
-    new Swiper(".episodeSwiper", {
-      slidesPerView: 1.2,
-      spaceBetween: 20,
-      navigation: { nextEl: ".episode-next-btn", prevEl: ".episode-prev-btn" },
-      breakpoints: {
-        640: { slidesPerView: 2.2 },
-        1024: { slidesPerView: 3.2 },
-        1280: { slidesPerView: 4 }
-      }
-    });
-  });
-
-  // ইউনিক ফাংশন নাম
-  function triggerEpisodeVideo(videoPath, btn) {
-    const videoWrapper = btn.parentElement;
-    videoWrapper.innerHTML = `
-      <video class="w-full h-full object-cover rounded-xl" controls autoplay>
-        <source src="${videoPath}" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-    `;
-  }
-</script>
+    }
+  </script>
 
 </div>
 
@@ -1760,7 +2771,7 @@ with Powerful AI Tools.</span>
 
 
 
-<div class="container mx-auto px-4 py-6 bg-gradient-to-b from-gray-950 via-slate-900 to-black text-white min-h-screen">
+<div class=" w-full mx-auto px-4 py-6 bg-[length:400%_400%] animate-gradient bg-gradient-to-b from-sky-300 via-blue-300 to-slate-600 text-white min-h-screen mb-12">
   
   <div class="flex items-center space-x-3 border-b border-gray-800/60 pb-3 mb-6 overflow-x-auto no-scrollbar text-sm font-medium">
     <button onclick="filterCategory('all')" class="category-btn bg-emerald-600 text-white rounded-full px-4 py-1.5 transition whitespace-nowrap shadow-sm shadow-emerald-600/20" data-cat="all">All Shorts</button>
@@ -1898,7 +2909,16 @@ with Powerful AI Tools.</span>
   .no-scrollbar::-webkit-scrollbar { display: none; }
   .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 </style>
-
+<style>
+  @keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  .animate-gradient {
+    animation: gradientAnimation 15s ease infinite;
+  }
+</style>
 
 
 
@@ -1909,7 +2929,7 @@ with Powerful AI Tools.</span>
 
 
 <section>
-    <div class="container mx-auto p-4 bg-gray-950 text-white min-h-screen">
+    <div class="w-full mx-auto p-4 bg-gray-950 text-white min-h-screen">
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
     
     <div class="lg:col-span-2 space-y-4">
@@ -2555,8 +3575,17 @@ with Powerful AI Tools.</span>
     
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-gray-800/60 pb-6 gap-4">
       <div>
-<h2 class="text-2xl md:text-4xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-300 to-zinc-900 transition-transform duration-300 hover:scale-[1.02]"
-    style="-webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.6); text-shadow: -5px 2px 17px #000000;">
+<h2 class="text-2xl md:text-4xl font-black tracking-tight text-black transition-transform duration-300 hover:scale-[1.02]"
+    style="
+      -webkit-text-stroke: 1px #fff;
+      text-shadow: 
+        0 1px 0 #cbd5e1, 
+        0 2px 0 #94a3b8, 
+        0 3px 0 #64748b, 
+        0 4px 0 #475569, 
+        0 5px 1px rgba(0,0,0,.4), 
+        -5px 2px 17px #000000;
+    ">
   World News & Politex, Latest Articles
 </h2>
         <p class="text-white text-xs md:text-sm mt-1">Stay updated with the most trending and deeply researched topics</p>
@@ -2575,14 +3604,14 @@ with Powerful AI Tools.</span>
 <script>
   // ৮টি ভিন্ন ভিন্ন আর্টিকেলের ডেটা অ্যারে
   const articleData = [
-    { title: "The Truth About Cholesterol", img: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=500", tag: "Health", desc: "There's so much confusion surrounding dietary cholesterol and its effects..." },
-    { title: "Why Does Your Back Hurt?", img: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=500", tag: "Fitness", desc: "Millions of people suffer from chronic back pain. In fact, it's leading to..." },
-    { title: "Are Artificial Sweeteners Healthier?", img: "https://images.unsplash.com/photo-1505576399279-565b52d4ac71?q=80&w=500", tag: "Nutrition", desc: "When people 'quit sugar' they often switch to an artificial, calorie-free alternative..." },
-    { title: "Global Political Shifts in 2026", img: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?q=80&w=500", tag: "Politics", desc: "Analyzing the latest policy changes and unexpected diplomatic moves globally..." },
-    { title: "The Evolution of Digital Media", img: "https://images.unsplash.com/photo-1493612276216-ee3925520721?q=80&w=500", tag: "Media", desc: "How modern consumption habits are redefining journalism and news curation..." },
-    { title: "Healthy Heart Crucial Tips", img: "https://images.unsplash.com/photo-1530026405186-ed1eaae6bbd4?q=80&w=500", tag: "Wellness", desc: "Discover the best daily exercises and food habits to keep your heart pumping strong..." },
-    { title: "Mental Well-being in Tech Era", img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=500", tag: "Psychology", desc: "Finding the fine line between digital connectivity and necessary mental peace..." },
-    { title: "Climate Adaptive Agriculture", img: "https://images.unsplash.com/photo-1593113598332-cd288d649433?q=80&w=500", tag: "Science", desc: "Exploring technological innovations helping farmers adapt to global warming..." }
+    { title: "The Truth About Cholesterol", img: "/img/articles01.jpeg", tag: "Health", desc: "There's so much confusion surrounding dietary cholesterol and its effects..." },
+    { title: "Why Does Your Back Hurt?", img: "/img/articles02.jpeg", tag: "Fitness", desc: "Millions of people suffer from chronic back pain. In fact, it's leading to..." },
+    { title: "Are Artificial Sweeteners Healthier?", img: "/img/articles03.jpeg", tag: "Nutrition", desc: "When people 'quit sugar' they often switch to an artificial, calorie-free alternative..." },
+    { title: "Global Political Shifts in 2026", img: "/img/articles04.jpeg", tag: "Politics", desc: "Analyzing the latest policy changes and unexpected diplomatic moves globally..." },
+    { title: "The Evolution of Digital Media", img: "/img/articles05.jpeg", tag: "Media", desc: "How modern consumption habits are redefining journalism and news curation..." },
+    { title: "Healthy Heart Crucial Tips", img: "/img/articles06.jpeg", tag: "Wellness", desc: "Discover the best daily exercises and food habits to keep your heart pumping strong..." },
+    { title: "Mental Well-being in Tech Era", img: "/img/articles07.jpeg", tag: "Psychology", desc: "Finding the fine line between digital connectivity and necessary mental peace..." },
+    { title: "Climate Adaptive Agriculture", img: "/img/articles08.jpeg", tag: "Science", desc: "Exploring technological innovations helping farmers adapt to global warming..." }
   ];
 
   const gridWrapper = document.getElementById('article-grid');
@@ -2627,7 +3656,7 @@ with Powerful AI Tools.</span>
 
 
 <section>
-  <div class="container mx-auto p-4 bg-slate-950 text-white min-h-screen">
+  <div class="w-full mx-auto p-4 bg-slate-950 text-white min-h-screen">
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
       
       <!-- Main Video Column -->
@@ -2636,7 +3665,7 @@ with Powerful AI Tools.</span>
           <iframe 
             id="secVideoPlayerIframe"
             class="w-full h-full transition-opacity duration-200" 
-            src="https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1" 
+            src="https://www.youtube.com/embed/pRpeEdMmmQ0" 
             title="Secondary Video Player" 
             frameborder="0" 
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
@@ -2646,7 +3675,7 @@ with Powerful AI Tools.</span>
 
         <div>
           <h1 id="secVideoTitle" class="text-xl md:text-2xl font-bold tracking-tight text-slate-100">
-            Rick Astley - Never Gonna Give You Up (Official Music Video)
+            Shakira - Waka Waka (FIFA World Cup)
           </h1>
         </div>
 
@@ -2682,6 +3711,72 @@ with Powerful AI Tools.</span>
           <span class="flex-1 border-b border-slate-800"></span>
           <span class="text-slate-500 text-[10px]">5 SONGS</span>
         </h3>
+
+<div class="sec-video-item flex gap-3 p-2 rounded-lg hover:bg-slate-800/80 cursor-pointer transition group" 
+     data-url="https://www.youtube.com/embed/pRpeEdMmmQ0" 
+     data-title="Shakira - Waka Waka (This Time for Africa) [Official FIFA World Cup Song]"
+     data-index="14">
+  <div class="relative w-36 h-20 flex-shrink-0 bg-slate-800 rounded-md overflow-hidden">
+    <img src="https://img.youtube.com/vi/pRpeEdMmmQ0/mqdefault.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" alt="thumbnail">
+    <span class="absolute bottom-1 right-1 bg-black/80 text-[10px] px-1 rounded text-slate-200">3:31</span>
+  </div>
+  <div class="flex flex-col justify-between py-1 flex-1 min-w-0">
+    <h4 class="text-sm font-semibold line-clamp-2 text-slate-200 group-hover:text-cyan-400 transition">Shakira - Waka Waka (FIFA World Cup)</h4>
+    <p class="text-xs text-slate-400">Shakira</p>
+    <p class="text-[11px] text-slate-500">3.9B views • 16 years ago</p>
+  </div>
+</div>
+
+
+
+
+<div class="sec-video-item flex gap-3 p-2 rounded-lg hover:bg-slate-800/80 cursor-pointer transition group" 
+     data-url="https://www.youtube.com/embed/kJQP7kiw5Fk" 
+     data-title="Luis Fonsi - Despacito ft. Daddy Yankee (Club Dance Mix)"
+     data-index="16">
+  <div class="relative w-36 h-20 flex-shrink-0 bg-slate-800 rounded-md overflow-hidden">
+    <img src="https://img.youtube.com/vi/kJQP7kiw5Fk/mqdefault.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" alt="thumbnail">
+    <span class="absolute bottom-1 right-1 bg-black/80 text-[10px] px-1 rounded text-slate-200">4:42</span>
+  </div>
+  <div class="flex flex-col justify-between py-1 flex-1 min-w-0">
+    <h4 class="text-sm font-semibold line-clamp-2 text-slate-200 group-hover:text-cyan-400 transition">Despacito - Ultimate Club Mix</h4>
+    <p class="text-xs text-slate-400">Luis Fonsi x Daddy Yankee</p>
+    <p class="text-[11px] text-slate-500">8.4B views • 9 years ago</p>
+  </div>
+</div>
+
+<div class="sec-video-item flex gap-3 p-2 rounded-lg hover:bg-slate-800/80 cursor-pointer transition group" 
+     data-url="https://www.youtube.com/embed/KRaWnd3LJfs" 
+     data-title="LMFAO - Party Rock Anthem ft. Lauren Bennett, GoonRock"
+     data-index="17">
+  <div class="relative w-36 h-20 flex-shrink-0 bg-slate-800 rounded-md overflow-hidden">
+    <img src="https://img.youtube.com/vi/KRaWnd3LJfs/mqdefault.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" alt="thumbnail">
+    <span class="absolute bottom-1 right-1 bg-black/80 text-[10px] px-1 rounded text-slate-200">4:23</span>
+  </div>
+  <div class="flex flex-col justify-between py-1 flex-1 min-w-0">
+    <h4 class="text-sm font-semibold line-clamp-2 text-slate-200 group-hover:text-cyan-400 transition">LMFAO - Party Rock Anthem (Classic Club)</h4>
+    <p class="text-xs text-slate-400">LMFAO</p>
+    <p class="text-[11px] text-slate-500">2.3B views • 15 years ago</p>
+  </div>
+</div>
+
+<div class="sec-video-item flex gap-3 p-2 rounded-lg hover:bg-slate-800/80 cursor-pointer transition group" 
+     data-url="https://www.youtube.com/embed/hT_nvWreIhg" 
+     data-title="Avicii - Wake Me Up (Official Video / Club Edit)"
+     data-index="18">
+  <div class="relative w-36 h-20 flex-shrink-0 bg-slate-800 rounded-md overflow-hidden">
+    <img src="https://img.youtube.com/vi/hT_nvWreIhg/mqdefault.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" alt="thumbnail">
+    <span class="absolute bottom-1 right-1 bg-black/80 text-[10px] px-1 rounded text-slate-200">4:32</span>
+  </div>
+  <div class="flex flex-col justify-between py-1 flex-1 min-w-0">
+    <h4 class="text-sm font-semibold line-clamp-2 text-slate-200 group-hover:text-cyan-400 transition">Avicii - Wake Me Up (EDM Club Anthem)</h4>
+    <p class="text-xs text-slate-400">Avicii</p>
+    <p class="text-[11px] text-slate-500">2.4B views • 13 years ago</p>
+  </div>
+</div>
+
+
+
         
         <!-- Song 1 -->
         <div class="sec-video-item flex gap-3 p-2 rounded-lg hover:bg-slate-800/80 cursor-pointer transition group bg-slate-800/40 border border-cyan-500/30" 
@@ -2762,6 +3857,104 @@ with Powerful AI Tools.</span>
             <p class="text-[11px] text-slate-500">8.1B views • 7 years ago</p>
           </div>
         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="sec-video-item flex gap-3 p-2 rounded-lg hover:bg-slate-800/80 cursor-pointer transition group" 
+     data-url="https://www.youtube.com/embed/fKopy74weus" 
+     data-title="Alan Walker - Faded (Festival EDM Remix)"
+     data-index="9">
+  <div class="relative w-36 h-20 flex-shrink-0 bg-slate-800 rounded-md overflow-hidden">
+    <img src="https://img.youtube.com/vi/fKopy74weus/mqdefault.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" alt="thumbnail">
+    <span class="absolute bottom-1 right-1 bg-black/80 text-[10px] px-1 rounded text-slate-200">3:32</span>
+  </div>
+  <div class="flex flex-col justify-between py-1 flex-1 min-w-0">
+    <h4 class="text-sm font-semibold line-clamp-2 text-slate-200 group-hover:text-cyan-400 transition">Alan Walker - Faded (Festival EDM Mix)</h4>
+    <p class="text-xs text-slate-400">Alan Walker</p>
+    <p class="text-[11px] text-slate-500">3.6B views • 9 years ago</p>
+  </div>
+</div>
+
+<div class="sec-video-item flex gap-3 p-2 rounded-lg hover:bg-slate-800/80 cursor-pointer transition group" 
+     data-url="https://www.youtube.com/embed/2Vv-BfVoq4g" 
+     data-title="Ed Sheeran - Perfect (Robin Schulz Remix)"
+     data-index="10">
+  <div class="relative w-36 h-20 flex-shrink-0 bg-slate-800 rounded-md overflow-hidden">
+    <img src="https://img.youtube.com/vi/2Vv-BfVoq4g/mqdefault.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" alt="thumbnail">
+    <span class="absolute bottom-1 right-1 bg-black/80 text-[10px] px-1 rounded text-slate-200">4:09</span>
+  </div>
+  <div class="flex flex-col justify-between py-1 flex-1 min-w-0">
+    <h4 class="text-sm font-semibold line-clamp-2 text-slate-200 group-hover:text-cyan-400 transition">Ed Sheeran - Perfect (Deep House Mix)</h4>
+    <p class="text-xs text-slate-400">Robin Schulz Remix</p>
+    <p class="text-[11px] text-slate-500">4.1B views • 6 years ago</p>
+  </div>
+</div>
+
+<div class="sec-video-item flex gap-3 p-2 rounded-lg hover:bg-slate-800/80 cursor-pointer transition group" 
+     data-url="https://www.youtube.com/embed/k2qgadSvNyU" 
+     data-title="Dua Lipa - New Rules (Initial Talk 80s Remix)"
+     data-index="11">
+  <div class="relative w-36 h-20 flex-shrink-0 bg-slate-800 rounded-md overflow-hidden">
+    <img src="https://img.youtube.com/vi/k2qgadSvNyU/mqdefault.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" alt="thumbnail">
+    <span class="absolute bottom-1 right-1 bg-black/80 text-[10px] px-1 rounded text-slate-200">3:44</span>
+  </div>
+  <div class="flex flex-col justify-between py-1 flex-1 min-w-0">
+    <h4 class="text-sm font-semibold line-clamp-2 text-slate-200 group-hover:text-cyan-400 transition">Dua Lipa - New Rules (Initial Talk Mix)</h4>
+    <p class="text-xs text-slate-400">Dua Lipa</p>
+    <p class="text-[11px] text-slate-500">2.9B views • 7 years ago</p>
+  </div>
+</div>
+
+<div class="sec-video-item flex gap-3 p-2 rounded-lg hover:bg-slate-800/80 cursor-pointer transition group" 
+     data-url="https://www.youtube.com/embed/hcM6U8a261M" 
+     data-title="The Weeknd - Blinding Lights (W&W Festival Remix)"
+     data-index="12">
+  <div class="relative w-36 h-20 flex-shrink-0 bg-slate-800 rounded-md overflow-hidden">
+    <img src="https://img.youtube.com/vi/hcM6U8a261M/mqdefault.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" alt="thumbnail">
+    <span class="absolute bottom-1 right-1 bg-black/80 text-[10px] px-1 rounded text-slate-200">3:22</span>
+  </div>
+  <div class="flex flex-col justify-between py-1 flex-1 min-w-0">
+    <h4 class="text-sm font-semibold line-clamp-2 text-slate-200 group-hover:text-cyan-400 transition">The Weeknd - Blinding Lights Remix</h4>
+    <p class="text-xs text-slate-400">The Weeknd</p>
+    <p class="text-[11px] text-slate-500">1.8B views • 4 years ago</p>
+  </div>
+</div>
+
+<div class="sec-video-item flex gap-3 p-2 rounded-lg hover:bg-slate-800/80 cursor-pointer transition group" 
+     data-url="https://www.youtube.com/embed/09R8_2nJtjg" 
+     data-title="Maroon 5 - Sugar (DJ Slidex Remix)"
+     data-index="13">
+  <div class="relative w-36 h-20 flex-shrink-0 bg-slate-800 rounded-md overflow-hidden">
+    <img src="https://img.youtube.com/vi/09R8_2nJtjg/mqdefault.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" alt="thumbnail">
+    <span class="absolute bottom-1 right-1 bg-black/80 text-[10px] px-1 rounded text-slate-200">3:55</span>
+  </div>
+  <div class="flex flex-col justify-between py-1 flex-1 min-w-0">
+    <h4 class="text-sm font-semibold line-clamp-2 text-slate-200 group-hover:text-cyan-400 transition">Maroon 5 - Sugar (Club Remix Mix)</h4>
+    <p class="text-xs text-slate-400">Maroon 5</p>
+    <p class="text-[11px] text-slate-500">4.0B views • 9 years ago</p>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
 
       </div>
     </div>
@@ -2877,62 +4070,87 @@ with Powerful AI Tools.</span>
 </section>
 
 <section>
-  <div class="max-w-7xl mx-auto p-4 bg-gray-900 text-white min-h-screen">
-  <h2 class="text-xl font-bold text-blue-500 mb-6">All Add & Worldwide Add</h2>
-
+  <div class="w-full mx-auto p-4 bg-gray-900 text-white min-h-screen py-8 mt-8">
+    <div class="max-w-6xl mx-auto">
+  <h2 class="text-xl font-bold text-white mb-2"
+    style="
+      -webkit-text-stroke: 1px #000;
+      text-shadow: 
+        0 2px 4px rgba(0,0,0,0.5), 
+        0 4px 10px rgba(0,0,0,0.3);
+    ">
+  We want everyone to be impressed by our work.
+</h2>
+<p class="text-gray-300 mb-6 text-sm">6 projects will be launched on this ecosystem of Family World Bangladesh with your support and inspiration. So that people are impressed and there is financial gain.</p>
   <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="content-grid">
     
     <div class="md:col-span-2 flex flex-col bg-gray-800 rounded-lg overflow-hidden shadow-lg group">
       <div class="relative aspect-video bg-black">
-        <img src="/img/ads01.PNG" alt="Main Content" class="w-full h-full object-cover">
+        <img src="/img/our-work01.jpeg" alt="Main Content" class="w-full h-full object-cover">
         </div>
-      <div class="p-4">
-        <h3 class="font-semibold text-lg line-clamp-2 hover:text-blue-400 cursor-pointer">
-          Man Dole Mera Tan Dole - Remix | Party dance | latest hindi dj remix | old song edm mix
-        </h3>
+      <div class="p-3 flex justify-between items-center bg-gray-800 h-full">
+        <div>
+          <h4 class="font-medium text-sm text-indigo-300">InstaDoodle - Special Offer</h4>
+          <p class="text-xs text-green-400 font-semibold">Special Offer - 87% Off</p>
+        </div>
+        <button class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-3 py-2 rounded transition">
+          Learn More
+        </button>
       </div>
     </div>
 
     <div class="flex flex-col gap-6">
       <div class="flex flex-col bg-gray-800 rounded-lg overflow-hidden shadow-lg">
         <div class="relative aspect-video bg-black">
-          <img src="/img/ads02.PNG" alt="Thumbnail" class="w-full h-full object-cover">
+          <img src="/img/our-work02.jpeg" alt="Thumbnail" class="w-full h-full object-cover">
         </div>
-        <div class="p-3">
-          <h4 class="font-medium text-sm line-clamp-2">Shreya Ghoshal Hits - Best of Romantic Songs Collection</h4>
-          <p class="text-xs text-gray-400 mt-1">90's Hindi Songs • 49K views</p>
+      <div class="p-3 flex justify-between items-center bg-gray-800 h-full">
+        <div>
+          <h4 class="font-medium text-sm text-indigo-300">InstaDoodle - Special Offer</h4>
+          <p class="text-xs text-green-400 font-semibold">Special Offer - 87% Off</p>
         </div>
+        <button class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-3 py-2 rounded transition">
+          Learn More
+        </button>
+      </div>
       </div>
 
       <div class="flex flex-col bg-gray-800 rounded-lg overflow-hidden shadow-lg">
         <div class="relative aspect-video bg-black">
-          <img src="/img/ads03.PNG" alt="Thumbnail" class="w-full h-full object-cover">
+          <img src="/img/our-work03.jpeg" alt="Thumbnail" class="w-full h-full object-cover">
         </div>
-        <div class="p-3">
-          <h4 class="font-medium text-sm line-clamp-2">He started a new life at 40! | Powerful Movie | Drama</h4>
-          <p class="text-xs text-gray-400 mt-1">Movie Hub • 1.2M views</p>
+      <div class="p-3 flex justify-between items-center bg-gray-800 h-full">
+        <div>
+          <h4 class="font-medium text-sm text-indigo-300">InstaDoodle - Special Offer</h4>
+          <p class="text-xs text-green-400 font-semibold">Special Offer - 87% Off</p>
         </div>
+        <button class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-3 py-2 rounded transition">
+          Learn More
+        </button>
+      </div>
       </div>
     </div>
 
     <div class="flex flex-col bg-gray-800 rounded-lg overflow-hidden shadow-lg">
       <div class="relative aspect-video bg-black">
-        <img src="/img/ads04.PNG" alt="Thumbnail" class="w-full h-full object-cover">
+        <img src="/img/our-work04.jpeg" alt="Thumbnail" class="w-full h-full object-cover">
       </div>
-      <div class="p-3">
-        <h4 class="font-medium text-sm line-clamp-2">90's Old Hindi Songs ❤️ 90s Love Song</h4>
-        <p class="text-xs text-gray-400 mt-1">Sajid Bashir official</p>
+       <div class="p-3 flex justify-between items-center bg-gray-800 h-full">
+        <div>
+          <h4 class="font-medium text-sm text-indigo-300">InstaDoodle - Special Offer</h4>
+          <p class="text-xs text-green-400 font-semibold">Special Offer - 87% Off</p>
+        </div>
+        <button class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-3 py-2 rounded transition">
+          Learn More
+        </button>
       </div>
     </div>
 
     <div class="flex flex-col bg-indigo-950 border border-indigo-500 rounded-lg overflow-hidden shadow-lg relative">
-      <div class="relative aspect-video bg-indigo-900 flex items-center justify-center p-4">
-        <div class="text-center">
-          <h3 class="text-xl font-extrabold text-white">Create <span class="text-pink-500">AI</span> Doodle Videos</h3>
-          <p class="text-xs text-indigo-300 mt-1">the only limit is your imagination</p>
-        </div>
-        <span class="absolute top-2 left-2 bg-yellow-500 text-black text-[10px] font-bold px-1.5 py-0.5 rounded">AD</span>
-      </div>
+      
+        <img src=" /img/our-work05.jpeg" alt="Thumbnail" class="w-full h-full object-cover">
+        
+     
       <div class="p-3 flex justify-between items-center bg-gray-800 h-full">
         <div>
           <h4 class="font-medium text-sm text-indigo-300">InstaDoodle - Special Offer</h4>
@@ -2946,11 +4164,16 @@ with Powerful AI Tools.</span>
 
     <div class="flex flex-col bg-gray-800 rounded-lg overflow-hidden shadow-lg">
       <div class="relative aspect-video bg-black">
-        <img src="/img/ads05.PNG" alt="Thumbnail" class="w-full h-full object-cover">
+        <img src="/img/our-work06.jpeg" alt="Thumbnail" class="w-full h-full object-cover">
       </div>
-      <div class="p-3">
-        <h4 class="font-medium text-sm line-clamp-2">AFRO HOUSE PARTY MIX 2026 🍹🔥</h4>
-        <p class="text-xs text-gray-400 mt-1">Golden Eyes VE • 2 weeks ago</p>
+      <div class="p-3 flex justify-between items-center bg-gray-800 h-full">
+        <div>
+          <h4 class="font-medium text-sm text-indigo-300">InstaDoodle - Special Offer</h4>
+          <p class="text-xs text-green-400 font-semibold">Special Offer - 87% Off</p>
+        </div>
+        <button class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-3 py-2 rounded transition">
+          Learn More
+        </button>
       </div>
     </div>
 
@@ -2966,17 +4189,17 @@ with Powerful AI Tools.</span>
   <img class="w-full auto" src="/img/page16.PNG" alt="">
 </section>
 
-<section class="w-full max-w-7xl mx-auto mt-8 px-4 center">
+<section class="w-full  mx-auto mt-8  center">
 
   <!-- Responsive Banner Image -->
-  <div class="w-full rounded-xl overflow-hidden shadow-2xl border border-gray-800">
+  <div class="w-full  overflow-hidden shadow-2xl border border-gray-800">
     <img class="w-full h-auto object-cover" src="/img/pages18.PNG" alt="Family Live TV Showcase">
   </div>
 </section>
 
 
 
-<section class="w-full max-w-7xl mx-auto mt-8 px-4 center">
+<section class="w-full  mx-auto mt-8  center">
   <!-- Headline Container with Tailwind Styling -->
 <div class="flex flex-col items-center text-center border-b border-gray-700 pb-4 mb-6">
   <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-400 uppercase">
@@ -3290,150 +4513,421 @@ with Powerful AI Tools.</span>
 
 
 <!-- Footer Section -->
-<footer class="bg-[#001529] text-gray-300 py-12 px-6 md:px-16 font-sans border-t border-gray-800">
+<footer class="bg-[#031525] text-slate-300 py-12 px-4 md:px-8 border-t border-slate-800 font-sans">
   <div class="max-w-7xl mx-auto">
     
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-10 border-b border-gray-700 pb-12">
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-8 pb-10 border-b border-slate-800">
       
-      <div class="sm:col-span-2 lg:col-span-2">
-           <!-- লোগো এবং স্লোগান সেকশন -->
-<section class="flex flex-col items-center justify-center py-0 px-2 group cursor-pointer select-none">
-    
-    <!-- লোগো মেইন রো (Compact Layout) -->
-    <div class="flex items-center gap-2 md:gap-3 transition-transform duration-500 group-hover:scale-105">
-        
-        <!-- 'Family' টেক্সট (Bold & Minimal) -->
-        <span class="text-2xl md:text-3xl font-black tracking-tight text-white transition-colors duration-300 group-hover:text-gray-200">
-            Family
-        </span>
+                    <div class="flex items-center gap-2 justify-center">
+                        <img src="/img/Logo 300X282.png" alt="Logo" class="h-10 w-auto object-contain rounded-md shadow-sm">
+                        
+                          <div class="text-lg font-bold text-white">Family World</div>
+                        
+                        
+                    </div> 
 
-        <!-- লোগো ইমেজ (Size reduced for better UX) -->
-        <div class="relative flex items-center justify-center">
-            <img 
-                src="/img/logo-removebg-preview (1).png" 
-                alt="logo" 
-                class="w-8 md:w-12 h-auto invert brightness-[1.8] drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-500 group-hover:rotate-12"
-            >
-            <!-- Background Glow -->
-            <div class="absolute inset-0 bg-white/5 blur-xl rounded-full scale-150 group-hover:bg-cyan-500/10 transition-colors"></div>
-        </div>
+      <div>
+        <h4 class="text-sm font-bold text-white mb-3 uppercase tracking-wider">Payment</h4>
+        <ul class="space-y-2 text-xs text-slate-400">
+          <li><a href="#" class="hover:text-cyan-400 transition">Asia</a></li>
+          <li><a href="#" class="hover:text-cyan-400 transition">Europe</a></li>
+          <li><a href="#" class="hover:text-cyan-400 transition">Austraalia</a></li>
+          <li><a href="#" class="hover:text-cyan-400 transition">USA</a></li>
+          <li><a href="#" class="hover:text-cyan-400 transition">Canada</a></li>
+        </ul>
+      </div>
 
-        <!-- 'World' টেক্সট (Gradient Focus) -->
-        <span class="text-2xl md:text-3xl font-black tracking-tight bg-gradient-to-br from-white via-cyan-200 to-cyan-500 bg-clip-text text-transparent">
-            World
-        </span>
+      <div>
+        <h4 class="text-sm font-bold text-white mb-3 uppercase tracking-wider flex items-center gap-1">
+          <span class="text-cyan-400 font-extrabold">|</span> Shows
+        </h4>
+        <ul class="space-y-2 text-xs text-slate-400">
+          <li><a href="#" class="hover:text-cyan-400 transition">Familyworld</a></li>
+          <li><a href="#" class="hover:text-cyan-400 transition">AI- Family AI</a></li>
+          <li><a href="#" class="hover:text-cyan-400 transition">Podcast</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-sm font-bold text-white mb-3 uppercase tracking-wider flex items-center gap-1">
+          <span class="text-cyan-400 font-extrabold">|</span> Articles
+        </h4>
+        <ul class="space-y-2 text-xs text-slate-400">
+          <li><a href="#" class="hover:text-cyan-400 transition">Blogs</a></li>
+          <li><a href="#" class="hover:text-cyan-400 transition">Resources</a></li>
+          <li><a href="#" class="hover:text-cyan-400 transition">Investment</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-sm font-bold text-white mb-3 uppercase tracking-wider flex items-center gap-1">
+          <span class="text-cyan-400 font-extrabold">|</span> About Us
+        </h4>
+        <ul class="space-y-2 text-xs text-slate-400">
+          <li><a href="#" class="hover:text-cyan-400 transition">FAQ</a></li>
+          <li><a href="#" class="hover:text-cyan-400 transition">Contact Us</a></li>
+          <li><a href="#" class="text-emerald-400 italic hover:underline transition">Hosting- Hostinger</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-sm font-bold text-white mb-3 uppercase tracking-wider flex items-center gap-1">
+          <span class="text-cyan-400 font-extrabold">|</span> AI Tech
+        </h4>
+        <ul class="space-y-2 text-xs text-slate-400">
+          <li><a href="#" class="hover:text-cyan-400 transition">Text to image</a></li>
+          <li><a href="#" class="hover:text-cyan-400 transition">Image to video</a></li>
+          <li><a href="#" class="hover:text-cyan-400 transition">Lip sync</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-sm font-bold text-white mb-3 uppercase tracking-wider flex items-center gap-1">
+          <span class="text-cyan-400 font-extrabold">|</span> Donate
+        </h4>
+        <ul class="space-y-2 text-xs text-slate-400">
+          <li><a href="#" class="hover:text-cyan-400 transition">Starte an Application</a></li>
+          <li><a href="#" class="hover:text-cyan-400 transition">Donate Foubdation</a></li>
+          <li><a href="#" class="hover:text-cyan-400 transition">Donate Video Contant</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-sm font-bold text-white mb-3 uppercase tracking-wider flex items-center gap-1">
+          <span class="text-cyan-400 font-extrabold">|</span> Campaign
+        </h4>
+      </div>
+
     </div>
 
-    <!-- স্লোগান (Subtle & Clean) -->
-    <div class="mt-1 overflow-hidden">
-        <p class="text-[7px] md:text-[9px] uppercase tracking-[0.3em] text-gray-500 font-semibold group-hover:text-cyan-400/80 transition-all duration-500 transform translate-y-0 group-hover:translate-y-[-1px]">
-            stream together for every family
-        </p>
-        <!-- নিচে একটি চিকন আন্ডারলাইন এনিমেশন -->
-        <div class="h-[1.5px] w-0 group-hover:w-full bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent transition-all duration-700 mx-auto mt-0.5"></div>
-    </div>
-
-</section>
-
-        <div class="grid grid-cols-1 gap-8 text-xs leading-relaxed">
-          <div>
-            <h3 class="text-emerald-400 font-bold mb-2 flex items-center gap-2">
-              <i class="fas fa-map-marker-alt"></i> United Arab Emirates
-            </h3>
-            <p>Office: APT- C10, Safetake Building, Ajman Industrial Area- 2, UAE</p>
-            <p class="mt-1">PH: +971 56 179 1590</p>
-          </div>
-
-          <div>
-            <h3 class="text-emerald-400 font-bold mb-2 flex items-center gap-2">
-              <i class="fas fa-map-marker-alt"></i> Singapore
-            </h3>
-            <p>10 Anson Road 5-17 International Plaza, Singapore, 079903</p>
-            <p class="mt-1">PH: (+65) 67940014</p>
-          </div>
-
-          <div>
-            <h3 class="text-emerald-400 font-bold mb-2 flex items-center gap-2">
-              <i class="fas fa-map-marker-alt"></i> Bangladesh
-            </h3>
-            <p>House: 84 (3rd Floor), Road: 16/23, Block: A, Banani, Dhaka-1212</p>
-            <p class="mt-1">PH: +880 1332-107467</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="space-y-4">
-        <h3 class="text-white font-bold uppercase text-sm border-l-4 border-emerald-500 pl-3">Shows</h3>
-        <ul class="space-y-2 text-sm">
-          <li><a href="#" class="hover:text-emerald-400 transition-all">Familyworld</a></li>
-          <li><a href="#" class="hover:text-emerald-400 transition-all">AI- Family AI</a></li>
-          <li><a href="#" class="hover:text-emerald-400 transition-all">Podcast</a></li>
-        </ul>
-      </div>
-
-      <div class="space-y-4">
-        <h3 class="text-white font-bold uppercase text-sm border-l-4 border-emerald-500 pl-3">Articles</h3>
-        <ul class="space-y-2 text-sm">
-          <li><a href="#" class="hover:text-emerald-400 transition-all">Blogs</a></li>
-          <li><a href="#" class="hover:text-emerald-400 transition-all">Resources</a></li>
-          <li><a href="#" class="hover:text-emerald-400 transition-all">Investment</a></li>
-        </ul>
-      </div>
-
-      <div class="space-y-4">
-        <h3 class="text-white font-bold uppercase text-sm border-l-4 border-emerald-500 pl-3">About Us</h3>
-        <ul class="space-y-2 text-sm">
-          <li><a href="#" class="hover:text-emerald-400 transition-all">FAQ</a></li>
-          <li><a href="#" class="hover:text-emerald-400 transition-all">Contact Us</a></li>
-          <li class="text-xs text-gray-500 pt-2 italic text-emerald-500/80">Hosting- Hostinger</li>
-        </ul>
-      </div>
-
-      <div class="space-y-4">
-        <h3 class="text-white font-bold uppercase text-sm border-l-4 border-emerald-500 pl-3">AI Tech</h3>
-        <ul class="space-y-2 text-sm">
-          <li><a href="#" class="hover:text-emerald-400 transition-all">Text to image</a></li>
-          <li><a href="#" class="hover:text-emerald-400 transition-all">Image to video</a></li>
-          <li><a href="#" class="hover:text-emerald-400 transition-all">Lip sync</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="mt-10 flex flex-col md:flex-row justify-between items-center gap-6">
-      <p class="text-xs text-gray-500">© 2026 Family World International Service.</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6 pt-10 text-[11px] leading-relaxed text-slate-400 border-b border-slate-800/50 pb-8">
       
+      <div>
+        <div class="flex items-center gap-1 text-emerald-400 font-semibold mb-2 text-xs">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Bangladesh
+        </div>
+        <p>House: 84 (3rd Floor), Road: 16/23,</p>
+        <p>Block: A, Banani, Dhaka-1212</p>
+        <p class="mt-1">PH: +880 1332-107467</p>
+      </div>
 
+      <div>
+        <div class="flex items-center gap-1 text-emerald-400 font-semibold mb-2 text-xs">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Bangladesh
+        </div>
+        <p>House: 84 (3rd Floor), Road: 16/23,</p>
+        <p>Block: A, Banani, Dhaka-1212</p>
+        <p class="mt-1">PH: +880 1332-107467</p>
+      </div>
 
+      <div>
+        <div class="flex items-center gap-1 text-emerald-400 font-semibold mb-2 text-xs">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Singapore
+        </div>
+        <p>10 Anson Road 5-17 International</p>
+        <p>Plaza, Singapore, 079903</p>
+        <p class="mt-1">PH: (+65) 67940014</p>
+      </div>
 
-                  <div class="flex items-center gap-3 DEVELOPED BY ROX SABIL">
-    <div class="group relative flex items-center gap-2 bg-white/5 px-4 py-2 rounded-full border border-white/10 hover:border-emerald-500/50 transition-all duration-300">
-        <span class="relative flex h-2 w-2">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-        </span>
-        
-        <p class="text-[10px] md:text-xs tracking-widest text-gray-400 group-hover:text-emerald-400 transition-colors">
+      <div>
+        <div class="flex items-center gap-1 text-emerald-400 font-semibold mb-2 text-xs">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          United Arab Emirates
+        </div>
+        <p>Office: APT- C10, Safetake Building,</p>
+        <p>Ajman Industrial Area- 2, UAE</p>
+        <p class="mt-1">PH: +971 56 179 1590</p>
+      </div>
+
+      <div>
+        <div class="flex items-center gap-1 text-emerald-400 font-semibold mb-2 text-xs">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Bangladesh
+        </div>
+        <p>House: 84 (3rd Floor), Road: 16/23,</p>
+        <p>Block: A, Banani, Dhaka-1212</p>
+        <p class="mt-1">PH: +880 1332-107467</p>
+      </div>
+
+      <div>
+        <div class="flex items-center gap-1 text-emerald-400 font-semibold mb-2 text-xs">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Singapore
+        </div>
+        <p>10 Anson Road 5-17 International</p>
+        <p>Plaza, Singapore, 079903</p>
+        <p class="mt-1">PH: (+65) 67940014</p>
+      </div>
+
+      <div>
+        <div class="flex items-center gap-1 text-emerald-400 font-semibold mb-2 text-xs">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          United Arab Emirates
+        </div>
+        <p>Office: APT- C10, Safetake Building,</p>
+        <p>Ajman Industrial Area- 2, UAE</p>
+        <p class="mt-1">PH: +971 56 179 1590</p>
+      </div>
+
+    </div>
+
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6">
+      <p class="text-xs text-slate-500 order-2 sm:order-1">© 2026 Family World. All rights reserved.</p>
+      
+      <div class="flex items-center gap-3 order-1 sm:order-2 ml-auto">
+        <div class="group relative flex items-center gap-2 bg-white/5 px-4 py-2 rounded-full border border-white/10 hover:border-emerald-500/50 transition-all duration-300">
+<span class="relative flex h-3 w-3 items-center justify-center">
+  <!-- Outer Pulse Glow 1 -->
+  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-60"></span>
+  
+  <!-- Outer Pulse Glow 2 (Slightly delayed style using opacity for depth) -->
+  <span class="animate-pulse absolute inline-flex h-5 w-5 rounded-full bg-emerald-400 opacity-25 blur-[2px]"></span>
+  
+  <!-- 3D Glossy Core Dot -->
+  <span class="relative inline-flex rounded-full h-3 w-3 bg-gradient-to-tr from-red-700 via-red-500 to-white shadow-[0_0_8px_rgba(239,68,68,0.8),inset_-1px_-1px_2px_rgba(0,0,0,0.5),inset_1px_1px_2px_rgba(255,255,255,0.8)]"></span>
+</span>
+          
+          <p class="text-[10px] md:text-xs tracking-widest text-gray-400 group-hover:text-emerald-400 transition-colors">
             DEVELOPED BY 
             <a href="https://rox-portfolio-8iff.onrender.com/" target="_blank" class="text-emerald-500 font-black hover:text-white transition-colors">
-                ROX SABIL
+              ROX SABIL
             </a>
-        </p>
+          </p>
+        </div>
+
+        <a href="https://wa.me/8801749935208" target="_blank" class="p-2.5 bg-emerald-500/10 hover:bg-emerald-500 text-emerald-500 hover:text-white rounded-full transition-all duration-300 flex items-center justify-center">
+          <i class="fab fa-whatsapp text-base"></i>
+        </a>
+        
+        <a href="https://rox-portfolio-8iff.onrender.com/" target="_blank" class="p-2.5 bg-emerald-500/10 hover:bg-emerald-500 text-emerald-500 hover:text-white rounded-full transition-all duration-300 flex items-center justify-center">
+          <i class="fa-solid fa-arrow-up-right-from-square text-sm"></i>
+        </a>
+      </div>
     </div>
 
-    <a href="https://wa.me/8801749935208" target="_blank" class="p-3 bg-emerald-500/10 hover:bg-emerald-500 text-emerald-500 hover:text-white rounded-full transition-all">
-        <i class="fab fa-whatsapp text-[18px]"></i>
-    </a>
-<a href="https://rox-portfolio-8iff.onrender.com/" target="_blank" class="p-3 bg-emerald-500/10 hover:bg-emerald-500 text-emerald-500 hover:text-white rounded-full transition-all">
-    <i class="fa-solid fa-arrow-up-right-from-square text-[17px]"></i>
-</a>
-
-
-</div>
-
-
-
-    </div>
   </div>
 </footer>
+<!-- Publish Your Ads modal: keeps the current home page layout intact while adding a responsive multi-step advertiser flow. -->
+<div id="ads-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-950/60 p-4 backdrop-blur-sm">
+    <div class="w-full max-w-4xl overflow-hidden rounded-3xl border border-sky-200 bg-white shadow-2xl">
+        <div class="flex items-center justify-between border-b border-slate-200 bg-sky-600 px-5 py-4 text-white">
+            <div>
+                <p class="text-xs uppercase tracking-[0.25em] text-sky-100">Advertise</p>
+                <h3 class="text-xl font-bold">Publish Your Ads</h3>
+            </div>
+            <button type="button" class="close-ads-modal rounded-full bg-white/10 p-2 text-xl hover:bg-white/20" aria-label="Close">×</button>
+        </div>
+
+        <div class="p-5 md:p-7">
+            <div id="ads-step-indicator" class="mb-6 hidden items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500 md:flex">
+                <span class="step-pill rounded-full bg-sky-100 px-3 py-1 text-sky-700">1. Upload</span>
+                <span class="text-slate-300">→</span>
+                <span class="step-pill rounded-full bg-slate-100 px-3 py-1">2. Payment</span>
+            </div>
+
+            <form id="ads-form" action="/ads/publish" method="POST" enctype="multipart/form-data" class="space-y-5">
+                <input type="hidden" name="paymentType" id="paymentType" value="manual">
+                <input type="hidden" name="gateway" id="gateway" value="bkash">
+
+                <div id="step-upload" class="space-y-5">
+                    <div class="grid gap-5 md:grid-cols-2">
+                        <div>
+                            <label class="mb-2 block text-sm font-semibold text-slate-700">Company Name</label>
+                            <input type="text" name="companyName" class="w-full rounded-xl border border-slate-300 px-3 py-3 text-sm outline-none transition focus:border-sky-500" placeholder="Your brand name" required>
+                        </div>
+                        <div>
+                            <label class="mb-2 block text-sm font-semibold text-slate-700">Ad Title</label>
+                            <input type="text" name="title" class="w-full rounded-xl border border-slate-300 px-3 py-3 text-sm outline-none transition focus:border-sky-500" placeholder="Summer campaign" required>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="mb-2 block text-sm font-semibold text-slate-700">Choose ad video</label>
+                        <input type="file" name="adVideoFile" accept="video/*" class="block w-full rounded-xl border border-dashed border-slate-300 bg-slate-50 px-3 py-5 text-sm text-slate-600 file:mr-3 file:rounded-full file:border-0 file:bg-sky-600 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white" required>
+                    </div>
+
+                    <div class="flex justify-end">
+                        <button type="button" id="continue-payment" class="rounded-xl bg-sky-600 px-5 py-3 text-sm font-semibold text-white hover:bg-sky-700">Continue to payment</button>
+                    </div>
+                </div>
+
+                <div id="step-payment" class="hidden space-y-6">
+                    <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                        <p class="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Select payment method</p>
+                        <div class="grid gap-3 sm:grid-cols-3">
+                            <button type="button" class="gateway-option rounded-2xl border border-slate-200 bg-white p-3 text-left transition hover:border-sky-400 hover:shadow-md" data-gateway="bkash">
+                                <div class="mb-2 flex h-12 w-12 items-center justify-center rounded-xl bg-pink-100 text-xl text-pink-600">b</div>
+                                <p class="font-bold text-slate-800">bKash</p>
+                                <p class="text-xs text-slate-500">01711-111111</p>
+                            </button>
+                            <button type="button" class="gateway-option rounded-2xl border border-slate-200 bg-white p-3 text-left transition hover:border-sky-400 hover:shadow-md" data-gateway="nagad">
+                                <div class="mb-2 flex h-12 w-12 items-center justify-center rounded-xl bg-violet-100 text-xl text-violet-600">N</div>
+                                <p class="font-bold text-slate-800">Nagad</p>
+                                <p class="text-xs text-slate-500">01722-222222</p>
+                            </button>
+                            <button type="button" class="gateway-option rounded-2xl border border-slate-200 bg-white p-3 text-left transition hover:border-sky-400 hover:shadow-md" data-gateway="rocket">
+                                <div class="mb-2 flex h-12 w-12 items-center justify-center rounded-xl bg-amber-100 text-xl text-amber-600">R</div>
+                                <p class="font-bold text-slate-800">Rocket</p>
+                                <p class="text-xs text-slate-500">01733-333333</p>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="grid gap-5 md:grid-cols-2">
+                        <div>
+                            <label class="mb-2 block text-sm font-semibold text-slate-700">Account number</label>
+                            <input type="text" name="accountNo" class="w-full rounded-xl border border-slate-300 px-3 py-3 text-sm outline-none transition focus:border-sky-500" placeholder="Enter sender number">
+                        </div>
+                        <div>
+                            <label class="mb-2 block text-sm font-semibold text-slate-700">Transaction ID</label>
+                            <input type="text" name="trxId" class="w-full rounded-xl border border-slate-300 px-3 py-3 text-sm outline-none transition focus:border-sky-500" placeholder="TrxID or reference code">
+                        </div>
+                    </div>
+
+                    <div class="grid gap-5 md:grid-cols-2">
+                        <div class="rounded-2xl border border-slate-200 bg-white p-4">
+                            <p class="mb-2 text-sm font-semibold text-slate-700">Manual send money flow</p>
+                            <div class="space-y-3">
+                                <input type="file" name="paymentScreenshot" accept="image/*" class="block w-full rounded-xl border border-dashed border-slate-300 bg-slate-50 px-3 py-3 text-sm text-slate-600 file:mr-3 file:rounded-full file:border-0 file:bg-slate-700 file:px-3 file:py-1.5 file:text-sm file:font-semibold file:text-white">
+                            </div>
+                            <button type="button" class="manual-submit mt-4 w-full rounded-xl bg-slate-800 px-4 py-3 text-sm font-semibold text-white hover:bg-slate-900">Submit for review</button>
+                        </div>
+
+                        <div class="rounded-2xl border border-slate-200 bg-white p-4">
+                            <p class="mb-2 text-sm font-semibold text-slate-700">Direct gateway mock flow</p>
+                            <div class="space-y-3">
+                                <input type="text" id="direct-otp" class="w-full rounded-xl border border-slate-300 px-3 py-3 text-sm outline-none transition focus:border-sky-500" placeholder="OTP code: 123456" maxlength="6">
+                                <input type="password" id="direct-pin" class="w-full rounded-xl border border-slate-300 px-3 py-3 text-sm outline-none transition focus:border-sky-500" placeholder="PIN: 1234" maxlength="4">
+                            </div>
+                            <button type="button" id="direct-payment-submit" class="mt-4 w-full rounded-xl bg-emerald-600 px-4 py-3 text-sm font-semibold text-white hover:bg-emerald-700">Verify and activate ad</button>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between pt-4">
+                        <button type="button" id="back-to-upload" class="rounded-xl border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100">Back</button>
+                        <button type="button" id="toggle-direct-mode" class="rounded-xl bg-sky-600 px-4 py-2 text-sm font-semibold text-white hover:bg-sky-700">Use direct gateway</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="toast" class="pointer-events-none fixed right-4 top-4 z-[110] hidden max-w-sm rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-700 shadow-xl"></div>
+
+<script>
+    // The toast system reuses the server-provided query message so login, signup, upload, and ad actions give immediate feedback.
+    function showToast(message) {
+        const toast = document.getElementById('toast');
+        if (!toast || !message) return;
+        toast.textContent = message;
+        toast.classList.remove('hidden');
+        setTimeout(() => toast.classList.add('hidden'), 3000);
+    }
+
+    const urlMessage = new URLSearchParams(window.location.search).get('message');
+    if (urlMessage) {
+        showToast(urlMessage);
+    }
+
+    // The ad modal uses a lightweight step flow to keep the existing home page layout and add a responsive advertiser experience.
+    const adsModal = document.getElementById('ads-modal');
+    const paymentInput = document.getElementById('paymentType');
+    const gatewayInput = document.getElementById('gateway');
+    const stepUpload = document.getElementById('step-upload');
+    const stepPayment = document.getElementById('step-payment');
+    const continuePayment = document.getElementById('continue-payment');
+    const toggleDirectMode = document.getElementById('toggle-direct-mode');
+    const directOtp = document.getElementById('direct-otp');
+    const directPin = document.getElementById('direct-pin');
+
+    function openAdsModal() {
+        if (adsModal) adsModal.classList.remove('hidden');
+        if (adsModal) adsModal.classList.add('flex');
+    }
+
+    function closeAdsModal() {
+        if (adsModal) {
+            adsModal.classList.add('hidden');
+            adsModal.classList.remove('flex');
+        }
+    }
+
+    document.querySelectorAll('.open-ads-modal').forEach((button) => {
+        button.addEventListener('click', openAdsModal);
+    });
+
+    document.querySelectorAll('.close-ads-modal').forEach((button) => {
+        button.addEventListener('click', closeAdsModal);
+    });
+
+    if (adsModal) {
+        adsModal.addEventListener('click', (event) => {
+            if (event.target === adsModal) closeAdsModal();
+        });
+    }
+
+    if (continuePayment) {
+        continuePayment.addEventListener('click', () => {
+            stepUpload.classList.add('hidden');
+            stepPayment.classList.remove('hidden');
+        });
+    }
+
+    if (toggleDirectMode) {
+        toggleDirectMode.addEventListener('click', () => {
+            paymentInput.value = 'direct';
+            toggleDirectMode.textContent = 'Use manual transfer';
+            document.querySelectorAll('.gateway-option').forEach((card) => card.classList.add('ring-2', 'ring-sky-400'));
+        });
+    }
+
+    document.querySelectorAll('.gateway-option').forEach((option) => {
+        option.addEventListener('click', () => {
+            const selectedGateway = option.dataset.gateway;
+            gatewayInput.value = selectedGateway;
+            document.querySelectorAll('.gateway-option').forEach((card) => {
+                card.classList.remove('border-sky-400', 'ring-2', 'ring-sky-400', 'bg-sky-50');
+                card.classList.add('border-slate-200', 'bg-white');
+            });
+            option.classList.add('border-sky-400', 'bg-sky-50', 'ring-2', 'ring-sky-400');
+        });
+    });
+
+    const backToUpload = document.getElementById('back-to-upload');
+    if (backToUpload) {
+        backToUpload.addEventListener('click', () => {
+            stepPayment.classList.add('hidden');
+            stepUpload.classList.remove('hidden');
+        });
+    }
+
+    const manualSubmit = document.querySelector('.manual-submit');
+    if (manualSubmit) {
+        manualSubmit.addEventListener('click', () => {
+            paymentInput.value = 'manual';
+            document.getElementById('ads-form').submit();
+        });
+    }
+
+    const directSubmit = document.getElementById('direct-payment-submit');
+    if (directSubmit) {
+        directSubmit.addEventListener('click', () => {
+            const otpValue = directOtp ? directOtp.value.trim() : '';
+            const pinValue = directPin ? directPin.value.trim() : '';
+
+            if (otpValue !== '123456' || pinValue !== '1234') {
+                showToast('Invalid OTP or PIN. Please use the demo values 123456 and 1234.');
+                return;
+            }
+
+            paymentInput.value = 'direct';
+            document.getElementById('ads-form').submit();
+        });
+    }
+</script>
 </body>
 </html>

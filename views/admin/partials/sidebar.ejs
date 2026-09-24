@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - First Page Video Upload</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-950 font-sans flex">
+
+<div class="w-72 bg-gradient-to-b from-slate-950 via-slate-900 to-black text-white min-h-screen p-6 flex flex-col justify-between border-r border-slate-800/60 shadow-2xl relative hidden md:flex">
+    
+    <div>
+        <div class="flex items-center gap-3 mb-10 px-2">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+                <i class="fa-solid fa-chart-pie text-white text-lg"></i>
+            </div>
+            <a href="/admin">
+                <div>
+                <h1 class="text-lg font-black tracking-wider leading-none bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400">ADMIN PANEL</h1>
+                <span class="text-[10px] font-bold text-slate-500 tracking-widest uppercase">Management</span>
+            </div>
+            </a>
+        </div>
+        
+        <div>
+            <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest px-4 block mb-4">Video Controls</span>
+            
+            <nav id="sidebarNav" class="space-y-1.5">
+                <a href="/admin/upload-1" onclick="setActiveLink(this)" class="nav-link group flex items-center justify-between px-4 py-3.5 rounded-xl transition-all duration-300 bg-gradient-to-r from-indigo-600/20 to-indigo-600/5 border border-indigo-500/30 text-indigo-400 font-semibold shadow-[0_0_15px_rgba(99,102,241,0.1)]">
+                    <div class="flex items-center gap-3.5">
+                        <i class="fa-solid fa-clapperboard text-sm transition-transform group-hover:scale-110"></i>
+                        <span class="text-sm">First Page Video</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                </a>
+                
+                <a href="/admin/upload-2" onclick="setActiveLink(this)" class="nav-link group flex items-center justify-between px-4 py-3.5 rounded-xl transition-all duration-300 border border-transparent text-slate-400 hover:text-slate-200 hover:bg-slate-900/50 font-medium">
+                    <div class="flex items-center gap-3.5">
+                        <i class="fa-solid fa-photo-film text-sm transition-transform group-hover:scale-110"></i>
+                        <span class="text-sm">Second Page Video</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-[10px] text-slate-600 group-hover:text-slate-400 transition-transform group-hover:translate-x-0.5"></i>
+                </a>
+
+
+                <a href="/admin/upload/ads" onclick="setActiveLink(this)" class="nav-link group flex items-center justify-between px-4 py-3.5 rounded-xl transition-all duration-300 border border-transparent text-slate-400 hover:text-slate-200 hover:bg-slate-900/50 font-medium">
+                    <div class="flex items-center gap-3.5">
+                        <i class="fa-solid fa-photo-film text-sm transition-transform group-hover:scale-110"></i>
+                        <span class="text-sm">Ads Videos Upload</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-[10px] text-slate-600 group-hover:text-slate-400 transition-transform group-hover:translate-x-0.5"></i>
+                </a>
+
+
+                
+                <a href="/admin/upload-3" onclick="setActiveLink(this)" class="nav-link group flex items-center justify-between px-4 py-3.5 rounded-xl transition-all duration-300 border border-transparent text-slate-400 hover:text-slate-200 hover:bg-slate-900/50 font-medium">
+                    <div class="flex items-center gap-3.5">
+                        <i class="fa-solid fa-film text-sm transition-transform group-hover:scale-110"></i>
+                        <span class="text-sm">3rd Page Video</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-[10px] text-slate-600 group-hover:text-slate-400 transition-transform group-hover:translate-x-0.5"></i>
+                </a>
+            </nav>
+        </div>
+    </div>
+    
+    <div class="border-t border-slate-800/80 pt-4 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center font-black text-xs text-indigo-400 uppercase">
+                RX
+            </div>
+            <div>
+                <h4 class="text-xs font-bold text-slate-200 leading-none">RoX Sabil</h4>
+                <span class="text-[10px] font-semibold text-slate-500 mt-1 block">Super Admin</span>
+            </div>
+        </div>
+        <button class="w-8 h-8 rounded-lg text-slate-500 hover:text-red-400 hover:bg-red-500/10 flex items-center justify-center transition-all duration-200">
+            <i class="fa-solid fa-power-off text-xs"></i>
+        </button>
+    </div>
+</div>
+
+<script>
+  function setActiveLink(clickedElement) {
+    // ১. প্রথমে সব লিংকের অ্যাক্টিভ ক্লাস ও স্টাইল রিমুভ করি
+    const links = document.querySelectorAll('.nav-link');
+    links.forEach(link => {
+      // অ্যাক্টিভ ক্লাস রিমুভ (মেটালিক গ্লো ও বর্ডার আউট)
+      link.classList.remove('bg-gradient-to-r', 'from-indigo-600/20', 'to-indigo-600/5', 'border-indigo-500/30', 'text-indigo-400', 'font-semibold', 'shadow-[0_0_15px_rgba(99,102,241,0.1)]');
+      
+      // ইন-অ্যাক্টিভ সাধারণ ক্লাসগুলো আবার ফিরিয়ে দেওয়া
+      link.classList.add('border-transparent', 'text-slate-400', 'font-medium');
+      
+      // ডানপাশের অ্যারো আইকনটির কালার ডিফল্ট করা
+      const arrow = link.querySelector('.fa-chevron-right');
+      if (arrow) {
+        arrow.classList.add('text-slate-600');
+        arrow.classList.remove('text-indigo-400');
+      }
+    });
+
+    // ২. এবার যে লিংকে ক্লিক করা হয়েছে (Clicked Element), সেটিতে অ্যাডভান্সড ব্যাকগ্রাউন্ড অ্যাপ্লাই করা
+    clickedElement.classList.remove('border-transparent', 'text-slate-400', 'font-medium');
+    clickedElement.classList.add('bg-gradient-to-r', 'from-indigo-600/20', 'to-indigo-600/5', 'border-indigo-500/30', 'text-indigo-400', 'font-semibold', 'shadow-[0_0_15px_rgba(99,102,241,0.1)]');
+    
+    // ক্লিক করা লিংকের অ্যারো কালার উজ্জ্বল করা
+    const activeArrow = clickedElement.querySelector('.fa-chevron-right');
+    if (activeArrow) {
+      activeArrow.classList.remove('text-slate-600');
+      activeArrow.classList.add('text-indigo-400');
+    }
+  }
+</script>
+
