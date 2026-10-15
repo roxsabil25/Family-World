@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Streamit Admin Panel</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              darkBg: '#111827',
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="bg-[#0b0f19] text-white font-sans antialiased min-h-screen flex flex-col">
+
+    <!-- Header Include -->
+    <%- include('partials/header') %>
+
+    <!-- Main Layout Container (Sidebar + Page Content) -->
+    <div class="flex flex-1 overflow-hidden">
+        
+        <!-- Sidebar Include -->
+        <div class="flex-shrink-0">
+            <%- include('partials/sideBar') %>
+        </div>
+
+        <!-- Main Content Area (Dynamic Page Loading) -->
+        <main class="flex-1 p-4 sm:p-6 overflow-y-auto bg-[#0b0f19]">
+            <div class="max-w-7xl mx-auto">
+                
+                <!-- ড্যাশবোর্ড বা অন্যান্য পেজ এখানে ডায়নামিকালি রেন্ডার হবে -->
+                <% if (activePage === 'dashboard') { %>
+                    <%- include('pages/dashboard') %>
+                <% } else if (activePage === 'media-library') { %>
+                    <%- include('pages/media-library') %>
+                <% } else { %>
+                    <h1 class="text-2xl font-bold mb-4">Welcome to Dashboard</h1>
+                    <p class="text-gray-400">Here is your main admin content area...</p>
+                <% } %>
+
+            </div>
+        </main>
+
+    </div>
+
+</body>
+</html>

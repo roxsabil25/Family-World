@@ -13,6 +13,14 @@ const adSchema = new mongoose.Schema({
         trim: true,
         default: ''
     },
+    driveFileId: {
+        type: String,
+        default: ''
+    },
+    webViewLink: {
+        type: String,
+        default: ''
+    },
     // Public title shown on the ad card and review list.
     title: {
         type: String,
@@ -40,6 +48,14 @@ const adSchema = new mongoose.Schema({
     screenshotUrl: {
         type: String,
         trim: true,
+        default: ''
+    },
+    screenshotDriveFileId: {
+        type: String,
+        default: ''
+    },
+    screenshotWebViewLink: {
+        type: String,
         default: ''
     },
     accountNo: {

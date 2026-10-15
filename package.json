@@ -16,6 +16,7 @@
     "ejs": "^5.0.2",
     "express": "^5.2.1",
     "express-session": "^1.18.2",
+    "googleapis": "^186.0.0",
     "mongoose": "^9.7.0",
     "multer": "^2.2.0"
   }

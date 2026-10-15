@@ -1,0 +1,66 @@
+<!-- Main Header Container -->
+<header class="bg-[#111827] text-white px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between border-b border-gray-800 w-full z-50">
+  
+  <!-- Left Section: Logo & Toggle Button -->
+  <div class="flex items-center space-x-3 sm:space-x-6">
+    <!-- Streamit Logo -->
+    <div class="flex items-center space-x-2">
+      <div class="bg-red-600 text-white font-black text-lg sm:text-xl px-2.5 py-1 rounded tracking-wider flex items-center justify-center">
+        S
+      </div>
+      <span class="text-red-600 font-bold text-lg sm:text-xl tracking-wider uppercase hidden xs:inline-block">STREAMIT</span>
+    </div>
+
+    <!-- Collapse / Back Arrow Button -->
+    <button class="bg-red-600 text-white p-2 rounded-full hover:bg-red-700 transition focus:outline-none">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Right Section: Actions, Icons & Profile -->
+  <div class="flex items-center space-x-2 sm:space-x-5">
+    
+    <!-- Orange Plus Action Button -->
+    <button class="bg-amber-500 hover:bg-amber-600 text-white p-1.5 sm:p-2 rounded-lg transition flex items-center justify-center">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+      </svg>
+    </button>
+
+    <!-- Red 'A' Button -->
+    <button class="bg-red-600 text-white font-bold px-2.5 sm:px-3 py-1 sm:py-1.5 rounded hover:bg-red-700 transition text-xs sm:text-sm">
+      A
+    </button>
+
+    <!-- Regular 'A' Button (隠す on very small screens if needed, or keep) -->
+    <button class="text-gray-300 hover:text-white font-medium px-1.5 sm:px-2 py-1 transition text-xs sm:text-sm hidden sm:inline-block">
+      A
+    </button>
+
+    <!-- Notification Icon with Badge -->
+    <div class="relative cursor-pointer p-1">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6 text-gray-300 hover:text-white transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+      </svg>
+      <span class="absolute -top-1 -right-1 bg-red-600 text-white text-[9px] sm:text-[10px] font-bold px-1.5 py-0.5 rounded-full">
+        10
+      </span>
+    </div>
+
+    <!-- Language Selector -->
+    <div class="hidden md:flex items-center space-x-1 cursor-pointer text-gray-300 hover:text-white transition text-sm font-medium">
+      <span>🇺🇸</span>
+      <span>EN</span>
+    </div>
+
+    <!-- User Profile Avatar -->
+    <div class="flex items-center pl-1 sm:pl-2">
+      <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=100" 
+           alt="User Profile" 
+           class="h-8 w-8 sm:h-9 sm:w-9 rounded-full object-cover border-2 border-gray-700 hover:border-red-600 transition cursor-pointer">
+    </div>
+
+  </div>
+</header>

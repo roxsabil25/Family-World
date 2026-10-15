@@ -17,6 +17,14 @@ const videoSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    driveFileId: {
+        type: String,
+        default: ''
+    },
+    webViewLink: {
+        type: String,
+        default: ''
+    },
     // Optional like counter kept for the existing interactive frontend.
     likes: {
         type: Number,
@@ -43,6 +51,10 @@ const videoSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     }
+});
+
+videoSchema.virtual('path').get(function () {
+    return this.videoUrl;
 });
 
 module.exports = mongoose.model('Video', videoSchema);

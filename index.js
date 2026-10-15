@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const { uploadBuffer, deleteDriveFile } = require('./services/googleDrive');
 const Video = require('./model/Video');
 const Ad = require('./model/ads');
 const User = require('./model/User');
@@ -50,12 +51,6 @@ const awareKeys = [
     { title: 'Existence', image: '/videos/14.mp4', type: 'horizontal' }
 ];
 
-const ensureDirectory = (dirPath) => {
-    if (!fs.existsSync(dirPath)) {
-        fs.mkdirSync(dirPath, { recursive: true });
-    }
-};
-
 // Health Check Route (startup verification for deployment and debugging)
 app.get('/healthz', (req, res) => {
     res.status(200).json({
@@ -92,50 +87,90 @@ const seedAdminUser = async () => {
 // MongoDB Atlas Connection
 mongoose.connect(process.env.MONGO_URI || 'mongodb+srv://roxmarjuk25_db_user:IpBd8VH3kOLIAInC@cluster0.miwqauj.mongodb.net/?appName=Cluster0')
     .then(async () => {
-        console.log('[SUCCESS] MongoDB Connected');
+        console.log('\x1b[32m[SUCCESS]\x1b[0m MongoDB Connected');
         await seedAdminUser();
     })
-    .catch(err => console.error('[ERROR] Database connection failed:', err));
+    .catch(err => console.error('\x1b[31m[ERROR]\x1b[0m Database connection failed:', err));
 
-// General video storage for normal uploads and user submissions.
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        const dir = 'public/videos/';
-        ensureDirectory(dir);
-        cb(null, dir);
+const MAX_UPLOAD_SIZE_BYTES = 250 * 1024 * 1024;
+const MAX_SCREENSHOT_SIZE_BYTES = 10 * 1024 * 1024;
+const memoryUpload = multer({
+    storage: multer.memoryStorage(),
+    limits: {
+        fileSize: MAX_UPLOAD_SIZE_BYTES,
+        files: 2
     },
-    filename: function (req, file, cb) {
-        cb(null, Date.now() + path.extname(file.originalname));
+    fileFilter: (req, file, callback) => {
+        const isScreenshot = file.fieldname === 'paymentScreenshot';
+        const validType = isScreenshot
+            ? file.mimetype.startsWith('image/')
+            : file.mimetype.startsWith('video/');
+        if (!validType) {
+            return callback(new Error(isScreenshot ? 'Please upload an image file.' : 'Please upload a video file.'));
+        }
+        callback(null, true);
     }
 });
-const upload = multer({ storage: storage });
 
-// Partner ad videos and payment screenshots use isolated folders for easier admin review and import checks.
-const adSubmissionStorage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        const dir = file.fieldname === 'paymentScreenshot' ? 'public/ADS/screenshots/' : 'public/ADS/';
-        ensureDirectory(dir);
-        cb(null, dir);
-    },
-    filename: function (req, file, cb) {
-        const prefix = file.fieldname === 'paymentScreenshot' ? 'payment-' : 'ad-';
-        cb(null, prefix + Date.now() + path.extname(file.originalname));
+const handleUploadErrors = (middleware, { redirectTo, message }) => (req, res, next) => {
+    try {
+        middleware(req, res, (error) => {
+            if (error) {
+                console.error('\x1b[31m[ERROR]\x1b[0m Multer memory upload failed:', error);
+                const errorMessage = error.code === 'LIMIT_FILE_SIZE'
+                    ? 'File is too large. The maximum upload size is 250 MB.'
+                    : message;
+                if (redirectTo) {
+                    return res.redirect(`${redirectTo}?message=${encodeURIComponent(errorMessage)}`);
+                }
+                return res.status(400).send(errorMessage);
+            }
+            next();
+        });
+    } catch (error) {
+        console.error('\x1b[31m[ERROR]\x1b[0m Multer middleware threw an error:', error);
+        if (redirectTo) {
+            return res.redirect(`${redirectTo}?message=${encodeURIComponent(message)}`);
+        }
+        return res.status(400).send(message);
     }
-});
-const publishAdUpload = multer({ storage: adSubmissionStorage });
+};
 
-// Legacy ads upload storage remains available for the existing admin ads screen.
-const adsStorage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        const dir = 'public/ADS/';
-        ensureDirectory(dir);
-        cb(null, dir);
-    },
-    filename: function (req, file, cb) {
-        cb(null, 'ad-' + Date.now() + path.extname(file.originalname));
-    }
+const videoUpload = handleUploadErrors(memoryUpload.single('videoFile'), {
+    message: 'Video upload could not be processed.'
 });
-const uploadAdsVideo = multer({ storage: adsStorage });
+const publishAdUpload = handleUploadErrors(memoryUpload.fields([
+    { name: 'adVideoFile', maxCount: 1 },
+    { name: 'paymentScreenshot', maxCount: 1 }
+]), {
+    redirectTo: '/',
+    message: 'Ad upload could not be processed.'
+});
+const adsVideoUpload = handleUploadErrors(memoryUpload.single('adsVideo'), {
+    message: 'Ad upload could not be processed.'
+});
+
+const cleanupDriveUpload = async (uploadedFile) => {
+    if (!uploadedFile?.driveFileId) {
+        return;
+    }
+    try {
+        await deleteDriveFile(uploadedFile.driveFileId);
+    } catch (cleanupError) {
+        console.error('\x1b[31m[ERROR]\x1b[0m Drive file cleanup failed after an upload error:', cleanupError);
+    }
+};
+
+const deleteLegacyLocalFile = (fileUrl, allowedFolder) => {
+    if (!fileUrl || !fileUrl.startsWith(`/${allowedFolder}/`)) {
+        return;
+    }
+    const filePath = path.join(__dirname, 'public', fileUrl.slice(1));
+    if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath);
+        console.log('\x1b[32m[SUCCESS]\x1b[0m Deleted legacy local upload:', filePath);
+    }
+};
 
 // Public home page: present the existing page1/page2 collection and the approved video/ad feed.
 app.get('/', async (req, res) => {
@@ -250,26 +285,37 @@ app.get('/logout', (req, res) => {
 });
 
 // User video upload route: authenticated users can submit videos for admin verification.
-app.post('/videos/upload', requireAuth, upload.single('videoFile'), async (req, res) => {
+app.post('/videos/upload', requireAuth, videoUpload, async (req, res) => {
+    let uploadedFile;
     try {
         if (!req.file) {
             return res.redirect('/?message=' + encodeURIComponent('Please choose a video file.'));
         }
 
+        console.log('\x1b[36m[INFO]\x1b[0m Processing user video in RAM:', req.file.originalname, req.file.size, 'bytes');
+        uploadedFile = await uploadBuffer({
+            buffer: req.file.buffer,
+            originalName: req.file.originalname,
+            mimeType: req.file.mimetype,
+            category: 'video'
+        });
         const newVideo = new Video({
             title: req.body.title || 'New user video',
             description: req.body.description || '',
-            videoUrl: '/videos/' + req.file.filename,
+            videoUrl: uploadedFile.playbackUrl,
+            driveFileId: uploadedFile.driveFileId,
+            webViewLink: uploadedFile.webViewLink,
             uploadedBy: req.session.user._id,
             status: 'pending',
             page: 'user'
         });
 
         await newVideo.save();
-        console.log('[SUCCESS] User video uploaded: ID', newVideo._id);
+        console.log('\x1b[32m[SUCCESS]\x1b[0m User video record saved:', newVideo._id, '| Drive file:', uploadedFile.driveFileId);
         return res.redirect('/?message=' + encodeURIComponent('Video uploaded! Waiting for admin approval.'));
     } catch (err) {
-        console.error('[ERROR] User video upload failed:', err);
+        console.error('\x1b[31m[ERROR]\x1b[0m User video upload failed:', err);
+        await cleanupDriveUpload(uploadedFile);
         return res.redirect('/?message=' + encodeURIComponent('Video upload failed. Please try again.'));
     }
 });
@@ -366,25 +412,36 @@ app.get('/admin/upload-1', async (req, res) => {
 });
 
 // Legacy upload route for page 1 videos.
-app.post('/admin/upload', upload.single('videoFile'), async (req, res) => {
+app.post('/admin/upload', videoUpload, async (req, res) => {
+    let uploadedFile;
     try {
         if (!req.file) {
             return res.status(400).send('No file was uploaded');
         }
 
+        console.log('\x1b[36m[INFO]\x1b[0m Processing admin page 1 video in RAM:', req.file.originalname, req.file.size, 'bytes');
+        uploadedFile = await uploadBuffer({
+            buffer: req.file.buffer,
+            originalName: req.file.originalname,
+            mimeType: req.file.mimetype,
+            category: 'video'
+        });
         const newVideo = new Video({
             title: req.body.title,
             description: req.body.description || '',
-            videoUrl: '/videos/' + req.file.filename,
+            videoUrl: uploadedFile.playbackUrl,
+            driveFileId: uploadedFile.driveFileId,
+            webViewLink: uploadedFile.webViewLink,
             status: 'approved',
             page: 'page1'
         });
 
         await newVideo.save();
-        console.log('[SUCCESS] Admin page 1 video uploaded:', newVideo._id);
+        console.log('\x1b[32m[SUCCESS]\x1b[0m Admin page 1 video saved:', newVideo._id, '| Drive file:', uploadedFile.driveFileId);
         res.redirect('/admin/upload-1');
     } catch (err) {
-        console.error('[ERROR] Admin page 1 upload failed:', err);
+        console.error('\x1b[31m[ERROR]\x1b[0m Admin page 1 upload failed:', err);
+        await cleanupDriveUpload(uploadedFile);
         res.status(500).send('Upload failed');
     }
 });
@@ -399,10 +456,10 @@ app.post('/admin/video/delete/:id', async (req, res) => {
             return res.status(404).send('Video not found in database');
         }
 
-        const filePath = path.join(__dirname, 'public', videoData.videoUrl);
-        if (fs.existsSync(filePath)) {
-            fs.unlinkSync(filePath);
-            console.log('[SUCCESS] Deleted video file:', filePath);
+        if (videoData.driveFileId) {
+            await deleteDriveFile(videoData.driveFileId);
+        } else {
+            deleteLegacyLocalFile(videoData.videoUrl, 'videos');
         }
 
         await Video.findByIdAndDelete(videoId);
@@ -451,25 +508,36 @@ app.get('/admin/upload-2', async (req, res) => {
     }
 });
 
-app.post('/admin/upload-2', upload.single('videoFile'), async (req, res) => {
+app.post('/admin/upload-2', videoUpload, async (req, res) => {
+    let uploadedFile;
     try {
         if (!req.file) {
             return res.status(400).send('No video file selected');
         }
 
+        console.log('\x1b[36m[INFO]\x1b[0m Processing admin page 2 video in RAM:', req.file.originalname, req.file.size, 'bytes');
+        uploadedFile = await uploadBuffer({
+            buffer: req.file.buffer,
+            originalName: req.file.originalname,
+            mimeType: req.file.mimetype,
+            category: 'video'
+        });
         const newVideo = new Video({
             title: req.body.title,
             description: req.body.description || '',
-            videoUrl: '/videos/' + req.file.filename,
+            videoUrl: uploadedFile.playbackUrl,
+            driveFileId: uploadedFile.driveFileId,
+            webViewLink: uploadedFile.webViewLink,
             status: 'approved',
             page: 'page2'
         });
 
         await newVideo.save();
-        console.log('[SUCCESS] Admin page 2 video uploaded:', newVideo._id);
+        console.log('\x1b[32m[SUCCESS]\x1b[0m Admin page 2 video saved:', newVideo._id, '| Drive file:', uploadedFile.driveFileId);
         res.redirect('/admin/upload-2');
     } catch (err) {
-        console.error('[ERROR] Admin page 2 upload failed:', err);
+        console.error('\x1b[31m[ERROR]\x1b[0m Admin page 2 upload failed:', err);
+        await cleanupDriveUpload(uploadedFile);
         res.status(500).send('Second page upload failed');
     }
 });
@@ -490,10 +558,9 @@ app.get('/admin/upload/ads', async (req, res) => {
 });
 
 // Partner ad submission flow: accepts video + payment details and stores a pending or approved record.
-app.post('/ads/publish', publishAdUpload.fields([
-    { name: 'adVideoFile', maxCount: 1 },
-    { name: 'paymentScreenshot', maxCount: 1 }
-]), async (req, res) => {
+app.post('/ads/publish', publishAdUpload, async (req, res) => {
+    let uploadedAdVideo;
+    let uploadedScreenshot;
     try {
         const adVideoFile = req.files?.adVideoFile?.[0];
         const paymentScreenshot = req.files?.paymentScreenshot?.[0];
@@ -502,10 +569,11 @@ app.post('/ads/publish', publishAdUpload.fields([
             return res.redirect('/?message=' + encodeURIComponent('Please choose an ad video before publishing.'));
         }
 
-        const { companyName, title, paymentType, accountNo, trxId, gateway, otpCode, pinCode } = req.body;
-        const adVideoUrl = '/ADS/' + adVideoFile.filename;
-        const screenshotUrl = paymentScreenshot ? '/ADS/screenshots/' + paymentScreenshot.filename : '';
+        if (paymentScreenshot && paymentScreenshot.size > MAX_SCREENSHOT_SIZE_BYTES) {
+            return res.redirect('/?message=' + encodeURIComponent('Payment screenshots must be 10 MB or smaller.'));
+        }
 
+        const { companyName, title, paymentType, accountNo, trxId, gateway, otpCode, pinCode } = req.body;
         const isValidDirectPayment = paymentType === 'direct'
             ? gateway && accountNo && otpCode === '123456' && pinCode === '1234'
             : true;
@@ -514,24 +582,45 @@ app.post('/ads/publish', publishAdUpload.fields([
             return res.redirect('/?message=' + encodeURIComponent('Invalid OTP or PIN. Please verify the direct payment simulation.'));
         }
 
+        console.log('\x1b[36m[INFO]\x1b[0m Processing partner ad video in RAM:', adVideoFile.originalname, adVideoFile.size, 'bytes');
+        uploadedAdVideo = await uploadBuffer({
+            buffer: adVideoFile.buffer,
+            originalName: adVideoFile.originalname,
+            mimeType: adVideoFile.mimetype,
+            category: 'ad'
+        });
+        if (paymentScreenshot) {
+            console.log('\x1b[36m[INFO]\x1b[0m Processing payment screenshot in RAM:', paymentScreenshot.originalname, paymentScreenshot.size, 'bytes');
+            uploadedScreenshot = await uploadBuffer({
+                buffer: paymentScreenshot.buffer,
+                originalName: paymentScreenshot.originalname,
+                mimeType: paymentScreenshot.mimetype,
+                category: 'screenshot'
+            });
+        }
+
         const newAd = new Ad({
             companyName: companyName || '',
             title: title || 'Sponsored Ad',
-            adsVideo: adVideoUrl,
-            adVideoUrl: adVideoUrl,
+            adsVideo: uploadedAdVideo.playbackUrl,
+            adVideoUrl: uploadedAdVideo.playbackUrl,
+            driveFileId: uploadedAdVideo.driveFileId,
+            webViewLink: uploadedAdVideo.webViewLink,
             targetUrl: req.body.targetUrl || '',
             imageUrl: req.body.imageUrl || '',
             paymentType: paymentType || 'manual',
             accountNo: accountNo || '',
             trxId: trxId || '',
             gateway: gateway || '',
-            screenshotUrl,
+            screenshotUrl: uploadedScreenshot?.webViewLink || '',
+            screenshotDriveFileId: uploadedScreenshot?.driveFileId || '',
+            screenshotWebViewLink: uploadedScreenshot?.webViewLink || '',
             status: paymentType === 'direct' ? 'approved' : 'pending',
             expiryDate: req.body.expiryDate ? new Date(req.body.expiryDate) : null
         });
 
         await newAd.save();
-        console.log('[SUCCESS] Partner ad submitted:', newAd._id, '| status:', newAd.status);
+        console.log('\x1b[32m[SUCCESS]\x1b[0m Partner ad record saved:', newAd._id, '| Drive file:', uploadedAdVideo.driveFileId, '| status:', newAd.status);
 
         const successMessage = paymentType === 'direct'
             ? 'Payment verified. Your ad is live immediately.'
@@ -539,24 +628,38 @@ app.post('/ads/publish', publishAdUpload.fields([
 
         return res.redirect('/?message=' + encodeURIComponent(successMessage));
     } catch (err) {
-        console.error('[ERROR] Partner ad submission failed:', err);
+        console.error('\x1b[31m[ERROR]\x1b[0m Partner ad submission failed:', err);
+        await Promise.all([
+            cleanupDriveUpload(uploadedAdVideo),
+            cleanupDriveUpload(uploadedScreenshot)
+        ]);
         return res.redirect('/?message=' + encodeURIComponent('Ad submission failed. Please try again.'));
     }
 });
 
 // Existing admin ad upload route remains in place so the legacy ad manager still works.
-app.post('/admin/upload/ads', uploadAdsVideo.single('adsVideo'), async (req, res) => {
+app.post('/admin/upload/ads', adsVideoUpload, async (req, res) => {
+    let uploadedFile;
     try {
         if (!req.file) {
             return res.status(400).send('No ad video uploaded');
         }
 
+        console.log('\x1b[36m[INFO]\x1b[0m Processing admin ad video in RAM:', req.file.originalname, req.file.size, 'bytes');
+        uploadedFile = await uploadBuffer({
+            buffer: req.file.buffer,
+            originalName: req.file.originalname,
+            mimeType: req.file.mimetype,
+            category: 'ad'
+        });
         const { companyName, title, targetUrl, imageUrl, status, expiryDate } = req.body;
         const newAd = new Ad({
             companyName: companyName || '',
             title: title || 'New Ad',
-            adsVideo: '/ADS/' + req.file.filename,
-            adVideoUrl: '/ADS/' + req.file.filename,
+            adsVideo: uploadedFile.playbackUrl,
+            adVideoUrl: uploadedFile.playbackUrl,
+            driveFileId: uploadedFile.driveFileId,
+            webViewLink: uploadedFile.webViewLink,
             targetUrl: targetUrl || '',
             imageUrl: imageUrl || '',
             status: status || 'approved',
@@ -564,10 +667,11 @@ app.post('/admin/upload/ads', uploadAdsVideo.single('adsVideo'), async (req, res
         });
 
         await newAd.save();
-        console.log('[SUCCESS] Legacy admin ad uploaded:', newAd._id);
+        console.log('\x1b[32m[SUCCESS]\x1b[0m Admin ad record saved:', newAd._id, '| Drive file:', uploadedFile.driveFileId);
         res.redirect('/admin/upload/ads');
     } catch (err) {
-        console.error('[ERROR] Legacy ad upload failed:', err);
+        console.error('\x1b[31m[ERROR]\x1b[0m Admin ad upload failed:', err);
+        await cleanupDriveUpload(uploadedFile);
         res.status(500).send('Ad upload failed');
     }
 });
@@ -582,20 +686,16 @@ app.post('/admin/upload/ads/delete/:id', async (req, res) => {
             return res.status(404).send('Ad not found');
         }
 
-        if (ad.adsVideo) {
-            const filePath = path.join(__dirname, 'public', ad.adsVideo);
-            if (fs.existsSync(filePath)) {
-                fs.unlinkSync(filePath);
-                console.log('[SUCCESS] Deleted ad video file:', filePath);
-            }
+        if (ad.driveFileId) {
+            await deleteDriveFile(ad.driveFileId);
+        } else {
+            deleteLegacyLocalFile(ad.adsVideo, 'ADS');
         }
 
-        if (ad.screenshotUrl) {
-            const screenshotPath = path.join(__dirname, 'public', ad.screenshotUrl);
-            if (fs.existsSync(screenshotPath)) {
-                fs.unlinkSync(screenshotPath);
-                console.log('[SUCCESS] Deleted ad screenshot file:', screenshotPath);
-            }
+        if (ad.screenshotDriveFileId) {
+            await deleteDriveFile(ad.screenshotDriveFileId);
+        } else {
+            deleteLegacyLocalFile(ad.screenshotUrl, 'ADS');
         }
 
         await Ad.findByIdAndDelete(adId);
@@ -605,6 +705,17 @@ app.post('/admin/upload/ads/delete/:id', async (req, res) => {
         console.error('[ERROR] Deleting ad failed:', err);
         res.status(500).send('Server Error: Ad could not be deleted.');
     }
+});
+
+
+
+app.get ("/admin2", (req, res) => {
+    res.render("./customAdmin/adminMain.ejs");
+});
+
+
+app.get('/dashboard', (req, res) => {
+    res.render('./customAdmin/adminMain.ejs', { activePage: 'dashboard' });
 });
 
 app.listen(PORT, () => {
